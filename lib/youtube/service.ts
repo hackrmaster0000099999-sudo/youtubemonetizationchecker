@@ -8,6 +8,10 @@ const COMMON_USER_AGENT =
 const DEFAULT_DISCLAIMER =
   "Public data cannot always confirm a creator's official YouTube Partner Program status. This result is an estimate based on publicly observable signals and available data.";
 
+function getYouTubeApiKey(): string | undefined {
+  return process.env.YOUTUBE_API_KEY || process.env.YOUTUBE_AP;
+}
+
 /**
  * Fetch video details by 11-char video ID.
  */
@@ -16,7 +20,7 @@ export async function getVideoData(videoId: string): Promise<VideoData> {
   const cached = appCache.get<VideoData>(cacheKey);
   if (cached) return cached;
 
-  const apiKey = process.env.YOUTUBE_API_KEY;
+  const apiKey = getYouTubeApiKey();
 
   if (apiKey) {
     try {
@@ -44,7 +48,7 @@ export async function getChannelData(identifier: string, isHandle = false): Prom
   const cached = appCache.get<ChannelData>(cacheKey);
   if (cached) return cached;
 
-  const apiKey = process.env.YOUTUBE_API_KEY;
+  const apiKey = getYouTubeApiKey();
 
   if (apiKey) {
     try {
