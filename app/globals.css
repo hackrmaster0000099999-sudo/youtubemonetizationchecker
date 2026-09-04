@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #FCFCFB;
+  --color-surface: #FFFFFF;
+  --color-ink: #16181C;
+  --color-ink-muted: #5B6169;
+  --color-accent: #D6293C;
+  --color-accent-hover: #B8202F;
+  --color-positive: #1E9E6B;
+  --color-caution: #C77C11;
+  --color-border: #E8E7E3;
+}
+
+:root {
+  --paper: #FCFCFB;
+  --surface: #FFFFFF;
+  --ink: #16181C;
+  --ink-muted: #5B6169;
+  --accent: #D6293C;
+  --accent-hover: #B8202F;
+  --positive: #1E9E6B;
+  --caution: #C77C11;
+  --border: #E8E7E3;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-mono-data {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Badge styles per PRD Section 38 */
+.badge-positive {
+  background-color: rgba(30, 158, 107, 0.12);
+  color: #1E9E6B;
+}
+
+.badge-caution {
+  background-color: rgba(199, 124, 17, 0.12);
+  color: #C77C11;
+}
+
+/* Snappy Native Click Micro-Interactions & Tap Feedback (Android-like response) */
+button, 
+a, 
+input[type="button"], 
+input[type="submit"], 
+.clickable-item {
+  -webkit-tap-highlight-color: rgba(214, 41, 60, 0.1);
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), 
+              background-color 0.15s ease, 
+              border-color 0.15s ease, 
+              box-shadow 0.15s ease;
+}
+
+button:active:not(:disabled),
+a:active,
+.clickable-item:active {
+  transform: scale(0.98);
+}
+
+.tap-press:active {
+  transform: scale(0.96);
+  opacity: 0.92;
+}
+
+/* Instant active ripple & feedback effect */
+.btn-interactive {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-interactive:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+.card-interactive {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.card-interactive:hover {
+  border-color: #16181C;
+}
+
+.card-interactive:active {
+  transform: scale(0.985);
+  background-color: #F7F6F3;
+}
