@@ -3,6 +3,8 @@ import { checkRateLimit, getClientIp } from '@/lib/rate-limit/rate-limiter';
 import { getChannelData, getVideoData } from '@/lib/youtube/service';
 import { parseYouTubeInput } from '@/lib/youtube/url-parser';
 
+export const runtime = 'edge';
+
 export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req.headers);
