@@ -96,28 +96,28 @@ export function EarningsCalculatorClient() {
     setFetchError(null);
 
     try {
-      const res = await fetch('/api/youtube/monetization', {
+      const res = await fetch('/api/youtube/lookup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: urlInput.trim() }),
+        body: JSON.stringify({ input: urlInput.trim() }),
       });
 
       const json = await res.json();
 
-      if (!res.ok || !json.success) {
-        throw new Error(json.error?.message || 'Could not inspect this YouTube resource.');
+      if (!res.ok) {
+        throw new Error(json.error || 'Could not inspect this YouTube resource.');
       }
 
-      if (json.data.type === 'VIDEO') {
-        const video: VideoData = json.data.video;
+      if (json.type === 'VIDEO') {
+        const video: VideoData = json.data;
         setFetchedResource({
           type: 'VIDEO',
           video,
-          isMonetized: json.data.monetization.status === 'Likely Monetized' || json.data.monetization.status === 'Monetization Signals Detected',
+          isMonetized: video.monetization?.status === 'Likely Monetized' || video.monetization?.status === 'Monetization Signals Detected',
         });
         setViews(video.viewCount || 50000);
-      } else if (json.data.type === 'CHANNEL') {
-        const channel: ChannelData = json.data.channel;
+      } else if (json.type === 'CHANNEL') {
+        const channel: ChannelData = json.data;
         const totalViews = channel.viewCount ?? 0;
         const vidCount = channel.videoCount ?? 0;
         const subCount = channel.subscriberCount ?? 0;
@@ -125,8 +125,8 @@ export function EarningsCalculatorClient() {
         const meetsSubs = subCount >= 1000;
         const hasUploads = vidCount > 0;
         const isSignalsPositive =
-          channel.monetization.status === 'Likely Monetized' ||
-          channel.monetization.status === 'Monetization Signals Detected';
+          channel.monetization?.status === 'Likely Monetized' ||
+          channel.monetization?.status === 'Monetization Signals Detected';
 
         const isMonetized = meetsSubs && hasUploads && isSignalsPositive;
 
