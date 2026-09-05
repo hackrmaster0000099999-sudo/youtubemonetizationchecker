@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'YouTube Image Downloader',
-  description: 'Download official high-resolution YouTube channel banners, cover art, profile pictures, and channel avatars in original quality.',
+  description:
+    'Download available YouTube channel images such as profile pictures and channel artwork with our free YouTube Image Downloader.',
   path: '/image-downloader',
 });
 

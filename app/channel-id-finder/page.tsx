@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'YouTube Channel ID Finder',
-  description: 'Find and copy canonical 24-character YouTube channel IDs (UC...) from custom URLs, @handles, user links, or videos. 100% free tool with RSS feed generator.',
+  description:
+    'Find a YouTube channel ID from a channel URL, handle, or username with our free Channel ID Finder. Get the channel identifier quickly and easily.',
   path: '/channel-id-finder',
 });
 

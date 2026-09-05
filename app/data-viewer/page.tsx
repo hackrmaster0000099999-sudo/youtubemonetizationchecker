@@ -8,15 +8,16 @@ import { CheckCircle2, Info } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Metadata Viewer',
-  description: 'Inspect public YouTube channel and video metadata, creation dates, duration, engagement ratios, and raw structured JSON payloads.',
+  title: 'YouTube Data Viewer',
+  description:
+    'View useful public YouTube video and channel data, including available metadata and statistics, with our free YouTube Data Viewer.',
   path: '/data-viewer',
 });
 
 const faqs = [
   {
-    q: 'What is the YouTube Metadata Viewer?',
-    a: 'The YouTube Metadata Viewer is a developer and creator diagnostic utility that parses and exposes normalized technical fields, channel creation dates, exact view counts, video duration, and raw JSON schema objects from YouTube endpoints.',
+    q: 'What is the YouTube Data Viewer?',
+    a: 'The YouTube Data Viewer is a developer and creator diagnostic utility that parses and exposes normalized technical fields, channel creation dates, exact view counts, video duration, and raw JSON schema objects from YouTube endpoints.',
   },
   {
     q: 'Can I view the raw JSON payload returned by YouTube?',
@@ -34,14 +35,14 @@ const faqs = [
 
 export default function DataViewerPage() {
   const appSchema = generateWebApplicationSchema({
-    name: 'YouTube Metadata Viewer',
-    description: 'Inspect raw public YouTube video and channel metadata with YT MONETIZE.',
+    name: 'YouTube Data Viewer',
+    description: 'View useful public YouTube video and channel data, including available metadata and statistics, with our free YouTube Data Viewer.',
     path: '/data-viewer',
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
-    { name: 'YouTube Metadata Viewer', url: '/data-viewer' },
+    { name: 'YouTube Data Viewer', url: '/data-viewer' },
   ]);
 
   const faqSchema = generateFAQSchema(faqs);

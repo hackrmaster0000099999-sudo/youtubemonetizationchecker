@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'YouTube Shadowban Detector',
-  description: 'Check if a YouTube channel or video is experiencing public indexing issues, search restrictions, or algorithmic visibility suppression.',
+  description:
+    'Check public YouTube visibility signals for potential search or discovery issues with our free Shadowban Detector and understand what the results may indicate.',
   path: '/shadowban-detector',
 });
 

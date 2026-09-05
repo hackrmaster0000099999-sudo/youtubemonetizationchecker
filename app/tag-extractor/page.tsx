@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'YouTube Tag Extractor',
-  description: 'Extract hidden SEO tags, keywords, and metadata from any public YouTube video. One-click copy for competitor keyword research.',
+  description:
+    'Extract available tags from a YouTube video URL, then view and copy the tags with our free YouTube Tag Extractor.',
   path: '/tag-extractor',
 });
 

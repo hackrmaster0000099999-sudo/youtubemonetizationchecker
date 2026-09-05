@@ -14,7 +14,7 @@ export function constructMetadata({
   path,
 }: MetadataOptions): Metadata {
   const canonicalUrl = `${SITE_URL}${path}`;
-  const fullTitle = `${title} | ${SITE_NAME}`;
+  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 
   return {
     title: fullTitle,
@@ -34,7 +34,7 @@ export function constructMetadata({
           url: `${SITE_URL}/logo.svg`,
           width: 512,
           height: 512,
-          alt: `${SITE_NAME} - ${title}`,
+          alt: `${SITE_NAME} - ${title.replace(` | ${SITE_NAME}`, '')}`,
         },
       ],
     },

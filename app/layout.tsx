@@ -18,23 +18,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} — YouTube Monetization Checker Online`,
+  title: `YouTube Tools & Monetization Checker | ${SITE_NAME}`,
   description:
-    'Check whether a YouTube channel or video shows public signals associated with monetization. Free, accurate, no-login creator utility platform.',
+    'Free YouTube tools to check monetization signals, find channel IDs, estimate earnings, download thumbnails, extract tags, and explore YouTube data.',
   metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
-    title: `${SITE_NAME} — YouTube Monetization Checker Online`,
+    title: `YouTube Tools & Monetization Checker | ${SITE_NAME}`,
     description:
-      'Check whether a YouTube channel or video shows public signals associated with monetization with free creator utilities.',
+      'Free YouTube tools to check monetization signals, find channel IDs, estimate earnings, download thumbnails, extract tags, and explore YouTube data.',
     url: SITE_URL,
     siteName: SITE_NAME,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_NAME} — YouTube Monetization Checker Online`,
+    title: `YouTube Tools & Monetization Checker | ${SITE_NAME}`,
     description:
-      'Check whether a YouTube channel or video shows public signals associated with monetization with free creator utilities.',
+      'Free YouTube tools to check monetization signals, find channel IDs, estimate earnings, download thumbnails, extract tags, and explore YouTube data.',
   },
   icons: {
     icon: [

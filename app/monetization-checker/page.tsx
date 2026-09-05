@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'YouTube Monetization Checker',
-  description: 'Check public YouTube monetization signals for any channel or video. Fast, accurate, no login required. Analyze ad placements, YPP eligibility markers, and metrics.',
+  description:
+    'Check publicly available YouTube monetization signals for a channel or video with our free YouTube Monetization Checker and understand what the results indicate.',
   path: '/monetization-checker',
 });
 

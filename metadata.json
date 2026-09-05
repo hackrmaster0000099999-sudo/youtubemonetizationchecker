@@ -1,6 +1,6 @@
 {
   "name": "YT MONETIZE",
-  "description": "Free YouTube creator utility platform and monetization checker with channel analytics, thumbnail downloader, tag extractor, and creator metadata tools.",
+  "description": "Free YouTube tools to check monetization signals, find channel IDs, estimate earnings, download thumbnails, extract tags, and explore YouTube data.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

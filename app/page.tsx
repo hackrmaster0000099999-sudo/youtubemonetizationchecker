@@ -20,8 +20,9 @@ import { ToolIcon, CategoryIcon } from '@/components/common/ToolIcon';
 import { constructMetadata, generateWebSiteSchema, generateOrganizationSchema, generateFAQSchema } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Monetization Checker — Free Creator Utilities',
-  description: 'Check if any YouTube channel or video is monetized. Free suite of creator utilities including Channel ID finder, thumbnail downloader, earnings calculator, and tag extractor.',
+  title: 'YouTube Tools & Monetization Checker',
+  description:
+    'Free YouTube tools to check monetization signals, find channel IDs, estimate earnings, download thumbnails, extract tags, and explore YouTube data.',
   path: '/',
 });
 

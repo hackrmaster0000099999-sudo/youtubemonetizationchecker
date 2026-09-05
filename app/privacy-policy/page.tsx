@@ -6,7 +6,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Privacy Policy',
-  description: 'Privacy Policy and data transparency statement for YT MONETIZE users. Learn how public YouTube data is safely processed without logins or cookies.',
+  description:
+    'Read the YT MONETIZE Privacy Policy to understand how website usage, tool requests, cookies, and other information are handled.',
   path: '/privacy-policy',
 });
 

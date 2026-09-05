@@ -86,7 +86,7 @@ export const TOOLS: ToolItem[] = [
   },
   {
     id: 'data-viewer',
-    name: 'YouTube Metadata Viewer',
+    name: 'YouTube Data Viewer',
     slug: 'data-viewer',
     path: '/data-viewer',
     description: 'Inspect normalized structured metadata, video specs, tags, timestamps, and channel telemetry in one view.',

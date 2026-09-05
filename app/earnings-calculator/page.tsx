@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'YouTube Earnings Calculator',
-  description: 'Estimate YouTube ad revenue and creator earnings based on views, CPM/RPM, and niche. Transparent formulas with industry benchmark RPM rates.',
+  description:
+    'Estimate potential YouTube ad earnings from views using factors such as RPM and CPM. Use our free calculator to explore possible revenue ranges.',
   path: '/earnings-calculator',
 });
 

@@ -9,7 +9,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'YouTube Thumbnail Downloader',
-  description: 'Download high-quality YouTube video thumbnails in HD 1080p, 720p, HQ, and SD. Free, instant extraction from any YouTube video link.',
+  description:
+    'Download available YouTube video thumbnails in their available image resolutions. Paste a video URL and retrieve the thumbnail with our free downloader.',
   path: '/thumbnail-downloader',
 });
 

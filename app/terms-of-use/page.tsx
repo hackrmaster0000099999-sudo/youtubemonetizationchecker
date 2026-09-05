@@ -5,7 +5,8 @@ import { constructMetadata, generateBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Terms of Use',
-  description: 'Terms of Use and service conditions for YT MONETIZE. Independent service disclaimers and guidelines for using our free YouTube creator utilities.',
+  description:
+    'Review the YT MONETIZE Terms of Use covering acceptable use, tool limitations, third-party services, and your responsibilities when using the website.',
   path: '/terms-of-use',
 });
 

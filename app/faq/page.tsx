@@ -6,8 +6,9 @@ import { constructMetadata, generateBreadcrumbSchema, generateFAQSchema } from '
 import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Frequently Asked Questions',
-  description: 'Frequently asked questions about YouTube monetization requirements, YPP eligibility markers, RPM estimation, and free creator utilities.',
+  title: 'YouTube Tools FAQ',
+  description:
+    'Find answers to common questions about YouTube monetization checks, earnings estimates, channel IDs, thumbnails, tags, data, and other YT MONETIZE tools.',
   path: '/faq',
 });
 

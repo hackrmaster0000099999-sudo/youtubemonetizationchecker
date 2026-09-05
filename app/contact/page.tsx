@@ -7,8 +7,9 @@ import { Mail, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Contact Support & Feedback',
-  description: 'Contact the YT MONETIZE team for tool support, feature suggestions, bug reports, and partnership inquiries.',
+  title: 'Contact YT MONETIZE',
+  description:
+    'Contact YT MONETIZE with questions, feedback, technical issues, suggestions, or other inquiries about our free YouTube tools.',
   path: '/contact',
 });
 
