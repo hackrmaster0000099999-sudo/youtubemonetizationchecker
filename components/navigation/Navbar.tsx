@@ -3,9 +3,22 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ChevronDown, Wrench } from 'lucide-react';
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Wrench,
+  Home,
+  DollarSign,
+  Calculator,
+  HelpCircle,
+  Sparkles,
+  LifeBuoy,
+  Layers,
+} from 'lucide-react';
 import { TOOLS } from '@/lib/constants/site';
 import { Logo } from '@/components/common/Logo';
+import { ToolIcon, CategoryIcon } from '@/components/common/ToolIcon';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,9 +28,9 @@ export function Navbar() {
   return (
     <header
       id="main-header"
-      className="sticky top-0 z-50 h-[72px] bg-white border-b border-[#E8E7E3] w-full"
+      className="sticky top-0 z-50 h-[72px] bg-white border-b border-[#E3E2DE] w-full"
     >
-      <div className="max-w-[1120px] mx-auto h-full px-6 flex items-center justify-between">
+      <div className="max-w-[1120px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between">
         {/* Official Brand Logo */}
         <Link
           href="/"
@@ -29,14 +42,32 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav id="desktop-nav" className="hidden md:flex items-center gap-6">
+        <nav id="desktop-nav" className="hidden md:flex items-center gap-2 lg:gap-3">
+          <Link
+            href="/"
+            id="nav-home-link"
+            className={`flex items-center gap-1.5 text-[13px] font-semibold py-1.5 px-3 rounded-xl border transition-all ${
+              pathname === '/'
+                ? 'text-[#D6293C] border-[#E3E2DE] bg-[#F9F9F8] shadow-2xs'
+                : 'text-[#16181C] border-transparent hover:border-[#E3E2DE] hover:text-[#D6293C]'
+            }`}
+          >
+            <Home className="w-4 h-4 text-inherit" />
+            <span>Home</span>
+          </Link>
+
+          {/* Tools Dropdown with Icons and Category Badges */}
           <div className="relative">
             <button
               id="tools-dropdown-btn"
               type="button"
               onClick={() => setToolsDropdownOpen(!toolsDropdownOpen)}
               onBlur={() => setTimeout(() => setToolsDropdownOpen(false), 250)}
-              className="flex items-center gap-1.5 text-[14px] font-semibold text-[#16181C] hover:text-[#D6293C] active:scale-95 transition-all py-2 cursor-pointer"
+              className={`flex items-center gap-1.5 text-[13px] font-semibold py-1.5 px-3 rounded-xl border transition-all cursor-pointer ${
+                toolsDropdownOpen
+                  ? 'text-[#D6293C] border-[#E3E2DE] bg-[#F9F9F8]'
+                  : 'text-[#16181C] border-transparent hover:border-[#E3E2DE] hover:text-[#D6293C]'
+              }`}
               aria-expanded={toolsDropdownOpen}
             >
               <Wrench className="w-4 h-4 text-[#5B6169]" />
@@ -47,30 +78,55 @@ export function Navbar() {
             {toolsDropdownOpen && (
               <div
                 id="tools-dropdown-menu"
-                className="absolute left-0 mt-2 w-80 bg-white border border-[#E8E7E3] shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
+                className="absolute left-0 mt-2 w-[420px] bg-white border border-[#E3E2DE] rounded-2xl shadow-xl p-3 z-50 animate-in fade-in slide-in-from-top-1 duration-150 overflow-hidden"
               >
-                <div className="px-4 py-1.5 text-[11px] font-semibold text-[#5B6169] uppercase tracking-wider border-b border-[#E8E7E3] mb-1">
-                  8 Production YouTube Tools
+                <div className="flex items-center justify-between px-3 py-2 text-[11px] font-bold text-[#5B6169] uppercase tracking-wider border-b border-[#F0EFEB] mb-2 bg-[#F9F9F8] rounded-xl">
+                  <span className="flex items-center gap-1.5">
+                    <Layers className="w-3.5 h-3.5 text-[#D6293C]" />
+                    8 Free YouTube Creator Tools
+                  </span>
+                  <span className="text-[10px] text-[#1E9E6B] font-bold bg-[rgba(30,158,107,0.1)] px-2 py-0.5 rounded-full">
+                    No Login
+                  </span>
                 </div>
-                {TOOLS.map((tool) => {
-                  const isActive = pathname === tool.path;
-                  return (
-                    <Link
-                      key={tool.id}
-                      href={tool.path}
-                      id={`nav-tool-${tool.id}`}
-                      onClick={() => setToolsDropdownOpen(false)}
-                      className={`block px-4 py-2.5 text-[14px] active:bg-[#F2F1EE] active:scale-[0.98] transition-all ${
-                        isActive
-                          ? 'text-[#D6293C] font-semibold bg-[#FCFCFB]'
-                          : 'text-[#16181C] hover:text-[#D6293C] hover:bg-[#FCFCFB]'
-                      }`}
-                    >
-                      <div className="font-medium text-[13px]">{tool.name}</div>
-                      <div className="text-[12px] text-[#5B6169] truncate mt-0.5">{tool.description}</div>
-                    </Link>
-                  );
-                })}
+                <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar">
+                  {Array.from(new Set(TOOLS.map(t => t.category))).map((category) => (
+                    <div key={category} className="space-y-1">
+                      <div className="flex items-center gap-1.5 px-2 py-1 text-[11px] font-bold text-[#5B6169] uppercase tracking-wider bg-[#F9F9F8] rounded-md mx-1">
+                        <CategoryIcon category={category} className="w-3.5 h-3.5 text-[#D6293C]" />
+                        <span>{category}</span>
+                      </div>
+                      {TOOLS.filter(t => t.category === category).map((tool) => {
+                        const isActive = pathname === tool.path;
+                        return (
+                          <Link
+                            key={tool.id}
+                            href={tool.path}
+                            id={`nav-tool-${tool.id}`}
+                            onClick={() => setToolsDropdownOpen(false)}
+                            className={`flex items-center gap-3 p-2.5 rounded-xl border transition-all ${
+                              isActive
+                                ? 'text-[#D6293C] font-semibold bg-[#F9F9F8] border-[#E3E2DE]'
+                                : 'text-[#16181C] border-transparent hover:bg-[#F9F9F8] hover:border-[#E3E2DE]'
+                            }`}
+                          >
+                            <div className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 ${
+                              isActive
+                                ? 'border-[#D6293C]/30 bg-white text-[#D6293C]'
+                                : 'border-[#E3E2DE] bg-white text-[#5B6169]'
+                            }`}>
+                              <ToolIcon name={tool.icon} className="w-4 h-4 text-inherit" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <span className="font-semibold text-[13px] truncate block">{tool.name}</span>
+                              <p className="text-[11px] text-[#5B6169] truncate mt-0.5">{tool.description}</p>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -78,44 +134,48 @@ export function Navbar() {
           <Link
             href="/monetization-checker"
             id="nav-monetization-link"
-            className={`text-[14px] font-medium py-1.5 px-3 border border-transparent hover:border-[#E8E7E3] active:scale-95 transition-all ${
+            className={`flex items-center gap-1.5 text-[13px] font-semibold py-1.5 px-3 rounded-xl border transition-all ${
               pathname === '/monetization-checker'
-                ? 'text-[#D6293C] font-semibold border-[#E8E7E3] bg-[#FCFCFB]'
-                : 'text-[#16181C] hover:text-[#D6293C]'
+                ? 'text-[#D6293C] font-semibold border-[#E3E2DE] bg-[#F9F9F8]'
+                : 'text-[#16181C] border-transparent hover:border-[#E3E2DE] hover:text-[#D6293C]'
             }`}
           >
-            Monetization Checker
+            <DollarSign className="w-4 h-4 text-inherit" />
+            <span>Monetization Checker</span>
           </Link>
 
           <Link
             href="/earnings-calculator"
             id="nav-earnings-link"
-            className={`text-[14px] font-medium py-1.5 px-3 border border-transparent hover:border-[#E8E7E3] active:scale-95 transition-all ${
+            className={`flex items-center gap-1.5 text-[13px] font-semibold py-1.5 px-3 rounded-xl border transition-all ${
               pathname === '/earnings-calculator'
-                ? 'text-[#D6293C] font-semibold border-[#E8E7E3] bg-[#FCFCFB]'
-                : 'text-[#16181C] hover:text-[#D6293C]'
+                ? 'text-[#D6293C] font-semibold border-[#E3E2DE] bg-[#F9F9F8]'
+                : 'text-[#16181C] border-transparent hover:border-[#E3E2DE] hover:text-[#D6293C]'
             }`}
           >
-            Earnings Calculator
+            <Calculator className="w-4 h-4 text-inherit" />
+            <span>Earnings Calculator</span>
           </Link>
 
           <Link
             href="/faq"
             id="nav-faq-link"
-            className={`text-[14px] font-medium py-1.5 px-3 border border-transparent hover:border-[#E8E7E3] active:scale-95 transition-all ${
+            className={`flex items-center gap-1.5 text-[13px] font-semibold py-1.5 px-3 rounded-xl border transition-all ${
               pathname === '/faq'
-                ? 'text-[#D6293C] font-semibold border-[#E8E7E3] bg-[#FCFCFB]'
-                : 'text-[#16181C] hover:text-[#D6293C]'
+                ? 'text-[#D6293C] font-semibold border-[#E3E2DE] bg-[#F9F9F8]'
+                : 'text-[#16181C] border-transparent hover:border-[#E3E2DE] hover:text-[#D6293C]'
             }`}
           >
-            FAQ
+            <HelpCircle className="w-4 h-4 text-inherit" />
+            <span>FAQ</span>
           </Link>
 
           <div
             id="lang-indicator"
-            className="text-[12px] font-mono-data font-semibold text-[#5B6169] border border-[#E8E7E3] px-2.5 py-1 bg-[#FCFCFB]"
+            className="flex items-center gap-1.5 text-[11px] font-mono-data font-bold text-[#5B6169] border border-[#E3E2DE] px-2.5 py-1.5 rounded-xl bg-[#F9F9F8]"
           >
-            v1.0 • FREE
+            <Sparkles className="w-3 h-3 text-[#1E9E6B]" />
+            <span>v1.0 • FREE</span>
           </div>
         </nav>
 
@@ -135,41 +195,89 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div
           id="mobile-nav-menu"
-          className="md:hidden bg-white border-b border-[#E8E7E3] px-6 py-4 space-y-3 shadow-xl"
+          className="md:hidden bg-white border-b border-[#E3E2DE] px-5 py-5 space-y-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150 max-h-[85vh] overflow-y-auto"
         >
-          <div className="text-[11px] font-semibold text-[#5B6169] uppercase tracking-wider pb-1 border-b border-[#E8E7E3]">
-            All 8 Free YouTube Tools
+          {/* Main Home Button */}
+          <Link
+            href="/"
+            id="mobile-nav-home-btn"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`flex items-center justify-between py-3 px-4 rounded-xl border text-[15px] font-bold transition-all shadow-xs ${
+              pathname === '/'
+                ? 'text-[#D6293C] border-[#D6293C]/30 bg-[rgba(214,41,60,0.06)]'
+                : 'text-[#16181C] border-[#E3E2DE] bg-[#F9F9F8] hover:border-[#16181C]'
+            }`}
+          >
+            <div className="flex items-center gap-2.5">
+              <Home className="w-5 h-5 text-inherit" />
+              <span>Home Dashboard</span>
+            </div>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#5B6169] bg-white border border-[#E3E2DE] px-2 py-0.5 rounded-md">
+              Main
+            </span>
+          </Link>
+
+          <div className="flex items-center justify-between text-[11px] font-bold text-[#5B6169] uppercase tracking-wider pt-2 pb-1 border-b border-[#F0EFEB]">
+            <span className="flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-[#D6293C]" />
+              All 8 Free YouTube Tools
+            </span>
           </div>
-          <div className="grid grid-cols-1 gap-1">
-            {TOOLS.map((tool) => (
-              <Link
-                key={tool.id}
-                href={tool.path}
-                id={`mobile-nav-tool-${tool.id}`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block py-2.5 px-2 text-[14px] font-medium active:bg-[#F2F1EE] active:scale-[0.98] transition-all ${
-                  pathname === tool.path ? 'text-[#D6293C] font-semibold bg-[#FCFCFB]' : 'text-[#16181C]'
-                }`}
-              >
-                {tool.name}
-              </Link>
+
+          <div className="space-y-4">
+            {Array.from(new Set(TOOLS.map(t => t.category))).map((category) => (
+              <div key={category} className="space-y-2">
+                <div className="flex items-center gap-1.5 px-1 text-[12px] font-bold text-[#16181C] uppercase tracking-wider">
+                  <CategoryIcon category={category} className="w-4 h-4 text-[#D6293C]" />
+                  <span>{category} Tools</span>
+                </div>
+                <div className="grid grid-cols-1 gap-2">
+                  {TOOLS.filter(t => t.category === category).map((tool) => (
+                    <Link
+                      key={tool.id}
+                      href={tool.path}
+                      id={`mobile-nav-tool-${tool.id}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center p-2.5 rounded-xl border transition-all ${
+                        pathname === tool.path 
+                          ? 'text-[#D6293C] font-semibold bg-[#F9F9F8] border-[#E3E2DE]' 
+                          : 'text-[#16181C] border-[#E3E2DE] hover:bg-[#F9F9F8]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 ${
+                          pathname === tool.path
+                            ? 'border-[#D6293C]/30 bg-white text-[#D6293C]'
+                            : 'border-[#E3E2DE] bg-white text-[#5B6169]'
+                        }`}>
+                          <ToolIcon name={tool.icon} className="w-4 h-4 text-inherit" />
+                        </div>
+                        <span className="text-[14px] font-semibold truncate block">{tool.name}</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
-          <div className="pt-3 border-t border-[#E8E7E3] flex justify-between items-center text-[13px]">
+
+          <div className="pt-3 border-t border-[#F0EFEB] flex justify-between items-center text-[13px]">
             <Link
               href="/faq"
               id="mobile-faq-link"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-[#16181C] font-semibold active:text-[#D6293C]"
+              className="flex items-center gap-1.5 text-[#16181C] font-semibold active:text-[#D6293C]"
             >
-              Platform FAQ &amp; Guides
+              <HelpCircle className="w-4 h-4 text-[#5B6169]" />
+              <span>Platform FAQ &amp; Guides</span>
             </Link>
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-[#5B6169] hover:text-[#16181C]"
+              className="flex items-center gap-1.5 text-[#5B6169] hover:text-[#16181C]"
             >
-              Contact Support
+              <LifeBuoy className="w-4 h-4 text-[#5B6169]" />
+              <span>Contact Support</span>
             </Link>
           </div>
         </div>

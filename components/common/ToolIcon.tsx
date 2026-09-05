@@ -1,0 +1,81 @@
+import React from 'react';
+import {
+  DollarSign,
+  Search,
+  Calculator,
+  Image as ImageIcon,
+  Download,
+  Tag,
+  ShieldAlert,
+  BarChart2,
+  UserCheck,
+  Film,
+  TrendingUp,
+  HelpCircle,
+  Sparkles,
+  Shield,
+  Layers,
+  LucideProps,
+} from 'lucide-react';
+
+interface ToolIconProps extends LucideProps {
+  name: string;
+  className?: string;
+}
+
+export function ToolIcon({ name, className = 'w-5 h-5 text-[#16181C]', ...props }: ToolIconProps) {
+  switch (name) {
+    case 'DollarSign':
+    case 'monetization-checker':
+    case 'Monetization':
+      return <DollarSign className={className} {...props} />;
+    case 'Search':
+    case 'channel-id-finder':
+      return <Search className={className} {...props} />;
+    case 'Calculator':
+    case 'earnings-calculator':
+      return <Calculator className={className} {...props} />;
+    case 'Image':
+    case 'thumbnail-downloader':
+      return <ImageIcon className={className} {...props} />;
+    case 'Download':
+    case 'image-downloader':
+      return <Download className={className} {...props} />;
+    case 'Tag':
+    case 'tag-extractor':
+      return <Tag className={className} {...props} />;
+    case 'ShieldAlert':
+    case 'shadowban-detector':
+      return <ShieldAlert className={className} {...props} />;
+    case 'BarChart2':
+    case 'data-viewer':
+      return <BarChart2 className={className} {...props} />;
+    case 'Channel':
+      return <UserCheck className={className} {...props} />;
+    case 'Video':
+      return <Film className={className} {...props} />;
+    case 'Analytics':
+      return <TrendingUp className={className} {...props} />;
+    case 'Help':
+      return <HelpCircle className={className} {...props} />;
+    case 'Sparkles':
+      return <Sparkles className={className} {...props} />;
+    default:
+      return <Layers className={className} {...props} />;
+  }
+}
+
+export function CategoryIcon({ category, className = 'w-3.5 h-3.5' }: { category: string; className?: string }) {
+  switch (category) {
+    case 'Monetization':
+      return <DollarSign className={className} />;
+    case 'Channel':
+      return <UserCheck className={className} />;
+    case 'Video':
+      return <Film className={className} />;
+    case 'Analytics':
+      return <TrendingUp className={className} />;
+    default:
+      return <Sparkles className={className} />;
+  }
+}

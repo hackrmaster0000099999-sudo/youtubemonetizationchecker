@@ -4,7 +4,7 @@ import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
 import { EarningsCalculatorClient } from '@/components/tools/EarningsCalculatorClient';
 import { constructMetadata, generateWebApplicationSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
-import { HelpCircle, CheckCircle2, Info } from 'lucide-react';
+import { HelpCircle, CheckCircle2, Info, Calculator } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
@@ -67,11 +67,15 @@ export default function EarningsCalculatorPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
-          <h1 className="text-[28px] md:text-[38px] font-semibold text-[#16181C] tracking-tight leading-[1.15]">
-            YouTube Earnings Calculator
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E3E2DE] text-[12px] font-bold text-[#5B6169] uppercase tracking-wider shadow-2xs">
+            <Calculator className="w-3.5 h-3.5 text-[#D6293C]" />
+            <span>Revenue Analytics</span>
+          </div>
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#16181C] tracking-tight leading-[1.15]">
+            YouTube Earnings Calculator &amp; Revenue Estimator
           </h1>
           <p className="text-[16px] text-[#5B6169] leading-relaxed">
-            Estimate prospective YouTube video and monthly channel revenue based on views, CPM/RPM metrics, and audience monetization rates.
+            Estimate prospective video or channel earnings by pasting any YouTube link, or calculate custom revenue based on views, CPM/RPM, and audience ad-rates.
           </p>
         </div>
 

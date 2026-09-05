@@ -23,7 +23,7 @@ export function formatCompactNumber(num: number | null | undefined): string {
 }
 
 /**
- * Formats ISO date string to human-readable format.
+ * Formats ISO date string to human-readable format (e.g., Oct 2, 2024).
  */
 export function formatDate(dateString: string | null | undefined): string {
   if (!dateString) return 'Not publicly available';
@@ -32,7 +32,7 @@ export function formatDate(dateString: string | null | undefined): string {
     if (isNaN(date.getTime())) return dateString;
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: 'numeric',
     }).format(date);
   } catch {

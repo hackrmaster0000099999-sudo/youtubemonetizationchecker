@@ -42,23 +42,23 @@ export function ResultCard({
       : 'bg-[#F2F1EE] text-[#5B6169]';
 
   return (
-    <div id={id} className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-6">
+    <div id={id} className="p-5 sm:p-7 bg-white border border-[#E3E2DE] rounded-2xl shadow-xs space-y-6">
       {/* Header section */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E8E7E3]">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#F0EFEB]">
+        <div className="flex items-center gap-3.5 min-w-0">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={title}
-              className="w-16 h-16 rounded-full object-cover border border-[#E8E7E3] shrink-0"
+              className="w-14 h-14 rounded-full object-cover border border-[#E3E2DE] shrink-0"
               referrerPolicy="no-referrer"
             />
           )}
-          <div className="space-y-1">
-            <h2 className="text-[20px] md:text-[22px] font-semibold text-[#16181C] leading-snug">
+          <div className="space-y-0.5 min-w-0">
+            <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C] leading-snug break-words">
               {title}
             </h2>
-            {subtitle && <div className="text-[14px] text-[#5B6169]">{subtitle}</div>}
+            {subtitle && <div className="text-[13px] text-[#5B6169] break-all">{subtitle}</div>}
           </div>
         </div>
 
@@ -66,7 +66,7 @@ export function ResultCard({
           <div className="shrink-0">
             <span
               id="result-status-badge"
-              className={`inline-block px-3 py-1.5 text-[13px] font-medium tracking-wide ${badgeClass}`}
+              className={`inline-block px-3.5 py-1.5 text-[12px] font-bold rounded-xl tracking-wide whitespace-nowrap shrink-0 ${badgeClass}`}
             >
               {status}
             </span>
@@ -76,23 +76,23 @@ export function ResultCard({
 
       {/* Description / Summary */}
       {description && (
-        <div className="text-[14px] text-[#5B6169] leading-relaxed bg-[#FCFCFB] p-4 border border-[#E8E7E3]">
+        <div className="text-[13px] text-[#3D444D] leading-relaxed bg-[#F9F9F8] p-4 rounded-xl border border-[#E3E2DE] break-words">
           {description}
         </div>
       )}
 
       {/* Data Rows */}
       {dataRows.length > 0 && (
-        <div className="divide-y divide-[#E8E7E3]">
+        <div className="divide-y divide-[#F0EFEB]">
           {dataRows.map((row, idx) => (
             <div
               key={idx}
-              className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4"
+              className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4"
             >
-              <span className="text-[14px] text-[#5B6169]">{row.label}</span>
-              <div className="flex items-center gap-3">
+              <span className="text-[13px] text-[#5B6169] shrink-0">{row.label}</span>
+              <div className="flex items-center gap-3 min-w-0">
                 <span
-                  className={`text-[15px] font-medium text-[#16181C] ${
+                  className={`text-[14px] font-semibold text-[#16181C] break-all ${
                     row.isMono ? 'font-mono-data' : ''
                   }`}
                 >
@@ -116,7 +116,7 @@ export function ResultCard({
 
       {/* Action buttons */}
       {actions && (
-        <div className="pt-4 border-t border-[#E8E7E3] flex flex-wrap gap-3">
+        <div className="pt-4 border-t border-[#F0EFEB] flex flex-wrap gap-2.5">
           {actions}
         </div>
       )}

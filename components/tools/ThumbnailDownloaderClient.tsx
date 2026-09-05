@@ -126,17 +126,17 @@ export function ThumbnailDownloaderClient() {
       )}
 
       {video && (
-        <div className="bg-white border border-[#E8E7E3] p-6 md:p-8 space-y-6">
-          <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-6 border-b border-[#E8E7E3]">
-            <div className="space-y-1">
-              <span className="text-[12px] font-semibold text-[#5B6169] uppercase tracking-wider">
+        <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#F0EFEB]">
+            <div className="space-y-1 min-w-0">
+              <span className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
                 Video Found
               </span>
-              <h2 className="text-[18px] md:text-[22px] font-semibold text-[#16181C]">
+              <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C] leading-snug">
                 {video.title}
               </h2>
-              <div className="text-[14px] text-[#5B6169]">
-                Channel: <span className="text-[#16181C] font-medium">{video.channelTitle}</span>
+              <div className="text-[13px] text-[#5B6169]">
+                Channel: <span className="text-[#16181C] font-semibold">{video.channelTitle}</span>
               </div>
             </div>
 
@@ -144,7 +144,7 @@ export function ThumbnailDownloaderClient() {
               href={`https://www.youtube.com/watch?v=${video.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E8E7E3] bg-[#FCFCFB] hover:border-[#16181C] active:scale-95 transition-all text-[13px] font-medium text-[#16181C] shrink-0"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] shrink-0 self-start sm:self-center transition-colors"
             >
               <span>Watch on YouTube</span>
               <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
@@ -154,10 +154,10 @@ export function ThumbnailDownloaderClient() {
           {/* Active Preview */}
           {previewUrl && (
             <div className="space-y-2">
-              <div className="text-[12px] font-semibold text-[#5B6169] uppercase tracking-wider">
+              <div className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
                 High-Resolution Preview
               </div>
-              <div className="relative aspect-video max-w-2xl bg-[#FCFCFB] border border-[#E8E7E3] overflow-hidden">
+              <div className="relative aspect-video max-w-2xl bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl overflow-hidden">
                 <img
                   src={previewUrl}
                   alt={`Thumbnail for ${video.title}`}
@@ -169,33 +169,33 @@ export function ThumbnailDownloaderClient() {
           )}
 
           {/* Resolution Options Grid */}
-          <div className="space-y-3 pt-2">
-            <div className="text-[14px] font-semibold text-[#16181C]">
+          <div className="space-y-3 pt-1">
+            <div className="text-[14px] font-bold text-[#16181C]">
               Available Image Sizes &amp; Direct Downloads
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {resolutions.map((res, idx) => (
                 <div
                   key={idx}
-                  className="p-4 border border-[#E8E7E3] bg-[#FCFCFB] flex items-center justify-between gap-4"
+                  className="p-4 border border-[#E3E2DE] bg-[#F9F9F8] rounded-xl flex items-center justify-between gap-3"
                 >
-                  <div className="space-y-1">
-                    <div className="font-semibold text-[14px] text-[#16181C]">{res.name}</div>
+                  <div className="space-y-0.5 min-w-0">
+                    <div className="font-bold text-[14px] text-[#16181C]">{res.name}</div>
                     <div className="font-mono-data text-[12px] text-[#5B6169]">{res.dimension}</div>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 shrink-0">
                     <button
                       type="button"
                       onClick={() => setPreviewUrl(res.url)}
-                      className="px-2.5 py-1.5 text-[12px] border border-[#E8E7E3] bg-white hover:border-[#16181C] active:scale-95 transition-all text-[#16181C] font-medium cursor-pointer"
+                      className="px-3 py-1.5 text-[12px] border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-lg text-[#16181C] font-medium cursor-pointer transition-colors"
                     >
                       Preview
                     </button>
                     <button
                       type="button"
                       onClick={() => handleDownload(res.url, `youtube-thumbnail-${video.id}-${res.tag}`)}
-                      className="btn-interactive inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold text-white bg-[#D6293C] hover:bg-[#B8202F] active:scale-95 transition-all cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[12px] font-semibold text-white bg-[#16181C] hover:bg-[#2A2E35] active:bg-black rounded-lg cursor-pointer transition-colors"
                     >
                       <Download className="w-3.5 h-3.5" />
                       <span>Download</span>

@@ -4,7 +4,7 @@ import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
 import { ImageDownloaderClient } from '@/components/tools/ImageDownloaderClient';
 import { constructMetadata, generateWebApplicationSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
-import { CheckCircle2, Info } from 'lucide-react';
+import { CheckCircle2, Info, Download } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
@@ -67,7 +67,11 @@ export default function ImageDownloaderPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
-          <h1 className="text-[28px] md:text-[38px] font-semibold text-[#16181C] tracking-tight leading-[1.15]">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E3E2DE] text-[12px] font-bold text-[#5B6169] uppercase tracking-wider shadow-2xs">
+            <Download className="w-3.5 h-3.5 text-[#D6293C]" />
+            <span>Channel Art Utility</span>
+          </div>
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#16181C] tracking-tight leading-[1.15]">
             YouTube Channel Image &amp; Banner Downloader
           </h1>
           <p className="text-[16px] text-[#5B6169] leading-relaxed">

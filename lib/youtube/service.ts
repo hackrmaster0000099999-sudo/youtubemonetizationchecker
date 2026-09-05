@@ -215,9 +215,12 @@ async function fetchChannelFromApi(identifier: string, isHandle: boolean, apiKey
   let monetizationStatus: MonetizationAnalysis['status'] = 'Likely Monetized';
   let reason = 'Channel meets key public Partner Program eligibility indicators (including subscriber threshold).';
 
-  if (subCount !== null && subCount < 1000) {
+  if (videoCount === 0 || (subCount !== null && subCount < 1000) || (viewCount !== null && viewCount === 0)) {
     monetizationStatus = 'No Clear Monetization Signals';
-    reason = 'The channel has not yet reached the standard 1,000 subscriber threshold required for the YouTube Partner Program.';
+    reason =
+      videoCount === 0
+        ? 'The channel has 0 public videos and does not meet the YouTube Partner Program (YPP) requirements.'
+        : 'The channel has not yet reached the standard 1,000 subscriber threshold required for the YouTube Partner Program.';
   }
 
   return {
@@ -499,7 +502,10 @@ async function fetchChannelFromPublicWeb(identifier: string, isHandle: boolean):
   let status: MonetizationAnalysis['status'] = 'Likely Monetized';
   let reason = 'Public monetization-related signals were detected for this channel.';
 
-  if (hasJoinButton || hasStoreTab) {
+  if (videoCount === 0) {
+    status = 'No Clear Monetization Signals';
+    reason = 'This channel has 0 public videos and does not meet the YouTube Partner Program (YPP) requirements.';
+  } else if (hasJoinButton || hasStoreTab) {
     status = 'Likely Monetized';
     reason = 'Active Channel Memberships or Shopping store detected, which are exclusive to YouTube Partner Program members.';
   } else if (subCount !== null && subCount < 1000) {
