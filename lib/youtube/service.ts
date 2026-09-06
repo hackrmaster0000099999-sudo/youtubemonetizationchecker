@@ -1,6 +1,6 @@
 import { appCache, CACHE_TTL } from '@/lib/cache/memory-cache';
 import { formatCompactNumber, formatNumber } from '@/lib/formatters/number';
-import { ChannelData, MonetizationAnalysis, VideoData } from './types';
+import { ChannelData, DislikeAnalysis, MonetizationAnalysis, VideoCommentsResult, VideoData, YouTubeComment } from './types';
 
 const COMMON_USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
@@ -574,3 +574,468 @@ function formatDurationIso(iso: string): string {
   }
   return `${mins}:${s.toString().padStart(2, '0')}`;
 }
+
+/**
+ * Fetch video comments with support for sorting (relevance or time) and pagination.
+ */
+export async function getVideoComments(
+  videoId: string,
+  order: 'relevance' | 'time' = 'relevance',
+  pageToken?: string
+): Promise<VideoCommentsResult> {
+  const cacheKey = `comments:${videoId}:${order}:${pageToken || 'first'}`;
+  const cached = appCache.get<VideoCommentsResult>(cacheKey);
+  if (cached) return cached;
+
+  // Retrieve basic video data for thumbnail, title, channelTitle, etc.
+  const videoData = await getVideoData(videoId);
+
+  const apiKey = getYouTubeApiKey();
+  if (apiKey) {
+    try {
+      const pageParam = pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : '';
+      const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&maxResults=50&order=${order}&key=${apiKey}${pageParam}`;
+      const res = await fetch(url, { next: { revalidate: 300 } });
+      const json = await res.json();
+
+      if (!res.ok) {
+        // Check if comments are disabled for this video
+        const isCommentsDisabled =
+          json.error?.errors?.some((e: { reason: string }) => e.reason === 'commentsDisabled') ||
+          json.error?.message?.toLowerCase().includes('disabled comments');
+
+        if (isCommentsDisabled) {
+          const disabledResult: VideoCommentsResult = {
+            video: {
+              id: videoData.id,
+              title: videoData.title,
+              channelTitle: videoData.channelTitle,
+              channelId: videoData.channelId,
+              thumbnail:
+                videoData.thumbnails.maxres ||
+                videoData.thumbnails.high ||
+                videoData.thumbnails.medium ||
+                videoData.thumbnails.default ||
+                '',
+              commentCount: 0,
+              viewCount: videoData.viewCount,
+              likeCount: videoData.likeCount,
+              publishedAt: videoData.publishedAt,
+            },
+            comments: [],
+            totalLoaded: 0,
+            commentsDisabled: true,
+          };
+          appCache.set(cacheKey, disabledResult, CACHE_TTL.SHORT_MS);
+          return disabledResult;
+        }
+
+        throw new Error(json.error?.message || `YouTube API error: ${res.status}`);
+      }
+
+      interface CommentApiItem {
+        id?: string;
+        snippet?: {
+          isPinned?: boolean;
+          totalReplyCount?: number;
+          topLevelComment?: {
+            snippet?: {
+              authorDisplayName?: string;
+              authorProfileImageUrl?: string;
+              authorChannelUrl?: string;
+              authorChannelId?: { value?: string };
+              textDisplay?: string;
+              textOriginal?: string;
+              likeCount?: number;
+              publishedAt?: string;
+            };
+          };
+        };
+      }
+
+      const comments: YouTubeComment[] = (json.items || []).map((item: CommentApiItem) => {
+        const top = item.snippet?.topLevelComment?.snippet || {};
+        return {
+          id: item.id || `cmt_${Math.random().toString(36).slice(2, 10)}`,
+          authorName: top.authorDisplayName || 'YouTube User',
+          authorAvatarUrl: top.authorProfileImageUrl || '',
+          authorChannelUrl:
+            top.authorChannelUrl ||
+            (top.authorChannelId?.value ? `https://www.youtube.com/channel/${top.authorChannelId.value}` : undefined),
+          authorChannelId: top.authorChannelId?.value,
+          text: top.textDisplay || top.textOriginal || '',
+          likeCount: typeof top.likeCount === 'number' ? top.likeCount : 0,
+          publishedAt: top.publishedAt || new Date().toISOString(),
+          replyCount: typeof item.snippet?.totalReplyCount === 'number' ? item.snippet.totalReplyCount : 0,
+          isPinned: !!item.snippet?.isPinned,
+        };
+      });
+
+      const result: VideoCommentsResult = {
+        video: {
+          id: videoData.id,
+          title: videoData.title,
+          channelTitle: videoData.channelTitle,
+          channelId: videoData.channelId,
+          thumbnail:
+            videoData.thumbnails.maxres ||
+            videoData.thumbnails.high ||
+            videoData.thumbnails.medium ||
+            videoData.thumbnails.default ||
+            '',
+          commentCount: videoData.commentCount,
+          viewCount: videoData.viewCount,
+          likeCount: videoData.likeCount,
+          publishedAt: videoData.publishedAt,
+        },
+        comments,
+        totalLoaded: comments.length,
+        nextPageToken: json.nextPageToken || null,
+        commentsDisabled: false,
+      };
+
+      appCache.set(cacheKey, result, CACHE_TTL.SHORT_MS);
+      return result;
+    } catch (err) {
+      console.warn('YouTube API commentThreads failed, attempting fallback extraction:', err);
+    }
+  }
+
+  // Fallback if API key unavailable
+  const fallbackResult = await fetchCommentsFromInnerTube(videoId, order, pageToken, videoData);
+  appCache.set(cacheKey, fallbackResult, CACHE_TTL.SHORT_MS);
+  return fallbackResult;
+}
+
+/**
+ * Fallback comment extractor using YouTube public client endpoint
+ */
+async function fetchCommentsFromInnerTube(
+  videoId: string,
+  _order: 'relevance' | 'time',
+  continuationToken: string | undefined,
+  videoData: VideoData
+): Promise<VideoCommentsResult> {
+  try {
+    let token = continuationToken;
+
+    if (!token) {
+      // Fetch watch next to find initial comments continuation token
+      const nextRes = await fetch('https://www.youtube.com/youtubei/v1/next?prettyPrint=false', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'User-Agent': COMMON_USER_AGENT,
+        },
+        body: JSON.stringify({
+          context: {
+            client: {
+              clientName: 'WEB',
+              clientVersion: '2.20240101.00.00',
+              hl: 'en',
+              gl: 'US',
+            },
+          },
+          videoId,
+        }),
+      });
+
+      if (!nextRes.ok) throw new Error(`InnerTube request failed with ${nextRes.status}`);
+      const nextJson = await nextRes.json();
+      const sections = nextJson.contents?.twoColumnWatchNextResults?.results?.results?.contents;
+      interface ItemSection {
+        itemSectionRenderer?: {
+          targetId?: string;
+          contents?: Array<{
+            continuationItemRenderer?: {
+              continuationEndpoint?: {
+                continuationCommand?: {
+                  token?: string;
+                };
+              };
+            };
+          }>;
+        };
+      }
+      const commentSection = sections?.find((s: ItemSection) => s.itemSectionRenderer?.targetId === 'comments-section');
+      token =
+        commentSection?.itemSectionRenderer?.contents?.[0]?.continuationItemRenderer?.continuationEndpoint
+          ?.continuationCommand?.token;
+    }
+
+    if (!token) {
+      return {
+        video: {
+          id: videoData.id,
+          title: videoData.title,
+          channelTitle: videoData.channelTitle,
+          channelId: videoData.channelId,
+          thumbnail:
+            videoData.thumbnails.maxres ||
+            videoData.thumbnails.high ||
+            videoData.thumbnails.medium ||
+            videoData.thumbnails.default ||
+            '',
+          commentCount: videoData.commentCount,
+          viewCount: videoData.viewCount,
+          likeCount: videoData.likeCount,
+          publishedAt: videoData.publishedAt,
+        },
+        comments: [],
+        totalLoaded: 0,
+        commentsDisabled: videoData.commentCount === 0 || videoData.commentCount === null,
+      };
+    }
+
+    const commRes = await fetch('https://www.youtube.com/youtubei/v1/next?prettyPrint=false', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': COMMON_USER_AGENT,
+      },
+      body: JSON.stringify({
+        context: {
+          client: {
+            clientName: 'WEB',
+            clientVersion: '2.20240101.00.00',
+            hl: 'en',
+            gl: 'US',
+          },
+        },
+        continuation: token,
+      }),
+    });
+
+    if (!commRes.ok) throw new Error('Failed to load continuation items');
+    const commJson = await commRes.json();
+
+    const comments: YouTubeComment[] = [];
+    let nextToken: string | null = null;
+
+    interface InnerTubeActionItem {
+      commentThreadRenderer?: {
+        comment?: {
+          commentRenderer?: {
+            commentId?: string;
+            authorText?: { simpleText?: string };
+            authorThumbnail?: { thumbnails?: Array<{ url: string }> };
+            contentText?: { runs?: Array<{ text: string }> };
+            voteCount?: { simpleText?: string };
+            publishedTimeText?: { runs?: Array<{ text: string }> };
+            replyCount?: number;
+            authorEndpoint?: {
+              commandMetadata?: {
+                webCommandMetadata?: {
+                  url?: string;
+                };
+              };
+            };
+          };
+        };
+      };
+      continuationItemRenderer?: {
+        continuationEndpoint?: {
+          continuationCommand?: {
+            token?: string;
+          };
+        };
+      };
+    }
+
+    const endpoints = commJson.onResponseReceivedEndpoints || [];
+    for (const ep of endpoints) {
+      const items: InnerTubeActionItem[] =
+        ep.reloadContinuationItemsCommand?.continuationItems || ep.appendContinuationItemsAction?.continuationItems || [];
+      for (const it of items) {
+        if (it.commentThreadRenderer?.comment?.commentRenderer) {
+          const cr = it.commentThreadRenderer.comment.commentRenderer;
+          const author = cr.authorText?.simpleText || 'YouTube User';
+          const avatar = cr.authorThumbnail?.thumbnails?.[0]?.url || '';
+          const text = cr.contentText?.runs?.map((r) => r.text).join('') || '';
+          const likesText = cr.voteCount?.simpleText || '0';
+          const likes = parseCompactLikes(likesText);
+          const published = cr.publishedTimeText?.runs?.[0]?.text || '';
+          const replyCount = cr.replyCount || 0;
+
+          comments.push({
+            id: cr.commentId || `it_${Math.random().toString(36).slice(2, 10)}`,
+            authorName: author,
+            authorAvatarUrl: avatar,
+            authorChannelUrl: cr.authorEndpoint?.commandMetadata?.webCommandMetadata?.url
+              ? `https://www.youtube.com${cr.authorEndpoint.commandMetadata.webCommandMetadata.url}`
+              : undefined,
+            text,
+            likeCount: likes,
+            publishedAt: published,
+            replyCount,
+          });
+        } else if (it.continuationItemRenderer?.continuationEndpoint?.continuationCommand?.token) {
+          nextToken = it.continuationItemRenderer.continuationEndpoint.continuationCommand.token;
+        }
+      }
+    }
+
+    return {
+      video: {
+        id: videoData.id,
+        title: videoData.title,
+        channelTitle: videoData.channelTitle,
+        channelId: videoData.channelId,
+        thumbnail:
+          videoData.thumbnails.maxres ||
+          videoData.thumbnails.high ||
+          videoData.thumbnails.medium ||
+          videoData.thumbnails.default ||
+          '',
+        commentCount: videoData.commentCount,
+        viewCount: videoData.viewCount,
+        likeCount: videoData.likeCount,
+        publishedAt: videoData.publishedAt,
+      },
+      comments,
+      totalLoaded: comments.length,
+      nextPageToken: nextToken,
+      commentsDisabled: false,
+    };
+  } catch (e) {
+    console.error('InnerTube fallback error:', e);
+    return {
+      video: {
+        id: videoData.id,
+        title: videoData.title,
+        channelTitle: videoData.channelTitle,
+        channelId: videoData.channelId,
+        thumbnail:
+          videoData.thumbnails.maxres ||
+          videoData.thumbnails.high ||
+          videoData.thumbnails.medium ||
+          videoData.thumbnails.default ||
+          '',
+        commentCount: videoData.commentCount,
+        viewCount: videoData.viewCount,
+        likeCount: videoData.likeCount,
+        publishedAt: videoData.publishedAt,
+      },
+      comments: [],
+      totalLoaded: 0,
+      commentsDisabled: false,
+    };
+  }
+}
+
+function parseCompactLikes(str: string): number {
+  if (!str) return 0;
+  const clean = str.trim().replace(/,/g, '');
+  const match = clean.match(/([\d.]+)\s*([KkMm])?/);
+  if (!match) return 0;
+  const val = parseFloat(match[1]);
+  if (isNaN(val)) return 0;
+  const unit = (match[2] || '').toUpperCase();
+  if (unit === 'K') return Math.round(val * 1000);
+  if (unit === 'M') return Math.round(val * 1000000);
+  return Math.round(val);
+}
+
+/**
+ * Fetch YouTube Dislikes and Sentiment Analysis using Return YouTube Dislike API and video data.
+ */
+export async function getVideoDislikes(videoId: string): Promise<DislikeAnalysis> {
+  // 1. Fetch video metadata
+  const video = await getVideoData(videoId);
+
+  // 2. Fetch dislike metrics from Return YouTube Dislike API
+  const cacheKey = `dislikes:${videoId}`;
+  let rydData = appCache.get<{
+    id: string;
+    likes?: number;
+    dislikes?: number;
+    rating?: number;
+    rawDislikes?: number;
+    viewCount?: number;
+  }>(cacheKey);
+
+  if (!rydData) {
+    try {
+      const res = await fetch(`https://returnyoutubedislikeapi.com/votes?videoId=${encodeURIComponent(videoId)}`, {
+        headers: { 'User-Agent': COMMON_USER_AGENT },
+        signal: AbortSignal.timeout(4500),
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json && typeof json.dislikes === 'number') {
+          rydData = json;
+          appCache.set(cacheKey, rydData, CACHE_TTL.VIDEO_MS);
+        }
+      }
+    } catch (err) {
+      console.warn('Return YouTube Dislike API request failed or timed out:', err);
+    }
+  }
+
+  // Calculate numbers accurately
+  const likes = typeof rydData?.likes === 'number' ? rydData.likes : (video.likeCount ?? 0);
+  const dislikes = typeof rydData?.dislikes === 'number' ? rydData.dislikes : 0;
+  const totalVotes = likes + dislikes;
+
+  const approvalRating = totalVotes > 0 ? Number(((likes / totalVotes) * 100).toFixed(1)) : 100;
+  const dislikeRatio = totalVotes > 0 ? Number(((dislikes / totalVotes) * 100).toFixed(1)) : 0;
+
+  const rating =
+    typeof rydData?.rating === 'number'
+      ? Number(rydData.rating.toFixed(2))
+      : Number(((approvalRating / 100) * 5).toFixed(2));
+
+  const viewCount = (typeof rydData?.viewCount === 'number' && rydData.viewCount > 0)
+    ? rydData.viewCount
+    : video.viewCount;
+
+  const dislikesPer1kViews =
+    viewCount && viewCount > 0 && dislikes > 0
+      ? Number(((dislikes / viewCount) * 1000).toFixed(2))
+      : 0;
+
+  let sentiment: DislikeAnalysis['sentiment'] = 'Mostly Positive';
+  if (approvalRating >= 95) {
+    sentiment = 'Overwhelmingly Positive';
+  } else if (approvalRating >= 85) {
+    sentiment = 'Mostly Positive';
+  } else if (approvalRating >= 70) {
+    sentiment = 'Mixed Sentiment';
+  } else {
+    sentiment = 'High Dislike Ratio';
+  }
+
+  const thumb =
+    video.thumbnails.maxres ||
+    video.thumbnails.standard ||
+    video.thumbnails.high ||
+    video.thumbnails.medium ||
+    video.thumbnails.default ||
+    '';
+
+  return {
+    videoId,
+    video: {
+      id: video.id,
+      title: video.title,
+      channelTitle: video.channelTitle,
+      channelId: video.channelId,
+      thumbnail: thumb,
+      viewCount,
+      publishedAt: video.publishedAt,
+      duration: video.duration,
+    },
+    likes,
+    dislikes,
+    totalVotes,
+    approvalRating,
+    dislikeRatio,
+    rating,
+    dislikesPer1kViews,
+    sentiment,
+    isEstimate: true,
+    disclaimer:
+      'YouTube officially made dislike counts private in December 2021. This estimate is calculated using public video telemetry and the Return YouTube Dislike community database.',
+  };
+}
+

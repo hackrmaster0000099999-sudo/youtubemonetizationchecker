@@ -102,7 +102,7 @@ export default function HomePage() {
         <section id="tools-grid-section" className="space-y-10">
           <div className="text-center space-y-3 max-w-[640px] mx-auto">
             <div className="inline-block px-3.5 py-1 text-[11px] font-bold text-[#D6293C] uppercase tracking-wider bg-[rgba(214,41,60,0.08)] rounded-full border border-[#D6293C]/20 whitespace-nowrap shrink-0">
-              All 8 Creator Utilities
+              All {TOOLS.length} Creator Utilities
             </div>
             <h2 className="text-[28px] md:text-[36px] font-extrabold text-[#16181C] tracking-tight">
               Explore All YouTube Creator Tools

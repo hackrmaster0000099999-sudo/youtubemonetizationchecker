@@ -83,7 +83,7 @@ export function Navbar() {
                 <div className="flex items-center justify-between px-3 py-2 text-[11px] font-bold text-[#5B6169] uppercase tracking-wider border-b border-[#F0EFEB] mb-2 bg-[#F9F9F8] rounded-xl">
                   <span className="flex items-center gap-1.5">
                     <Layers className="w-3.5 h-3.5 text-[#D6293C]" />
-                    8 Free YouTube Creator Tools
+                    {TOOLS.length} Free YouTube Creator Tools
                   </span>
                   <span className="text-[10px] text-[#1E9E6B] font-bold bg-[rgba(30,158,107,0.1)] px-2 py-0.5 rounded-full">
                     No Login
@@ -220,7 +220,7 @@ export function Navbar() {
           <div className="flex items-center justify-between text-[11px] font-bold text-[#5B6169] uppercase tracking-wider pt-2 pb-1 border-b border-[#F0EFEB]">
             <span className="flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-[#D6293C]" />
-              All 8 Free YouTube Tools
+              All {TOOLS.length} Free YouTube Tools
             </span>
           </div>
 

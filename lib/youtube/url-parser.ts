@@ -1,8 +1,8 @@
-export type YouTubeTargetType = 'VIDEO' | 'CHANNEL' | 'HANDLE' | 'CHANNEL_ID' | 'INVALID';
+export type YouTubeTargetType = 'VIDEO' | 'CHANNEL' | 'HANDLE' | 'CHANNEL_ID' | 'PLAYLIST' | 'INVALID';
 
 export interface ParsedYouTubeTarget {
   type: YouTubeTargetType;
-  id: string; // Video ID, Channel ID, or Handle
+  id: string; // Video ID, Channel ID, Handle, or Playlist ID
   normalizedUrl: string;
   rawInput: string;
   error?: string;
@@ -56,7 +56,17 @@ export function parseYouTubeInput(input: string): ParsedYouTubeTarget {
     };
   }
 
-  // 4. Try parsing as URL
+  // 4. Check if raw playlist ID: starts with PL, UU, FL, RD, OLAK5uy_ and is 16-45 chars
+  if (/^(PL|UU|FL|RD|OLAK5uy_)[a-zA-Z0-9_-]{12,45}$/.test(trimmed)) {
+    return {
+      type: 'PLAYLIST',
+      id: trimmed,
+      normalizedUrl: `https://www.youtube.com/playlist?list=${trimmed}`,
+      rawInput: trimmed,
+    };
+  }
+
+  // 5. Try parsing as URL
   let parsedUrl: URL;
   try {
     // Add protocol if user typed youtube.com/... without https://
@@ -105,6 +115,19 @@ export function parseYouTubeInput(input: string): ParsedYouTubeTarget {
         type: 'VIDEO',
         id: videoId,
         normalizedUrl: `https://www.youtube.com/watch?v=${videoId}`,
+        rawInput: trimmed,
+      };
+    }
+  }
+
+  // youtube.com/playlist?list=PLAYLIST_ID
+  if (pathname === '/playlist' || pathname === '/playlist/') {
+    const listId = parsedUrl.searchParams.get('list');
+    if (listId && /^(PL|UU|FL|RD|OLAK5uy_)[a-zA-Z0-9_-]{12,45}$/.test(listId)) {
+      return {
+        type: 'PLAYLIST',
+        id: listId,
+        normalizedUrl: `https://www.youtube.com/playlist?list=${listId}`,
         rawInput: trimmed,
       };
     }

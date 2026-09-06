@@ -15,6 +15,12 @@ import {
   Sparkles,
   Shield,
   Layers,
+  MessageSquare,
+  Trophy,
+  ThumbsDown,
+  FileText,
+  EyeOff,
+  FolderSearch,
   LucideProps,
 } from 'lucide-react';
 
@@ -25,6 +31,24 @@ interface ToolIconProps extends LucideProps {
 
 export function ToolIcon({ name, className = 'w-5 h-5 text-[#16181C]', ...props }: ToolIconProps) {
   switch (name) {
+    case 'FolderSearch':
+    case 'hidden-video-finder':
+      return <FolderSearch className={className} {...props} />;
+    case 'EyeOff':
+    case 'private-viewer':
+      return <EyeOff className={className} {...props} />;
+    case 'FileText':
+    case 'description-viewer':
+      return <FileText className={className} {...props} />;
+    case 'ThumbsDown':
+    case 'dislike-checker':
+      return <ThumbsDown className={className} {...props} />;
+    case 'Trophy':
+    case 'random-comment-picker':
+      return <Trophy className={className} {...props} />;
+    case 'MessageSquare':
+    case 'comment-viewer':
+      return <MessageSquare className={className} {...props} />;
     case 'DollarSign':
     case 'monetization-checker':
     case 'Monetization':

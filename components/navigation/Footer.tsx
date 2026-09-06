@@ -16,6 +16,11 @@ import {
   AlertCircle,
   Layers,
   Tv,
+  MessageSquare,
+  Trophy,
+  ThumbsDown,
+  EyeOff,
+  FolderSearch,
 } from 'lucide-react';
 import { Logo } from '@/components/common/Logo';
 import { CategoryIcon } from '@/components/common/ToolIcon';
@@ -55,6 +60,12 @@ export function Footer() {
                 <Link href="/channel-id-finder" id="footer-link-channel-id" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
                   <Search className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
                   <span>YouTube Channel ID Finder</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/hidden-video-finder" id="footer-link-hidden-videos" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
+                  <FolderSearch className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
+                  <span>Unlisted Video Finder</span>
                 </Link>
               </li>
               <li>
@@ -101,6 +112,36 @@ export function Footer() {
                 <Link href="/data-viewer" id="footer-link-data" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
                   <BarChart2 className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
                   <span>YouTube Metadata Viewer</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/comment-viewer" id="footer-link-comments" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
+                  <MessageSquare className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
+                  <span>YouTube Comment Viewer</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/random-comment-picker" id="footer-link-picker" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
+                  <Trophy className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
+                  <span>Random Comment Picker</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dislike-checker" id="footer-link-dislikes" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
+                  <ThumbsDown className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
+                  <span>YouTube Dislike Checker</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/description-viewer" id="footer-link-description" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
+                  <FileText className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
+                  <span>YouTube Description Viewer</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/private-viewer" id="footer-link-private" className="group flex items-center gap-2 hover:text-[#D6293C] active:text-[#D6293C] transition-colors">
+                  <EyeOff className="w-3.5 h-3.5 text-[#5B6169] group-hover:text-[#D6293C] shrink-0" />
+                  <span>Private YouTube Viewer</span>
                 </Link>
               </li>
             </ul>
