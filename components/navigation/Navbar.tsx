@@ -15,14 +15,19 @@ import {
   Sparkles,
   LifeBuoy,
   Layers,
+  Bookmark,
 } from 'lucide-react';
 import { TOOLS } from '@/lib/constants/site';
 import { Logo } from '@/components/common/Logo';
 import { ToolIcon, CategoryIcon } from '@/components/common/ToolIcon';
+import { useSavedItems } from '@/lib/saved-items/storage';
+import { SavedItemsDrawer } from '@/components/common/SavedItemsDrawer';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+  const [savedDrawerOpen, setSavedDrawerOpen] = useState(false);
+  const { count, isClient } = useSavedItems();
   const pathname = usePathname();
 
   return (
@@ -170,6 +175,27 @@ export function Navbar() {
             <span>FAQ</span>
           </Link>
 
+          {/* Saved Items Button (Browser Cache) */}
+          <button
+            type="button"
+            id="nav-saved-btn"
+            onClick={() => setSavedDrawerOpen(true)}
+            className={`flex items-center gap-1.5 text-[13px] font-semibold py-1.5 px-3 rounded-xl border transition-all cursor-pointer ${
+              pathname === '/saved' || savedDrawerOpen
+                ? 'text-[#D6293C] border-[#D6293C]/30 bg-[#FDF2F3]'
+                : 'text-[#16181C] border-[#E3E2DE] bg-white hover:border-[#16181C]'
+            }`}
+            title="View saved channels, videos & metrics in your browser cache"
+          >
+            <Bookmark className="w-4 h-4 text-[#D6293C] fill-[#D6293C]" />
+            <span>Saved</span>
+            {isClient && count > 0 && (
+              <span className="text-[10px] font-mono-data font-bold bg-[#D6293C] text-white px-1.5 py-0.2 rounded-full">
+                {count}
+              </span>
+            )}
+          </button>
+
           <div
             id="lang-indicator"
             className="flex items-center gap-1.5 text-[11px] font-mono-data font-bold text-[#5B6169] border border-[#E3E2DE] px-2.5 py-1.5 rounded-xl bg-[#F9F9F8]"
@@ -179,16 +205,33 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Mobile menu toggle */}
-        <button
-          id="mobile-menu-toggle"
-          type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-[#16181C] hover:text-[#D6293C] active:scale-90 transition-transform"
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile menu right side: Saved button + Menu toggle */}
+        <div className="flex md:hidden items-center gap-2">
+          <button
+            type="button"
+            id="mobile-saved-toggle"
+            onClick={() => setSavedDrawerOpen(true)}
+            className="flex items-center gap-1 p-2 text-[13px] font-bold text-[#16181C] border border-[#E3E2DE] rounded-xl bg-[#F9F9F8] active:scale-95 transition-transform cursor-pointer"
+            aria-label="Open saved items"
+          >
+            <Bookmark className="w-4 h-4 text-[#D6293C] fill-[#D6293C]" />
+            {isClient && count > 0 && (
+              <span className="text-[10px] font-mono-data font-bold bg-[#D6293C] text-white px-1.5 py-0.2 rounded-full">
+                {count}
+              </span>
+            )}
+          </button>
+
+          <button
+            id="mobile-menu-toggle"
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-[#16181C] hover:text-[#D6293C] active:scale-90 transition-transform cursor-pointer"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -282,6 +325,12 @@ export function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Saved Items Drawer (Client-Side Storage) */}
+      <SavedItemsDrawer
+        isOpen={savedDrawerOpen}
+        onClose={() => setSavedDrawerOpen(false)}
+      />
     </header>
   );
 }

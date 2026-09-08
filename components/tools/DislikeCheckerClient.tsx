@@ -6,6 +6,7 @@ import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
 import { CopyButton } from '@/components/common/CopyButton';
+import { SaveButton } from '@/components/common/SaveButton';
 import { DislikeAnalysis } from '@/lib/youtube/types';
 import { formatNumber, formatCompactNumber } from '@/lib/formatters/number';
 import {
@@ -29,6 +30,7 @@ import {
 export function DislikeCheckerClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
   const [data, setData] = useState<DislikeAnalysis | null>(null);
   const [copiedSummary, setCopiedSummary] = useState(false);
 
@@ -116,9 +118,10 @@ Checked via YT MONETIZE (youtubemonetizationchecker.online/dislike-checker)`;
   return (
     <div className="space-y-6">
       {/* Input Box */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="dislike-checker-form"
+          initialValue={inputValue}
           placeholder="Enter YouTube video link (e.g. youtube.com/watch?v=... or youtu.be/...)"
           buttonText="Check Dislikes & Ratio"
           loadingText="Analyzing video metrics..."
@@ -205,6 +208,23 @@ Checked via YT MONETIZE (youtubemonetizationchecker.online/dislike-checker)`;
                     <span>Published: {data.video.publishedAt}</span>
                   </div>
                 )}
+                <SaveButton
+                  item={{
+                    id: `dislike_${data.videoId}`,
+                    toolId: 'dislike-checker',
+                    toolName: 'Dislike Checker',
+                    category: 'Analytics',
+                    targetType: 'VIDEO',
+                    title: data.video.title,
+                    handle: data.video.channelTitle,
+                    avatarUrl: data.video.thumbnail || undefined,
+                    url: `https://www.youtube.com/watch?v=${data.videoId}`,
+                    metaText: `${data.approvalRating}% Approval (${formatNumber(data.dislikes)} dislikes)`,
+                    badgeType: data.approvalRating >= 80 ? 'success' : data.approvalRating >= 60 ? 'warning' : 'danger',
+                    summary: `${formatNumber(data.likes)} likes • ${formatNumber(data.dislikes)} dislikes`,
+                  }}
+                />
+
                 <a
                   href={`https://www.youtube.com/watch?v=${data.videoId}`}
                   target="_blank"

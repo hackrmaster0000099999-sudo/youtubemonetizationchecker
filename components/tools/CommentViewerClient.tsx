@@ -5,6 +5,7 @@ import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
 import { CopyButton } from '@/components/common/CopyButton';
+import { SaveButton } from '@/components/common/SaveButton';
 import { VideoCommentsResult, YouTubeComment } from '@/lib/youtube/types';
 import { formatCompactNumber, formatNumber } from '@/lib/formatters/number';
 import {
@@ -216,9 +217,10 @@ export function CommentViewerClient() {
   return (
     <div className="space-y-6">
       {/* Input Form Card */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="comment-viewer-form"
+          initialValue={currentInput}
           placeholder="Paste YouTube video link (e.g. youtube.com/watch?v=... or youtu.be/...)"
           buttonText="View Comments"
           loadingText="Loading comments..."
@@ -310,7 +312,24 @@ export function CommentViewerClient() {
                 )}
               </div>
 
-              <div className="pt-1">
+              <div className="pt-1 flex items-center gap-3">
+                <SaveButton
+                  item={{
+                    id: `comments_${data.video.id}`,
+                    toolId: 'comment-viewer',
+                    toolName: 'Comment Viewer',
+                    category: 'Engagement',
+                    targetType: 'VIDEO',
+                    title: data.video.title,
+                    handle: data.video.channelTitle,
+                    avatarUrl: data.video.thumbnail || undefined,
+                    url: `https://www.youtube.com/watch?v=${data.video.id}`,
+                    metaText: `${formatNumber(data.video.commentCount || 0)} comments`,
+                    badgeType: 'neutral',
+                    summary: `${formatCompactNumber(data.video.viewCount || 0)} views • ${formatCompactNumber(data.video.likeCount || 0)} likes`,
+                  }}
+                />
+
                 <a
                   href={`https://www.youtube.com/watch?v=${data.video.id}`}
                   target="_blank"

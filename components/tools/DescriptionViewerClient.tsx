@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
+import { SaveButton } from '@/components/common/SaveButton';
 import { DescriptionAnalysis } from '@/lib/youtube/types';
 import { formatNumber } from '@/lib/formatters/number';
 import {
@@ -27,6 +28,7 @@ import {
 export function DescriptionViewerClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
   const [data, setData] = useState<DescriptionAnalysis | null>(null);
   const [activeTab, setActiveTab] = useState<'text' | 'timestamps' | 'links' | 'hashtags'>('text');
   const [searchQuery, setSearchQuery] = useState('');
@@ -123,9 +125,10 @@ export function DescriptionViewerClient() {
   return (
     <div className="space-y-6">
       {/* Input Form */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="description-viewer-form"
+          initialValue={inputValue}
           placeholder="Paste YouTube video or channel link (e.g. youtube.com/watch?v=...)"
           buttonText="Extract Description"
           loadingText="Extracting video metadata &amp; description..."
@@ -214,6 +217,23 @@ export function DescriptionViewerClient() {
                     <span>Published: {data.publishedAt}</span>
                   </div>
                 )}
+                <SaveButton
+                  item={{
+                    id: `description_${data.id}`,
+                    toolId: 'description-viewer',
+                    toolName: 'Description Viewer',
+                    category: 'SEO',
+                    targetType: 'VIDEO',
+                    title: data.title,
+                    handle: data.author,
+                    avatarUrl: data.thumbnail || undefined,
+                    url: `https://www.youtube.com/watch?v=${data.id}`,
+                    metaText: `${data.stats.characters} chars (${data.stats.words} words)`,
+                    badgeType: 'neutral',
+                    summary: `${data.timestamps?.length || 0} chapters • ${data.links?.length || 0} links • ${data.hashtags?.length || 0} hashtags`,
+                  }}
+                />
+
                 <a
                   href={`https://www.youtube.com/watch?v=${data.id}`}
                   target="_blank"

@@ -19,6 +19,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { CopyButton } from '@/components/common/CopyButton';
+import { SaveButton } from '@/components/common/SaveButton';
 import { formatNumber, formatDate } from '@/lib/formatters/number';
 import { ChannelData, VideoData } from '@/lib/youtube/types';
 
@@ -317,6 +318,25 @@ export function EarningsCalculatorClient() {
                   </div>
 
                   <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+                    <SaveButton
+                      item={{
+                        id: `earnings_channel_${fetchedResource.channel.id}`,
+                        toolId: 'earnings-calculator',
+                        toolName: 'Earnings Calculator',
+                        category: 'Analytics',
+                        targetType: 'CHANNEL',
+                        title: fetchedResource.channel.title,
+                        handle: fetchedResource.channel.handle,
+                        avatarUrl: fetchedResource.channel.avatarUrl || undefined,
+                        url: fetchedResource.channel.channelUrl || `https://youtube.com/channel/${fetchedResource.channel.id}`,
+                        metaText: fetchedResource.isMonetized
+                          ? `Est. ${formatCurrency(fetchedResource.realAnalytics?.lowMonthlyRevenue || 0)} - ${formatCurrency(fetchedResource.realAnalytics?.highMonthlyRevenue || 0)}/mo`
+                          : 'Not Monetized',
+                        badgeType: fetchedResource.isMonetized ? 'success' : 'danger',
+                        summary: `${formatNumber(fetchedResource.channel.subscriberCount || 0)} subs • ${formatNumber(fetchedResource.channel.videoCount || 0)} videos`,
+                      }}
+                    />
+
                     {fetchedResource.isMonetized ? (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold text-white bg-[#1E9E6B] shrink-0">
                         <CheckCircle2 className="w-3.5 h-3.5" />
@@ -474,30 +494,51 @@ export function EarningsCalculatorClient() {
             )}
 
             {fetchedResource.type === 'VIDEO' && fetchedResource.video && (
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
-                <img
-                  src={fetchedResource.video.thumbnails.medium || fetchedResource.video.thumbnails.default || ''}
-                  alt={fetchedResource.video.title}
-                  className="w-28 h-18 object-cover rounded-xl border border-[#E3E2DE] shrink-0"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="space-y-1 flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 text-[11px] font-bold uppercase text-[#16181C] bg-[#E8E7E3] rounded-md">
-                      Video Found
-                    </span>
-                    <span className="text-[12px] text-[#5B6169]">
-                      by {fetchedResource.video.channelTitle}
-                    </span>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5">
+                <div className="flex items-start sm:items-center gap-3.5 min-w-0 flex-1">
+                  <img
+                    src={fetchedResource.video.thumbnails.medium || fetchedResource.video.thumbnails.default || ''}
+                    alt={fetchedResource.video.title}
+                    className="w-28 h-18 object-cover rounded-xl border border-[#E3E2DE] shrink-0"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="space-y-1 flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 text-[11px] font-bold uppercase text-[#16181C] bg-[#E8E7E3] rounded-md">
+                        Video Found
+                      </span>
+                      <span className="text-[12px] text-[#5B6169]">
+                        by {fetchedResource.video.channelTitle}
+                      </span>
+                    </div>
+                    <h3 className="text-[15px] font-bold text-[#16181C] leading-snug">
+                      {fetchedResource.video.title}
+                    </h3>
+                    <div className="text-[12px] text-[#5B6169] flex flex-wrap items-center gap-x-2">
+                      <span><strong>Live Views:</strong> {formatNumber(fetchedResource.video.viewCount)}</span>
+                      <span>•</span>
+                      <span><strong>Duration:</strong> {fetchedResource.video.duration || 'Standard'}</span>
+                    </div>
                   </div>
-                  <h3 className="text-[15px] font-bold text-[#16181C] leading-snug">
-                    {fetchedResource.video.title}
-                  </h3>
-                  <div className="text-[12px] text-[#5B6169] flex flex-wrap items-center gap-x-2">
-                    <span><strong>Live Views:</strong> {formatNumber(fetchedResource.video.viewCount)}</span>
-                    <span>•</span>
-                    <span><strong>Duration:</strong> {fetchedResource.video.duration || 'Standard'}</span>
-                  </div>
+                </div>
+
+                <div className="shrink-0 self-start sm:self-center">
+                  <SaveButton
+                    item={{
+                      id: `earnings_video_${fetchedResource.video.id}`,
+                      toolId: 'earnings-calculator',
+                      toolName: 'Earnings Calculator',
+                      category: 'Analytics',
+                      targetType: 'VIDEO',
+                      title: fetchedResource.video.title,
+                      handle: fetchedResource.video.channelTitle,
+                      avatarUrl: fetchedResource.video.thumbnails.medium || fetchedResource.video.thumbnails.default || undefined,
+                      url: `https://www.youtube.com/watch?v=${fetchedResource.video.id}`,
+                      metaText: `Views: ${formatNumber(fetchedResource.video.viewCount)}`,
+                      badgeType: 'neutral',
+                      summary: `Video analysis by ${fetchedResource.video.channelTitle}`,
+                    }}
+                  />
                 </div>
               </div>
             )}
@@ -698,9 +739,29 @@ export function EarningsCalculatorClient() {
           <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-6 shadow-xs space-y-5">
             {/* Big Prominent Revenue Display */}
             <div className="space-y-1 border-b border-[#F0EFEB] pb-5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#5B6169]">
-                Simulated {timeframe.toLowerCase()} revenue
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#5B6169]">
+                  Simulated {timeframe.toLowerCase()} revenue
+                </span>
+                <SaveButton
+                  item={{
+                    id: `calc_projection_${views}_${rpm}_${timeframe}`,
+                    toolId: 'earnings-calculator',
+                    toolName: 'Earnings Calculator',
+                    category: 'Analytics',
+                    targetType: 'CHANNEL',
+                    title: fetchedResource?.channel?.title
+                      ? `${fetchedResource.channel.title} (Revenue Simulation)`
+                      : `Custom Simulation (${formatNumber(views)} views)`,
+                    handle: `@$${rpm.toFixed(2)} RPM`,
+                    avatarUrl: fetchedResource?.channel?.avatarUrl || undefined,
+                    url: fetchedResource?.channel?.channelUrl || `/earnings-calculator`,
+                    metaText: `${formatCurrency(displayedRevenue)} (${timeframe})`,
+                    badgeType: 'success',
+                    summary: `${formatNumber(views)} views @ $${rpm.toFixed(2)} RPM (${contentFormat.toLowerCase()})`,
+                  }}
+                />
+              </div>
               <div className="flex items-baseline gap-2 pt-1">
                 <span className="font-mono-data text-[36px] sm:text-[42px] font-extrabold text-[#16181C] tracking-tight">
                   {formatCurrency(displayedRevenue)}

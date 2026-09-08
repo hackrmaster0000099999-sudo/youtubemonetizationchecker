@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit/rate-limiter';
 import { getChannelData, getVideoData } from '@/lib/youtube/service';
 import { parseYouTubeInput } from '@/lib/youtube/url-parser';
+import { recentChecksStore } from '@/lib/recent-checks/store';
 
 // Cloudflare Pages Edge Runtime configuration
 export const runtime = 'edge';
@@ -38,8 +39,38 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const tool = body?.tool || 'monetization-checker';
+
     if (parsed.type === 'VIDEO') {
       const video = await getVideoData(parsed.id);
+
+      if (tool === 'monetization-checker') {
+        try {
+          const isMonetized =
+            video.monetization?.status === 'Likely Monetized' ||
+            video.monetization?.status === 'Monetization Signals Detected';
+
+          recentChecksStore.addCheck({
+            id: video.id,
+            targetType: 'VIDEO',
+            title: video.title,
+            handle: video.channelHandle,
+            avatarUrl:
+              video.thumbnails?.high ||
+              video.thumbnails?.medium ||
+              `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`,
+            url: `https://www.youtube.com/watch?v=${video.id}`,
+            tool: 'monetization-checker',
+            category: 'Monetization',
+            statusText: isMonetized ? 'Monetized' : 'Not Monetized',
+            statusType: isMonetized ? 'success' : 'danger',
+            metaText: video.channelTitle,
+          });
+        } catch (e) {
+          console.warn('Failed to record recent check:', e);
+        }
+      }
+
       return NextResponse.json({
         type: 'VIDEO',
         data: video,
@@ -48,6 +79,31 @@ export async function POST(req: NextRequest) {
 
     if (parsed.type === 'CHANNEL_ID' || parsed.type === 'HANDLE' || parsed.type === 'CHANNEL') {
       const channel = await getChannelData(parsed.id, parsed.type === 'HANDLE');
+
+      if (tool === 'monetization-checker') {
+        try {
+          const isMonetized =
+            channel.monetization?.status === 'Likely Monetized' ||
+            channel.monetization?.status === 'Monetization Signals Detected';
+
+          recentChecksStore.addCheck({
+            id: channel.id,
+            targetType: 'CHANNEL',
+            title: channel.title,
+            handle: channel.handle,
+            avatarUrl: channel.avatarUrl,
+            url: channel.channelUrl || `https://www.youtube.com/${channel.handle || `channel/${channel.id}`}`,
+            tool: 'monetization-checker',
+            category: 'Monetization',
+            statusText: isMonetized ? 'Monetized' : 'Not Monetized',
+            statusType: isMonetized ? 'success' : 'danger',
+            metaText: channel.subscriberText || `${channel.title}`,
+          });
+        } catch (e) {
+          console.warn('Failed to record recent check:', e);
+        }
+      }
+
       return NextResponse.json({
         type: 'CHANNEL',
         data: channel,

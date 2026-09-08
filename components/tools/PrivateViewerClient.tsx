@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolError } from '@/components/common/ToolError';
+import { SaveButton } from '@/components/common/SaveButton';
 import { formatNumber } from '@/lib/formatters/number';
 import {
   ShieldCheck,
@@ -28,6 +29,7 @@ export function PrivateViewerClient() {
   const [channelTitle, setChannelTitle] = useState<string | null>(null);
   const [viewCount, setViewCount] = useState<number | null>(null);
   const [publishedAt, setPublishedAt] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -120,9 +122,10 @@ export function PrivateViewerClient() {
   return (
     <div className="space-y-6">
       {/* Input Form */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="private-viewer-form"
+          initialValue={inputValue}
           placeholder="Paste YouTube video link to watch privately..."
           buttonText="Watch Anonymously"
           loadingText="Loading private player..."
@@ -246,6 +249,23 @@ export function PrivateViewerClient() {
             </div>
 
             <div className="flex items-center gap-2">
+              <SaveButton
+                item={{
+                  id: `private_${videoId}`,
+                  toolId: 'private-viewer',
+                  toolName: 'Private Viewer',
+                  category: 'Media',
+                  targetType: 'VIDEO',
+                  title: videoTitle || `YouTube Video ${videoId}`,
+                  handle: channelTitle || undefined,
+                  avatarUrl: `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+                  url: `https://www.youtube.com/watch?v=${videoId}`,
+                  metaText: 'Privacy-Enhanced Stream',
+                  badgeType: 'success',
+                  summary: 'Saved for private, no-history tracking viewing',
+                }}
+              />
+
               <button
                 type="button"
                 onClick={handleCopyEmbedUrl}

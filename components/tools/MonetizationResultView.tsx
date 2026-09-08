@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { ChannelData, VideoData } from '@/lib/youtube/types';
 import { CopyButton } from '@/components/common/CopyButton';
+import { SaveButton } from '@/components/common/SaveButton';
 import { formatDate } from '@/lib/formatters/number';
 
 interface MonetizationResultViewProps {
@@ -179,6 +180,27 @@ export function MonetizationResultView({ type, channelData, videoData }: Monetiz
                   <span>Channel Not Monetized</span>
                 </div>
               )}
+
+              <SaveButton
+                item={{
+                  id: `monetization_${data.id}`,
+                  toolId: 'monetization-checker',
+                  toolName: 'Monetization Checker',
+                  category: 'Monetization',
+                  targetType: isVideo ? 'VIDEO' : 'CHANNEL',
+                  title: isVideo ? (videoData?.title || 'Video') : (channelData?.title || 'Channel'),
+                  handle: isVideo ? videoData?.channelTitle : channelData?.handle,
+                  avatarUrl: isVideo
+                    ? (videoData?.thumbnails.medium || videoData?.thumbnails.default || undefined)
+                    : (channelData?.avatarUrl || undefined),
+                  url: isVideo
+                    ? `https://www.youtube.com/watch?v=${data.id}`
+                    : (channelData?.channelUrl || `https://www.youtube.com/channel/${data.id}`),
+                  metaText: isPositive ? 'Channel Monetized' : 'Not Monetized',
+                  badgeType: isPositive ? 'success' : 'danger',
+                  summary: `Confidence: ${confidence} (${detectedSignalsCount}/${totalSignalsCount} signals)`,
+                }}
+              />
 
               <a
                 href={

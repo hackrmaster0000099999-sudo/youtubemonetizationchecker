@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
+import { SaveButton } from '@/components/common/SaveButton';
 import { ChannelData, VideoData } from '@/lib/youtube/types';
 import { CheckCircle2, AlertTriangle, ShieldCheck, HelpCircle, ExternalLink } from 'lucide-react';
 
@@ -16,6 +17,7 @@ interface VisibilityCheck {
 export function ShadowbanDetectorClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
   const [channel, setChannel] = useState<ChannelData | null>(null);
   const [checks, setChecks] = useState<VisibilityCheck[]>([]);
 
@@ -91,9 +93,10 @@ export function ShadowbanDetectorClient() {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="shadowban-detector-form"
+          initialValue={inputValue}
           placeholder="Enter channel URL, @handle, or video link"
           buttonText="Run Diagnostic"
           loadingText="Scanning signals..."
@@ -142,15 +145,34 @@ export function ShadowbanDetectorClient() {
               </div>
             </div>
 
-            <a
-              href={channel.channelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] shrink-0 self-start sm:self-center transition-colors"
-            >
-              <span>View Channel</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
-            </a>
+            <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+              <SaveButton
+                item={{
+                  id: `shadowban_${channel.id}`,
+                  toolId: 'shadowban-detector',
+                  toolName: 'Shadowban Detector',
+                  category: 'Channel',
+                  targetType: 'CHANNEL',
+                  title: channel.title,
+                  handle: channel.handle,
+                  avatarUrl: channel.avatarUrl || undefined,
+                  url: channel.channelUrl,
+                  metaText: 'Healthy Visibility Signals',
+                  badgeType: 'success',
+                  summary: `${checks.length} diagnostic checks passed • Public indexing verified`,
+                }}
+              />
+
+              <a
+                href={channel.channelUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] transition-colors"
+              >
+                <span>View Channel</span>
+                <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
+              </a>
+            </div>
           </div>
 
           {/* Overall Health Banner */}

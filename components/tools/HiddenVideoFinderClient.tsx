@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
+import { SaveButton } from '@/components/common/SaveButton';
 import { HiddenVideoScanResult } from '@/lib/youtube/types';
 import { formatNumber } from '@/lib/formatters/number';
 import {
@@ -28,6 +29,7 @@ import {
 export function HiddenVideoFinderClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
   const [result, setResult] = useState<HiddenVideoScanResult | null>(null);
   const [activeTab, setActiveTab] = useState<'unlisted' | 'private' | 'playlists'>('unlisted');
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -50,6 +52,7 @@ export function HiddenVideoFinderClient() {
       }
 
       setResult(json.data);
+
       // Default to the most interesting tab
       if (json.data?.unlistedVideos?.length > 0) {
         setActiveTab('unlisted');
@@ -79,9 +82,10 @@ export function HiddenVideoFinderClient() {
   return (
     <div className="space-y-6">
       {/* Input Form */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="hidden-video-finder-form"
+          initialValue={inputValue}
           placeholder="Enter YouTube Channel URL, @handle, or Playlist link to scan..."
           buttonText="Scan for Hidden Videos"
           loadingText="Scanning channel playlists and unlisted items..."
@@ -161,6 +165,26 @@ export function HiddenVideoFinderClient() {
             </div>
 
             <div className="flex items-center gap-2">
+              <SaveButton
+                item={{
+                  id: `hidden_${result.targetInfo.id}`,
+                  toolId: 'hidden-video-finder',
+                  toolName: 'Hidden Video Finder',
+                  category: 'Channel',
+                  targetType: result.targetType === 'PLAYLIST' ? 'PLAYLIST' : 'CHANNEL',
+                  title: result.targetInfo.title,
+                  handle: `@${result.targetInfo.id}`,
+                  avatarUrl: result.targetInfo.avatarOrThumb || undefined,
+                  url:
+                    result.targetType === 'PLAYLIST'
+                      ? `https://www.youtube.com/playlist?list=${result.targetInfo.id}`
+                      : `https://www.youtube.com/channel/${result.targetInfo.id}`,
+                  metaText: `${result.stats.unlistedCount} Unlisted • ${result.stats.privateSlotsCount} Private`,
+                  badgeType: result.stats.unlistedCount > 0 ? 'warning' : 'neutral',
+                  summary: `${result.stats.publicCount} public videos • ${result.stats.playlistsScanned} playlists scanned`,
+                }}
+              />
+
               <a
                 href={
                   result.targetType === 'PLAYLIST'

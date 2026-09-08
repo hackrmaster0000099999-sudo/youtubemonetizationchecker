@@ -5,6 +5,7 @@ import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
 import { CopyButton } from '@/components/common/CopyButton';
+import { SaveButton } from '@/components/common/SaveButton';
 import { ChannelData, VideoData } from '@/lib/youtube/types';
 import { ExternalLink, Rss, ShieldCheck, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import Link from 'next/link';
 export function ChannelIdFinderClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
   const [channel, setChannel] = useState<{
     id: string;
     title: string;
@@ -34,7 +36,7 @@ export function ChannelIdFinderClient() {
       const res = await fetch('/api/youtube/lookup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ input }),
+        body: JSON.stringify({ input, tool: 'channel-id-finder' }),
       });
 
       const json = await res.json();
@@ -78,9 +80,10 @@ export function ChannelIdFinderClient() {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="channel-id-finder-form"
+          initialValue={inputValue}
           placeholder="Paste channel URL, @handle, custom URL, or video link"
           buttonText="Find Channel ID"
           loadingText="Finding ID..."
@@ -145,15 +148,34 @@ export function ChannelIdFinderClient() {
                 </div>
               </div>
 
-              <a
-                href={channel.channelUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] shrink-0 self-start sm:self-center transition-colors"
-              >
-                <span>View on YouTube</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
-              </a>
+              <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+                <SaveButton
+                  item={{
+                    id: `channel_id_${channel.id}`,
+                    toolId: 'channel-id-finder',
+                    toolName: 'Channel ID Finder',
+                    category: 'Channel',
+                    targetType: 'CHANNEL',
+                    title: channel.title,
+                    handle: channel.handle,
+                    avatarUrl: channel.avatarUrl || undefined,
+                    url: channel.channelUrl,
+                    metaText: `Channel ID: ${channel.id}`,
+                    badgeType: 'neutral',
+                    summary: `${channel.subscriberText || ''} • ${channel.videoCountText || ''}`,
+                  }}
+                />
+
+                <a
+                  href={channel.channelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] transition-colors"
+                >
+                  <span>View on YouTube</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
+                </a>
+              </div>
             </div>
 
             {/* Primary Channel ID Box (Native Android Highlight Surface) */}

@@ -7,6 +7,7 @@ import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
 import { CopyButton } from '@/components/common/CopyButton';
+import { SaveButton } from '@/components/common/SaveButton';
 import { VideoCommentsResult, YouTubeComment } from '@/lib/youtube/types';
 import { formatNumber } from '@/lib/formatters/number';
 import {
@@ -229,9 +230,10 @@ export function RandomCommentPickerClient() {
   return (
     <div className="space-y-6">
       {/* Input Form Card */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="random-comment-picker-form"
+          initialValue={currentInput}
           placeholder="Paste YouTube video URL (e.g. youtube.com/watch?v=... or youtu.be/...)"
           buttonText="Load Video Comments"
           loadingText="Loading comments..."
@@ -299,7 +301,7 @@ export function RandomCommentPickerClient() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-1">
+              <div className="flex flex-wrap items-center gap-2 pt-1">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F9F9F8] border border-[#E8E7E3] text-[12px] font-medium text-[#16181C]">
                   <MessageSquare className="w-3.5 h-3.5 text-[#D6293C]" />
                   <span>{formatNumber(data.video.commentCount || commentsList.length)} Comments on Video</span>
@@ -314,6 +316,22 @@ export function RandomCommentPickerClient() {
                     <span>{eligiblePool.length} Eligible Entries</span>
                   </div>
                 )}
+                <SaveButton
+                  item={{
+                    id: `picker_${data.video.id}`,
+                    toolId: 'random-comment-picker',
+                    toolName: 'Random Comment Picker',
+                    category: 'Engagement',
+                    targetType: 'VIDEO',
+                    title: data.video.title,
+                    handle: data.video.channelTitle,
+                    avatarUrl: data.video.thumbnail || undefined,
+                    url: `https://www.youtube.com/watch?v=${data.video.id}`,
+                    metaText: `${commentsList.length} Comments Loaded`,
+                    badgeType: 'neutral',
+                    summary: `${eligiblePool.length} eligible participants • ${winners.length > 0 ? `${winners.length} winner(s) picked` : 'Giveaway pool ready'}`,
+                  }}
+                />
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 
 interface YouTubeInputFormProps {
@@ -23,6 +23,12 @@ export function YouTubeInputForm({
   id = 'youtube-input-form',
 }: YouTubeInputFormProps) {
   const [value, setValue] = useState(initialValue);
+  const [prevInitialValue, setPrevInitialValue] = useState(initialValue);
+
+  if (initialValue !== prevInitialValue) {
+    setPrevInitialValue(initialValue);
+    setValue(initialValue);
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

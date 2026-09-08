@@ -5,12 +5,14 @@ import { YouTubeInputForm } from '@/components/forms/YouTubeInputForm';
 import { ToolLoading } from '@/components/common/ToolLoading';
 import { ToolError } from '@/components/common/ToolError';
 import { CopyButton } from '@/components/common/CopyButton';
+import { SaveButton } from '@/components/common/SaveButton';
 import { VideoData } from '@/lib/youtube/types';
 import { Tag as TagIcon, Hash, ShieldCheck, ExternalLink } from 'lucide-react';
 
 export function TagExtractorClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
   const [video, setVideo] = useState<VideoData | null>(null);
 
   const handleExtract = async (input: string) => {
@@ -22,7 +24,7 @@ export function TagExtractorClient() {
       const res = await fetch('/api/youtube/lookup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ input }),
+        body: JSON.stringify({ input, tool: 'tag-extractor' }),
       });
 
       const json = await res.json();
@@ -34,7 +36,8 @@ export function TagExtractorClient() {
         throw new Error('Please provide an individual YouTube video URL (e.g. youtube.com/watch?v=... or youtu.be/...) to inspect video SEO tags.');
       }
 
-      setVideo(json.data as VideoData);
+      const videoData = json.data as VideoData;
+      setVideo(videoData);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Error extracting tags.');
     } finally {
@@ -47,9 +50,10 @@ export function TagExtractorClient() {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs">
+      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
         <YouTubeInputForm
           id="tag-extractor-form"
+          initialValue={inputValue}
           placeholder="Paste YouTube video link (e.g. youtube.com/watch?v=... or youtu.be/...)"
           buttonText="Extract Tags"
           loadingText="Extracting tags..."
@@ -76,7 +80,7 @@ export function TagExtractorClient() {
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#F0EFEB]">
             <div className="space-y-1 min-w-0">
               <span className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
-                Video Analyzed
+                Video Found
               </span>
               <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C] leading-snug">
                 {video.title}
@@ -86,47 +90,64 @@ export function TagExtractorClient() {
               </div>
             </div>
 
-            <a
-              href={`https://www.youtube.com/watch?v=${video.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] shrink-0 self-start sm:self-center transition-colors"
-            >
-              <span>Watch Video</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
-            </a>
+            <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+              <SaveButton
+                item={{
+                  id: `tags_${video.id}`,
+                  toolId: 'tag-extractor',
+                  toolName: 'Tag Extractor',
+                  category: 'SEO',
+                  targetType: 'VIDEO',
+                  title: video.title,
+                  handle: video.channelTitle,
+                  avatarUrl: video.thumbnails.medium || video.thumbnails.default || undefined,
+                  url: `https://www.youtube.com/watch?v=${video.id}`,
+                  metaText: `${tags.length} SEO Tags`,
+                  badgeType: 'neutral',
+                  summary: tags.slice(0, 5).join(', ') || 'No tags found',
+                }}
+              />
+
+              <a
+                href={`https://www.youtube.com/watch?v=${video.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-[#F9F9F8] hover:bg-white rounded-xl text-[13px] font-medium text-[#16181C] transition-colors"
+              >
+                <span>Watch on YouTube</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
           {tags.length === 0 ? (
-            <div className="p-8 border border-dashed border-[#E3E2DE] bg-[#F9F9F8] rounded-2xl text-center space-y-2">
+            <div className="p-8 text-center bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl space-y-2">
               <TagIcon className="w-8 h-8 text-[#5B6169] mx-auto opacity-50" />
-              <div className="font-bold text-[15px] text-[#16181C]">No Public Video Tags Found</div>
-              <p className="text-[13px] text-[#5B6169] max-w-md mx-auto leading-relaxed">
-                This creator did not specify custom keyword tags for this upload, or YouTube has normalized them. Video rankings for this upload are primarily driven by the title, description, and audience retention.
+              <div className="font-bold text-[15px] text-[#16181C]">No Public Tags Found</div>
+              <p className="text-[13px] text-[#5B6169] max-w-md mx-auto">
+                This creator did not specify custom search tags for this video, or they rely exclusively on title and description keywords.
               </p>
             </div>
           ) : (
             <div className="space-y-5">
-              {/* Copy all row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#F0EFEB]">
                 <div className="flex items-center gap-2">
                   <Hash className="w-4 h-4 text-[#D6293C]" />
-                  <span className="text-[14px] font-bold text-[#16181C]">
-                    {tags.length} Video Tags Extracted
+                  <span className="font-bold text-[15px] text-[#16181C]">
+                    {tags.length} Tags Extracted
                   </span>
                 </div>
                 <CopyButton
                   id="copy-all-tags-btn"
                   textToCopy={commaSeparatedTags}
-                  label="Copy All Tags (Comma-Separated)"
-                  className="shrink-0"
+                  label="Copy All Tags"
                 />
               </div>
 
-              {/* Individual Tag Pills */}
+              {/* Tag Badges */}
               <div className="space-y-2">
                 <div className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
-                  Individual Tags (Tap to Copy Single Tag)
+                  Individual Tags
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, idx) => (
@@ -134,9 +155,7 @@ export function TagExtractorClient() {
                       key={idx}
                       type="button"
                       onClick={() => {
-                        if (navigator.clipboard) {
-                          navigator.clipboard.writeText(tag);
-                        }
+                        navigator.clipboard.writeText(tag);
                       }}
                       title="Click to copy tag"
                       className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#F9F9F8] border border-[#E3E2DE] hover:border-[#16181C] hover:bg-white rounded-lg active:scale-95 transition-all text-[13px] text-[#16181C] font-mono-data cursor-pointer"
