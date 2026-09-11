@@ -32,13 +32,13 @@ export function Footer() {
       className="w-full bg-[#FCFCFB] border-t border-[#EDE8F9] pt-16 pb-12 text-[#181135]"
     >
       <div className="max-w-[1120px] mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#EDE8F9]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-12 border-b border-[#EDE8F9]">
           {/* Brand Column */}
-          <div className="md:col-span-1 space-y-3">
+          <div className="sm:col-span-2 lg:col-span-1 space-y-4">
             <Link href="/" className="inline-block tap-press">
               <Logo size={32} showText={true} />
             </Link>
-            <p className="text-[13px] text-[#635B80] leading-relaxed">
+            <p className="text-[13px] text-[#635B80] leading-relaxed max-w-sm">
               Fast, accurate, free YouTube creator utility platform. Research channel monetization, copy channel IDs, estimate revenue, and inspect public video metadata without login or software installs.
             </p>
           </div>
@@ -192,40 +192,40 @@ export function Footer() {
               No Login Required • 100% Free
             </span>
           </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-[12px] text-[#635B80]">
-            <Link href="/monetization-checker" className="hover:text-[#7C3AED] transition-colors">YouTube Monetization Checker</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/channel-id-finder" className="hover:text-[#7C3AED] transition-colors">Channel ID Finder</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/earnings-calculator" className="hover:text-[#7C3AED] transition-colors">YouTube Earnings Calculator</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/thumbnail-downloader" className="hover:text-[#7C3AED] transition-colors">Thumbnail Downloader HD</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/tag-extractor" className="hover:text-[#7C3AED] transition-colors">YouTube Tag Extractor</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/dislike-checker" className="hover:text-[#7C3AED] transition-colors">YouTube Dislike Checker</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/random-comment-picker" className="hover:text-[#7C3AED] transition-colors">Random Comment Giveaway Picker</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/description-viewer" className="hover:text-[#7C3AED] transition-colors">Description Grabber</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/comment-viewer" className="hover:text-[#7C3AED] transition-colors">Comment Search &amp; Viewer</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/data-viewer" className="hover:text-[#7C3AED] transition-colors">Metadata &amp; Upload Time Viewer</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/private-viewer" className="hover:text-[#7C3AED] transition-colors">Private Incognito Viewer</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/shadowban-detector" className="hover:text-[#7C3AED] transition-colors">Shadowban Diagnostic</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/hidden-video-finder" className="hover:text-[#7C3AED] transition-colors">Unlisted Video Search</Link>
-            <span className="text-[#DDD0FA]">•</span>
-            <Link href="/image-downloader" className="hover:text-[#7C3AED] transition-colors">Banner &amp; Avatar Downloader</Link>
+          <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2.5 text-[12px] text-[#635B80]">
+            <Link href="/monetization-checker" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">YouTube Monetization Checker</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/channel-id-finder" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Channel ID Finder</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/earnings-calculator" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">YouTube Earnings Calculator</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/thumbnail-downloader" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Thumbnail Downloader HD</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/tag-extractor" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">YouTube Tag Extractor</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/dislike-checker" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">YouTube Dislike Checker</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/random-comment-picker" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Random Comment Giveaway Picker</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/description-viewer" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Description Grabber</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/comment-viewer" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Comment Search &amp; Viewer</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/data-viewer" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Metadata &amp; Upload Time Viewer</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/private-viewer" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Private Incognito Viewer</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/shadowban-detector" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Shadowban Diagnostic</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/hidden-video-finder" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Unlisted Video Search</Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
+            <Link href="/image-downloader" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Banner &amp; Avatar Downloader</Link>
           </div>
         </div>
 
         {/* Bottom Bar / Disclaimers */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-[#635B80]">
-          <div>
+          <div className="text-center md:text-left">
             © {new Date().getFullYear()} {process.env.NEXT_PUBLIC_SITE_NAME || 'YT MONETIZE'}. All rights reserved.
           </div>
           <div className="flex items-center gap-2 text-center md:text-right">
