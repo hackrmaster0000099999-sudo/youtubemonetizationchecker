@@ -32,7 +32,6 @@ interface ToolIconProps extends LucideProps {
 
 export function ToolIcon({ name, className = 'w-5 h-5 text-[#7C3AED]', ...props }: ToolIconProps) {
   switch (name) {
-    case 'video-downloader':
     case 'Video':
       return <Video className={className} {...props} />;
     case 'FolderSearch':

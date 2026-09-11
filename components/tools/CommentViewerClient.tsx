@@ -128,7 +128,7 @@ export function CommentViewerClient() {
 
       // 2. Filter tabs
       if (activeFilter === 'replies') {
-        return comment.replyCount > 0;
+        return (comment.replyCount ?? 0) > 0;
       }
       if (activeFilter === 'liked') {
         return comment.likeCount >= 10;
@@ -147,7 +147,7 @@ export function CommentViewerClient() {
     let liked = 0;
     let questions = 0;
     for (const c of commentsList) {
-      if (c.replyCount > 0) replies++;
+      if ((c.replyCount ?? 0) > 0) replies++;
       if (c.likeCount >= 10) liked++;
       if (c.text.includes('?')) questions++;
     }
@@ -654,10 +654,10 @@ export function CommentViewerClient() {
                           <ThumbsUp className="w-3.5 h-3.5 text-[#7C3AED]" />
                           <span>{formatCompactNumber(comment.likeCount)} likes</span>
                         </div>
-                        {comment.replyCount > 0 && (
+                        {Boolean(comment.replyCount && comment.replyCount > 0) && (
                           <div className="flex items-center gap-1 font-medium text-[#635B80]">
                             <MessageSquare className="w-3.5 h-3.5 text-[#635B80]" />
-                            <span>{formatNumber(comment.replyCount)} replies</span>
+                            <span>{formatNumber(comment.replyCount || 0)} replies</span>
                           </div>
                         )}
                       </div>

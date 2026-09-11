@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
+import { PopularSearchQueries } from '@/components/common/PopularSearchQueries';
 import { CommentViewerClient } from '@/components/tools/CommentViewerClient';
 import {
   constructMetadata,
@@ -9,49 +10,53 @@ import {
   generateBreadcrumbSchema,
   generateFAQSchema,
 } from '@/lib/seo';
-import { CheckCircle2, MessageSquare, Search, Trophy, Filter } from 'lucide-react';
+import { TOOL_SEO_MAP } from '@/lib/constants/tool-seo';
+import { CheckCircle2, MessageSquare, Search, Trophy, Filter, Info } from 'lucide-react';
+import Link from 'next/link';
+
+const seo = TOOL_SEO_MAP['comment-viewer'];
 
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Comment Viewer & Search',
-  description:
-    'Free YouTube Comment Viewer and search tool. View, search, filter, and pick random giveaway winners from any YouTube video without login.',
+  title: seo.title,
+  description: seo.metaDescription,
   path: '/comment-viewer',
+  keywords: seo.keywords,
 });
 
 const faqs = [
   {
-    q: 'How do I search or view all comments on a YouTube video?',
-    a: 'Simply paste any YouTube video link (e.g., youtube.com/watch?v=... or youtu.be/...) into our Comment Viewer. The tool fetches public comments, showing author names, avatars, timestamps, like counts, and reply numbers.',
+    q: 'How to search comments on YouTube video free online?',
+    a: 'Simply paste any YouTube video link (e.g., youtube.com/watch?v=... or youtu.be/...) into our Comment Viewer. Type any specific word, phrase, or username in the filter box to find exact comment matches in real time.',
   },
   {
-    q: 'Can I search for specific keywords inside YouTube comments?',
-    a: 'Yes! The Comment Viewer includes an instant keyword filter bar. As you type, the list updates in real time to show only comments containing your query or written by a specific user.',
+    q: 'How to view all comments on a YouTube video online without app?',
+    a: 'Our online reader connects to YouTube public comment feeds, loading top comments, timestamps, author names, like counts, and replies directly in your browser without logging in.',
   },
   {
-    q: 'Can I pick a random comment winner for a YouTube giveaway?',
-    a: 'Yes. Click the "Pick Random Winner" button on the comments toolbar. The tool will randomly choose a winner from all loaded comments, making it easy to run transparent YouTube giveaways and contests.',
+    q: 'How to search YouTube comments by username?',
+    a: 'Enter the username or creator handle into the search filter to display all comments and replies authored by that specific user across the video discussion thread.',
   },
   {
-    q: 'Why does it say comments are disabled for a video?',
-    a: 'If a creator manually turned off comments in YouTube Studio, or if the video is designated as "Made for Kids" or age-restricted, YouTube restricts public comment threads for that video.',
+    q: 'Why are comments disabled on some YouTube videos?',
+    a: 'If a creator turned off comments in YouTube Studio, or if the video is designated as "Made for Kids" or age-restricted, YouTube restricts comment threads on that video.',
   },
   {
-    q: 'Can I export or copy comments?',
-    a: 'Yes. You can copy individual comments, use "Copy All" to grab all loaded comments formatted with author and like details, or click "Export JSON" to download the structured data.',
+    q: 'Can I export or copy YouTube comments to text or JSON?',
+    a: 'Yes. You can copy individual comments, use "Copy All" for a formatted text list, or click "Export JSON" to download the complete structured comment dataset.',
   },
 ];
 
 export default function CommentViewerPage() {
   const appSchema = generateWebApplicationSchema({
-    name: 'YouTube Comment Viewer & Search Tool',
-    description:
-      'Search, filter, analyze, and pick random winners from YouTube video comments with YT MONETIZE.',
+    name: seo.name,
+    description: seo.metaDescription,
     path: '/comment-viewer',
+    keywords: seo.keywords,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
-    { name: 'Comment Viewer', url: '/comment-viewer' },
+    { name: 'YouTube Comment Viewer', url: '/comment-viewer' },
   ]);
 
   const faqSchema = generateFAQSchema(faqs);
@@ -72,122 +77,95 @@ export default function CommentViewerPage() {
       />
 
       <div className="space-y-12 py-4">
-        {/* Breadcrumb Navigation */}
+        {/* Breadcrumb */}
         <Breadcrumbs items={[{ label: 'Comment Viewer' }]} />
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
+            <MessageSquare className="w-3.5 h-3.5 text-[#7C3AED]" />
+            <span>Comment Search &amp; Analysis Tool</span>
+          </div>
           <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
-            YouTube Comment Viewer &amp; Search
+            YouTube Comment Viewer &amp; Search Engine
           </h1>
           <p className="text-[16px] text-[#635B80] leading-relaxed">
-            Inspect public comment threads from any YouTube video. Search comments by keyword, filter top
-            or newest discussions, pick transparent giveaway winners, and export comments without logging in.
+            Search specific words in YouTube comments, filter by username, view top replies, and inspect discussions from any public video without signing in.
           </p>
         </div>
 
         {/* Interactive Tool Widget */}
         <CommentViewerClient />
 
-        {/* How It Works & Core Capabilities */}
+        {/* Feature Highlights */}
         <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
             <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-              Key Features of the YouTube Comment Viewer
+              How to Search and Filter YouTube Video Comments
             </h2>
             <p className="text-[15px] text-[#635B80] leading-relaxed">
-              Designed for creators, researchers, and viewers who need to analyze audience feedback and
-              organize community interactions:
+              Explore comment conversations and audience feedback with precision filtering:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <Search className="w-4 h-4 text-[#7C3AED]" />
-                <h3>Live Keyword Search</h3>
+                <h3>Instant Word Search</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Filter thousands of comments instantly by typing keywords, phrases, or specific usernames to
-                find answers, feedback, or mentions.
+                Find exact keywords, timestamps, or product mentions across hundreds of video comments instantly.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
-                <Trophy className="w-4 h-4 text-emerald-600" />
-                <h3>Random Giveaway Picker</h3>
+                <Filter className="w-4 h-4 text-emerald-600" />
+                <h3>Username Filtering</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Pick unbiased random winners for YouTube contests, community giveaways, or audience Q&amp;A
-                spotlights with a single click.
+                Filter comments posted by specific community members, channel moderators, or creator replies.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
-                <Filter className="w-4 h-4 text-[#7C3AED]" />
-                <h3>Smart Filter Tabs</h3>
+                <Trophy className="w-4 h-4 text-amber-500" />
+                <h3>Giveaway Random Picker</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Filter comments by question marks (<code className="font-mono text-[12px] bg-[#EDE8F9] px-1 text-[#7C3AED] rounded-sm">?</code>),
-                highly liked remarks (10+ likes), or discussions with active reply threads.
+                Pick a fair and transparent giveaway winner from loaded comments with duplicate user filtering.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* Why Analyze YouTube Comments */}
-        <section className="space-y-4 pt-4">
-          <h2 className="text-[20px] md:text-[24px] font-bold text-[#181135]">
-            Why Creators &amp; Researchers Analyze YouTube Comments
-          </h2>
-          <div className="tool-card-3d p-6 sm:p-8 space-y-4 text-[15px] text-[#181135] leading-relaxed">
-            <p>
-              The comment section of a YouTube video is one of the richest sources of direct audience sentiment.
-              Whether you are an independent creator trying to understand what your viewers want next, or a digital
-              marketer researching competitor reception, examining comments reveals:
-            </p>
-            <ul className="space-y-2 list-disc list-inside text-[#635B80]">
-              <li>
-                <strong className="text-[#181135]">Unanswered Audience Questions:</strong> Spot common confusion or
-                topics that warrant a dedicated follow-up video.
-              </li>
-              <li>
-                <strong className="text-[#181135]">Community Sentiment &amp; Feedback:</strong> See what jokes,
-                timestamps, or advice resonated most with viewers based on like counts.
-              </li>
-              <li>
-                <strong className="text-[#181135]">Fair Contest Drawings:</strong> Conduct transparent giveaway winner
-                drawings without biased manual scrolling.
-              </li>
-            </ul>
           </div>
         </section>
 
         {/* FAQ Section */}
         <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
-          <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-[15px] text-[#635B80]">
-              Common questions about inspecting and searching YouTube video comments.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="tool-card-3d p-5 space-y-2">
-                <h3 className="text-[15px] font-bold text-[#181135] flex items-start gap-2">
-                  <span className="text-[#7C3AED] font-bold">Q.</span>
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
+            Frequently Asked Questions
+          </h2>
+          <div className="divide-y divide-[#EDE8F9] border border-[#EDE8F9] bg-white/80 backdrop-blur-md rounded-2xl shadow-xs overflow-hidden">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="p-5 space-y-2">
+                <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
+                  <Info className="w-4 h-4 text-[#7C3AED]" />
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#635B80] leading-relaxed pl-5">{faq.a}</p>
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-6">
+                  {faq.a}
+                </p>
               </div>
             ))}
           </div>
         </section>
+
+        {/* Popular SEO Search Queries */}
+        <PopularSearchQueries
+          mainKeyword={seo.mainKeyword}
+          searchQueries={seo.searchQueries}
+        />
 
         {/* Related Tools */}
         <RelatedTools currentToolId="comment-viewer" />

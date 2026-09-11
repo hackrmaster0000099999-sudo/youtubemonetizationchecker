@@ -624,6 +624,7 @@ export async function getVideoComments(
             },
             comments: [],
             totalLoaded: 0,
+            nextPageToken: null,
             commentsDisabled: true,
           };
           appCache.set(cacheKey, disabledResult, CACHE_TTL.SHORT_MS);
@@ -783,6 +784,7 @@ async function fetchCommentsFromInnerTube(
         },
         comments: [],
         totalLoaded: 0,
+        nextPageToken: null,
         commentsDisabled: videoData.commentCount === 0 || videoData.commentCount === null,
       };
     }
@@ -918,6 +920,7 @@ async function fetchCommentsFromInnerTube(
       },
       comments: [],
       totalLoaded: 0,
+      nextPageToken: null,
       commentsDisabled: false,
     };
   }

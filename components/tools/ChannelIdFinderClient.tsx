@@ -64,7 +64,7 @@ export function ChannelIdFinderClient() {
           handle: c.handle || `@${c.title.replace(/\s+/g, '')}`,
           avatarUrl: c.avatarUrl,
           bannerUrl: c.bannerUrl,
-          channelUrl: c.channelUrl,
+          channelUrl: c.channelUrl || `https://www.youtube.com/channel/${c.id}`,
           subscriberText: c.subscriberText,
           videoCountText: c.videoCountText,
           viewCountText: c.viewCountText,

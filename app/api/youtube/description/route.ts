@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
         title: `${channel.title} (Channel About Info)`,
         author: channel.title,
         channelId: channel.id,
-        thumbnail: channel.avatarUrl,
+        thumbnail: channel.avatarUrl || '',
         description: channel.description || '',
         viewCount: channel.viewCount,
         publishedAt: channel.publishedAt,

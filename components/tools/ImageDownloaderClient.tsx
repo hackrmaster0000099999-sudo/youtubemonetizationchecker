@@ -140,7 +140,7 @@ export function ImageDownloaderClient() {
                   title: channel.title,
                   handle: channel.handle,
                   avatarUrl: channel.avatarUrl || undefined,
-                  url: channel.channelUrl,
+                  url: channel.channelUrl || `https://www.youtube.com/channel/${channel.id}`,
                   metaText: channel.bannerUrl ? 'Avatar & Banner Available' : 'Avatar Available',
                   badgeType: 'neutral',
                   summary: `${channel.subscriberText || ''} channel graphics & branding assets`,

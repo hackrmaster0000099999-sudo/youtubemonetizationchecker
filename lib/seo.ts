@@ -12,6 +12,7 @@ export function constructMetadata({
   title,
   description,
   path,
+  keywords,
 }: MetadataOptions): Metadata {
   const canonicalUrl = `${SITE_URL}${path}`;
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
@@ -19,6 +20,7 @@ export function constructMetadata({
   return {
     title: fullTitle,
     description,
+    keywords: keywords && keywords.length > 0 ? keywords : undefined,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -89,10 +91,12 @@ export function generateWebApplicationSchema({
   name,
   description,
   path,
+  keywords,
 }: {
   name: string;
   description: string;
   path: string;
+  keywords?: string[];
 }) {
   return {
     '@context': 'https://schema.org',
@@ -103,6 +107,7 @@ export function generateWebApplicationSchema({
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
+    keywords: keywords?.join(', '),
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -141,6 +146,22 @@ export function generateFAQSchema(faqs: { q: string; a: string }[]) {
         '@type': 'Answer',
         text: faq.a,
       },
+    })),
+  };
+}
+
+export function generateSiteNavigationSchema(
+  items: { name: string; url: string; description?: string }[]
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: items.map((item, idx) => ({
+      '@type': 'SiteNavigationElement',
+      position: idx + 1,
+      name: item.name,
+      description: item.description,
+      url: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url}`,
     })),
   };
 }

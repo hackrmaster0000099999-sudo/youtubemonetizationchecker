@@ -2,42 +2,51 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
+import { PopularSearchQueries } from '@/components/common/PopularSearchQueries';
 import { ChannelIdFinderClient } from '@/components/tools/ChannelIdFinderClient';
 import { constructMetadata, generateWebApplicationSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
+import { TOOL_SEO_MAP } from '@/lib/constants/tool-seo';
 import { Info, CheckCircle2, Search } from 'lucide-react';
 import Link from 'next/link';
 
+const seo = TOOL_SEO_MAP['channel-id-finder'];
+
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Channel ID Finder',
-  description:
-    'Find a YouTube channel ID from a channel URL, handle, or username with our free Channel ID Finder. Get the channel identifier quickly and easily.',
+  title: seo.title,
+  description: seo.metaDescription,
   path: '/channel-id-finder',
+  keywords: seo.keywords,
 });
 
 const faqs = [
   {
-    q: 'What is a YouTube Channel ID?',
-    a: 'A YouTube Channel ID is a unique, immutable 24-character string starting with "UC" (for example, UCX6OQ3DkcsbYNE6H8uQQuVA) that permanently identifies a YouTube channel regardless of name or handle changes.',
+    q: 'How to find YouTube channel ID from URL or handle?',
+    a: 'Paste any YouTube channel link (e.g. youtube.com/@username, youtube.com/c/customname, or a video URL) into the finder. Our tool resolves vanity names to extract the canonical 24-character UC channel identifier instantly.',
   },
   {
-    q: 'Where is a YouTube Channel ID required?',
-    a: 'Channel IDs are needed when configuring YouTube Data API queries, setting up third-party analytics dashboards, adding live subscriber counters, embedding RSS feeds, or white-listing creator accounts in advertising software.',
+    q: 'What is a YouTube Channel ID and why is it needed for APIs?',
+    a: 'A YouTube Channel ID is a permanent, unique 24-character string beginning with "UC" (e.g., UCX6OQ3DkcsbYNE6H8uQQuVA). It is required when setting up YouTube Data API integrations, webhooks, live subscriber counters, and RSS feeds.',
   },
   {
-    q: 'How does this tool find the Channel ID from a handle or video link?',
-    a: 'The tool queries YouTube public endpoint manifests, resolves vanity URLs and @handles to their canonical resource representations, and extracts the primary UC-prefixed identifier.',
+    q: 'How to get YouTube channel ID on mobile browser?',
+    a: 'Open this page on your mobile device, paste the channel URL or share link from the YouTube mobile app, and tap "Find Channel ID". You can copy the resulting UC ID with one click.',
   },
   {
-    q: 'Can a channel owner change their YouTube Channel ID?',
-    a: 'No. While creators can change their display name, custom URL, and @handle, the underlying UC channel ID remains permanently fixed for the lifetime of the channel.',
+    q: 'Can a creator change their YouTube Channel ID?',
+    a: 'No. While creators can change their handle (@name), display name, and custom URL, the underlying UC channel ID remains immutable and permanent forever.',
+  },
+  {
+    q: 'Is this YouTube Channel ID Finder tool free?',
+    a: 'Yes, 100% free with no sign-up, no extension installation, and unlimited lookups.',
   },
 ];
 
 export default function ChannelIdFinderPage() {
   const appSchema = generateWebApplicationSchema({
-    name: 'YouTube Channel ID Finder',
-    description: 'Find and copy canonical 24-character YouTube channel IDs from URLs, handles, and video links with YT MONETIZE.',
+    name: seo.name,
+    description: seo.metaDescription,
     path: '/channel-id-finder',
+    keywords: seo.keywords,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -70,13 +79,13 @@ export default function ChannelIdFinderPage() {
         <div className="space-y-3 max-w-[800px]">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
             <Search className="w-3.5 h-3.5 text-[#7C3AED]" />
-            <span>Channel ID Utility</span>
+            <span>Identifier Resolver</span>
           </div>
           <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
-            YouTube Channel ID Finder
+            YouTube Channel ID Finder &amp; Handle Converter
           </h1>
           <p className="text-[16px] text-[#635B80] leading-relaxed">
-            Find the canonical 24-character YouTube channel ID (UC...) for any channel, creator handle, or video URL. One-click copy with instant RSS feed links.
+            Find and convert YouTube channel IDs from URLs, handles (@username), custom links, or video URLs into canonical 24-character UC identifiers.
           </p>
         </div>
 
@@ -87,10 +96,10 @@ export default function ChannelIdFinderPage() {
         <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
             <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-              How to Find Any YouTube Channel ID
+              How to Find and Copy YouTube Channel IDs
             </h2>
             <p className="text-[15px] text-[#635B80] leading-relaxed">
-              YouTube introduced modern @handles and custom URLs, but most developer tools, plugins, and RSS readers still require the raw 24-character Channel ID:
+              Our resolver queries YouTube&apos;s canonical registry to extract permanent channel identifiers:
             </p>
           </div>
 
@@ -98,71 +107,31 @@ export default function ChannelIdFinderPage() {
             <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>1. Paste Any YouTube Link</h3>
+                <h3>1. Input Any Format</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Enter any format including <code className="font-mono-data text-[12px] bg-white/60 px-1 py-0.5 rounded border border-[#EDE8F9]">youtube.com/@handle</code>, custom URLs, legacy usernames, or video URLs.
+                Accepts handles (e.g. @MrBeast), vanity URLs (youtube.com/c/name), or any video link from that creator.
               </p>
             </div>
 
             <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>2. Instant Canonical Extraction</h3>
+                <h3>2. Resolve Canonical ID</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                The engine resolves redirects, parses verified channel metadata, and extracts the unique UC-prefixed identifier immediately.
+                The resolver queries YouTube metadata to extract the official 24-character &quot;UC...&quot; string.
               </p>
             </div>
 
             <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>3. One-Click Copy & RSS</h3>
+                <h3>3. One-Click Copy</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Copy the channel ID with one tap, or grab the ready-to-use YouTube XML RSS feed link for feed readers and Discord bots.
+                Copy the channel ID or use direct quick links to inspect monetization, telemetry, and banner assets.
               </p>
-            </div>
-          </div>
-
-          {/* Contextual Links */}
-          <div className="p-4.5 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-2xs">
-            <p>
-              Once you have the channel ID, you can check its monetization status with our{' '}
-              <Link href="/monetization-checker" className="text-[#7C3AED] font-bold hover:underline">
-                YouTube Monetization Checker
-              </Link>{' '}
-              or inspect full metadata in the{' '}
-              <Link href="/data-viewer" className="text-[#7C3AED] font-bold hover:underline">
-                YouTube Metadata Viewer
-              </Link>
-              .
-            </p>
-          </div>
-        </section>
-
-        {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#EDE8F9]">
-          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-            When You Need a YouTube Channel ID
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">API Integrations:</strong>
-              When setting up YouTube Data API v3 scripts, channel endpoints strictly mandate the UC channel ID.
-            </div>
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">RSS Feeds &amp; Webhooks:</strong>
-              Syndicating new video notifications to Discord, Telegram, or RSS readers requires the channel XML feed URL.
-            </div>
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">Website Widgets &amp; Embeds:</strong>
-              Third-party YouTube subscribe buttons and showcase sliders often require the permanent ID.
-            </div>
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">Creator Collaboration:</strong>
-              Cross-check official channel identifiers to prevent impersonation when signing influencer agreements.
             </div>
           </div>
         </section>
@@ -186,6 +155,12 @@ export default function ChannelIdFinderPage() {
             ))}
           </div>
         </section>
+
+        {/* Popular SEO Search Queries */}
+        <PopularSearchQueries
+          mainKeyword={seo.mainKeyword}
+          searchQueries={seo.searchQueries}
+        />
 
         {/* Related Tools */}
         <RelatedTools currentToolId="channel-id-finder" />

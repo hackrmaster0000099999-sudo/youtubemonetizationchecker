@@ -2,42 +2,51 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
+import { PopularSearchQueries } from '@/components/common/PopularSearchQueries';
 import { ShadowbanDetectorClient } from '@/components/tools/ShadowbanDetectorClient';
 import { constructMetadata, generateWebApplicationSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
-import { CheckCircle2, Info } from 'lucide-react';
+import { TOOL_SEO_MAP } from '@/lib/constants/tool-seo';
+import { CheckCircle2, Info, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 
+const seo = TOOL_SEO_MAP['shadowban-detector'];
+
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Shadowban Detector',
-  description:
-    'Check public YouTube visibility signals for potential search or discovery issues with our free Shadowban Detector and understand what the results may indicate.',
+  title: seo.title,
+  description: seo.metaDescription,
   path: '/shadowban-detector',
+  keywords: seo.keywords,
 });
 
 const faqs = [
   {
-    q: 'Does YouTube officially "shadowban" channels?',
-    a: 'According to YouTube official product leadership and algorithm engineering teams, YouTube does not have a "shadowban" switch. Instead, low viewership is usually caused by changing audience trends, lower click-through rates (CTR), weak average view duration (AVD), or non-violating content being categorized as "borderline".',
+    q: 'How to check if YouTube channel is shadowbanned?',
+    a: 'Paste your YouTube channel URL or @handle into our detector. The tool runs 5 public diagnostic tests: direct search indexing, @handle resolution, public video playback status, age/safe-search restrictions, and comment indexing health.',
   },
   {
-    q: 'What does this visibility diagnostic check?',
-    a: 'Our tool checks whether the channel is indexable in public searches, whether canonical handles resolve correctly, whether public video streams are restricted, and whether age-rating classifications are appropriately configured.',
+    q: 'Why are my YouTube views suddenly dropping?',
+    a: 'Sudden view drops are usually caused by lower click-through rates (CTR), drops in average view duration (AVD), seasonal audience behavior shifts, or content being flagged as borderline content (reducing recommendation impressions) rather than an intentional account shadowban.',
   },
   {
-    q: 'How can I recover views if my impressions suddenly drop?',
-    a: 'Focus on improving thumbnail CTR, optimizing the first 30 seconds of your video hook to maximize retention, analyzing YouTube Studio traffic source analytics, and maintaining consistent uploads in your defined niche.',
+    q: 'How to fix YouTube shadowban on Shorts?',
+    a: 'Avoid re-uploading duplicate content, clean up repetitive spam tags in titles/descriptions, improve viewer swipe-away percentage (aim for >70% viewed vs swiped away), and ensure audio tracks use approved YouTube Shorts library licenses.',
   },
   {
-    q: 'Is this YouTube visibility scanner free?',
-    a: 'Yes, 100% free with no login required.',
+    q: 'How to check if my YouTube comment is shadowbanned?',
+    a: 'Use our tool to verify channel health or open the video in an incognito window without logging in. If your comment is invisible in incognito mode, it was likely filtered by YouTube automatic spam filter or the creator held-for-review word blocklist.',
+  },
+  {
+    q: 'How to unshadowban YouTube channel fast?',
+    a: 'Audit recent uploads for copyright claims or community guidelines warnings, pause high-frequency spammy uploads for 48 hours, optimize titles and thumbnails for organic search, and engage directly with your active subscriber base.',
   },
 ];
 
 export default function ShadowbanDetectorPage() {
   const appSchema = generateWebApplicationSchema({
-    name: 'YouTube Shadowban Detector',
-    description: 'Check channel indexing health and public search visibility markers with YT MONETIZE.',
+    name: seo.name,
+    description: seo.metaDescription,
     path: '/shadowban-detector',
+    keywords: seo.keywords,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -68,97 +77,61 @@ export default function ShadowbanDetectorPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
+            <ShieldAlert className="w-3.5 h-3.5 text-[#7C3AED]" />
+            <span>Channel Health &amp; Indexing Diagnostic</span>
+          </div>
           <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
-            YouTube Shadowban &amp; Visibility Detector
+            YouTube Shadowban Detector &amp; Channel Visibility Checker
           </h1>
           <p className="text-[16px] text-[#635B80] leading-relaxed">
-            Diagnose public YouTube channel search discoverability, canonical handle routing, RSS feed access, and algorithmic visibility health.
+            Run real-time diagnostic checks on your YouTube channel search indexing, sudden view drops, video restrictions, and public visibility signals.
           </p>
         </div>
 
         {/* Interactive Tool Widget */}
         <ShadowbanDetectorClient />
 
-        {/* How The Tool Works */}
+        {/* Diagnostic Explanation */}
         <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
             <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-              How the YouTube Visibility Diagnostic Operates
+              Understanding YouTube Algorithm Penalties vs Shadowbans
             </h2>
             <p className="text-[15px] text-[#635B80] leading-relaxed">
-              Our automated diagnostic engine runs technical checks against publicly available YouTube endpoint markers:
+              YouTube engineers have clarified that the recommendation system responds to audience engagement metrics rather than secretive account switches:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>1. Canonical Handle Resolution</h3>
+                <h3>1. Search Indexing</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Verifies that the channel&apos;s custom handle routes cleanly to the primary UC channel ID without broken redirects.
+                Verifies whether your channel name and recent uploads appear in public YouTube search query indexes.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>2. Search &amp; Feed Discovery</h3>
+                <h3>2. Handle Resolution</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Checks that video uploads are broadcast to public XML syndication streams without restriction headers.
+                Confirms that your unique YouTube handle resolves cleanly to the canonical channel ID without redirects.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>3. Content Safety Flags</h3>
+                <h3>3. Borderline Content Checks</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Evaluates family-friendly metadata classifications that dictate whether content is recommended on home feeds.
+                Detects if content restrictions or age limitations are suppressing recommendation impressions.
               </p>
-            </div>
-          </div>
-
-          {/* Contextual Links */}
-          <div className="p-4 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-2xs">
-            <p>
-              Concerned about channel monetization? Run a diagnostic with our{' '}
-              <Link href="/monetization-checker" className="text-[#7C3AED] font-semibold hover:underline">
-                YouTube Monetization Checker
-              </Link>{' '}
-              or inspect complete technical parameters in the{' '}
-              <Link href="/data-viewer" className="text-[#7C3AED] font-semibold hover:underline">
-                YouTube Metadata Viewer
-              </Link>
-              .
-            </p>
-          </div>
-        </section>
-
-        {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#EDE8F9]">
-          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-            When to Run a Visibility Audit
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 text-[15px]">Sudden Viewership Drops:</strong>
-              Check if a drop in views is caused by public indexing anomalies or normal audience interest variance.
-            </div>
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 text-[15px]">After Content Niche Pivots:</strong>
-              Verify channel metadata routing after changing video topics or uploading new formats.
-            </div>
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 text-[15px]">Community Guidelines Checks:</strong>
-              Ensure video feeds and comment modules are active across public API streams.
-            </div>
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 text-[15px]">Routine Health Audits:</strong>
-              Run quarterly health checks to ensure your channel metadata remains clean and properly indexed.
             </div>
           </div>
         </section>
@@ -168,9 +141,9 @@ export default function ShadowbanDetectorPage() {
           <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-3">
+          <div className="divide-y divide-[#EDE8F9] border border-[#EDE8F9] bg-white/80 backdrop-blur-md rounded-2xl shadow-xs overflow-hidden">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="tool-card-3d p-5 space-y-2">
+              <div key={idx} className="p-5 space-y-2">
                 <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
                   <Info className="w-4 h-4 text-[#7C3AED]" />
                   <span>{faq.q}</span>
@@ -182,6 +155,12 @@ export default function ShadowbanDetectorPage() {
             ))}
           </div>
         </section>
+
+        {/* Popular SEO Search Queries */}
+        <PopularSearchQueries
+          mainKeyword={seo.mainKeyword}
+          searchQueries={seo.searchQueries}
+        />
 
         {/* Related Tools */}
         <RelatedTools currentToolId="shadowban-detector" />

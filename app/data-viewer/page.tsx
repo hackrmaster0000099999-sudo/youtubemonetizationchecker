@@ -2,42 +2,51 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
+import { PopularSearchQueries } from '@/components/common/PopularSearchQueries';
 import { DataViewerClient } from '@/components/tools/DataViewerClient';
 import { constructMetadata, generateWebApplicationSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
-import { CheckCircle2, Info } from 'lucide-react';
+import { TOOL_SEO_MAP } from '@/lib/constants/tool-seo';
+import { CheckCircle2, Info, BarChart2 } from 'lucide-react';
 import Link from 'next/link';
 
+const seo = TOOL_SEO_MAP['data-viewer'];
+
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Data Viewer',
-  description:
-    'View useful public YouTube video and channel data, including available metadata and statistics, with our free YouTube Data Viewer.',
+  title: seo.title,
+  description: seo.metaDescription,
   path: '/data-viewer',
+  keywords: seo.keywords,
 });
 
 const faqs = [
   {
-    q: 'What is the YouTube Data Viewer?',
-    a: 'The YouTube Data Viewer is a developer and creator diagnostic utility that parses and exposes normalized technical fields, channel creation dates, exact view counts, video duration, and raw JSON schema objects from YouTube endpoints.',
+    q: 'How to check exact YouTube video publish date and upload time?',
+    a: 'Paste any YouTube video link into our Data Viewer. The tool inspects the canonical metadata schema to extract the exact ISO timestamp (date, hour, minute, second) when the video was uploaded and published.',
   },
   {
-    q: 'Can I view the raw JSON payload returned by YouTube?',
-    a: 'Yes. Toggle the "Show Raw JSON" button to view and copy the complete structured JSON response for use in API debugging or developer scripts.',
+    q: 'How to check YouTube channel creation date online?',
+    a: 'Enter a channel URL or handle into the search box. The tool displays the exact registration timestamp and founding date of the YouTube channel alongside lifetime view metrics.',
   },
   {
-    q: 'Does this tool show private channel data?',
-    a: 'No. All information is retrieved strictly from publicly accessible endpoints. Private analytics, earnings, and viewer demographics are never exposed.',
+    q: 'Can I inspect hidden YouTube video metadata and raw JSON details?',
+    a: 'Yes. Toggle the "Raw JSON" switch to inspect and copy normalized JSON metadata fields, including video IDs, channel identifiers, duration seconds, and category IDs for API development.',
   },
   {
-    q: 'Is this YouTube Data Viewer free to use?',
-    a: 'Yes, 100% free with no registration or rate limits.',
+    q: 'Does this tool show private YouTube statistics or personal data?',
+    a: 'No. All telemetry is retrieved strictly from publicly accessible endpoints and manifests. Private earnings and subscriber identities are never exposed.',
+  },
+  {
+    q: 'Is this YouTube Data Viewer and metadata extractor free?',
+    a: 'Yes, 100% free with no registration, no API key requirements, and instant data parsing.',
   },
 ];
 
 export default function DataViewerPage() {
   const appSchema = generateWebApplicationSchema({
-    name: 'YouTube Data Viewer',
-    description: 'View useful public YouTube video and channel data, including available metadata and statistics, with our free YouTube Data Viewer.',
+    name: seo.name,
+    description: seo.metaDescription,
     path: '/data-viewer',
+    keywords: seo.keywords,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -68,11 +77,15 @@ export default function DataViewerPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
+            <BarChart2 className="w-3.5 h-3.5 text-[#7C3AED]" />
+            <span>Metadata &amp; Telemetry Inspector</span>
+          </div>
           <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
-            YouTube Metadata &amp; Raw Data Viewer
+            YouTube Data Viewer &amp; Video Metadata Inspector
           </h1>
           <p className="text-[16px] text-[#635B80] leading-relaxed">
-            Inspect public channel and video technical metadata, upload dates, lifetime statistics, and raw structured JSON data payloads.
+            Inspect public YouTube video and channel telemetry: exact upload timestamps, channel creation dates, technical specs, and raw structured JSON data.
           </p>
         </div>
 
@@ -83,82 +96,42 @@ export default function DataViewerPage() {
         <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
             <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-              How the YouTube Data Viewer Works
+              Technical YouTube Video Analytics &amp; Metadata
             </h2>
             <p className="text-[15px] text-[#635B80] leading-relaxed">
-              Our inspection engine normalizes public API schemas into accessible structured views and developer JSON objects:
+              Understand the technical parameters indexed by YouTube:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>1. Input Resource</h3>
+                <h3>Exact ISO Timestamps</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Provide any valid YouTube video link, channel URL, or creator handle to initiate inspection.
+                Discover the exact minute and second a video was published to YouTube servers.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>2. Schema Normalization</h3>
+                <h3>Video Duration Specs</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                The engine cleans and maps raw YouTube fields into standardized technical attributes like ISO timestamps and duration codes.
+                Parse ISO-8601 duration strings into total seconds and runtime formats.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>3. Formatted &amp; Raw JSON</h3>
+                <h3>Developer JSON Export</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Review data in a clean key-value table or switch to the raw JSON tab with a one-click copy button.
+                Copy structured JSON payloads for rapid debugging, API testing, and research scripts.
               </p>
-            </div>
-          </div>
-
-          {/* Contextual Links */}
-          <div className="p-4 tool-card-3d text-[14px] text-[#635B80] space-y-2">
-            <p>
-              Looking to extract specific video tags? Use our{' '}
-              <Link href="/tag-extractor" className="text-[#7C3AED] font-bold hover:underline">
-                YouTube Tag Extractor
-              </Link>{' '}
-              or find canonical channel IDs with the{' '}
-              <Link href="/channel-id-finder" className="text-[#7C3AED] font-bold hover:underline">
-                YouTube Channel ID Finder
-              </Link>
-              .
-            </p>
-          </div>
-        </section>
-
-        {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#EDE8F9]">
-          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-            When to Use the YouTube Data Viewer
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 font-bold">Developer Debugging:</strong>
-              Inspect raw payload shapes and field names when building custom YouTube API integrations or webhooks.
-            </div>
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 font-bold">Historical Auditing:</strong>
-              Check exact channel creation timestamps and upload dates without relying on rounded UI badges.
-            </div>
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 font-bold">Channel Valuation:</strong>
-              Review aggregate metrics, video volume, and engagement indicators when assessing digital creator assets.
-            </div>
-            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
-              <strong className="text-[#181135] block mb-1 font-bold">Content Research:</strong>
-              Analyze publishing cadences and metadata structures used by leading channels in any category.
             </div>
           </div>
         </section>
@@ -168,20 +141,26 @@ export default function DataViewerPage() {
           <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             Frequently Asked Questions
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="divide-y divide-[#EDE8F9] border border-[#EDE8F9] bg-white/80 backdrop-blur-md rounded-2xl shadow-xs overflow-hidden">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="tool-card-3d p-5 space-y-2">
-                <h3 className="text-[15px] font-bold text-[#181135] flex items-center gap-2">
-                  <span className="text-[#7C3AED] font-bold">Q.</span>
+              <div key={idx} className="p-5 space-y-2">
+                <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
+                  <Info className="w-4 h-4 text-[#7C3AED]" />
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#635B80] leading-relaxed pl-5">
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-6">
                   {faq.a}
                 </p>
               </div>
             ))}
           </div>
         </section>
+
+        {/* Popular SEO Search Queries */}
+        <PopularSearchQueries
+          mainKeyword={seo.mainKeyword}
+          searchQueries={seo.searchQueries}
+        />
 
         {/* Related Tools */}
         <RelatedTools currentToolId="data-viewer" />

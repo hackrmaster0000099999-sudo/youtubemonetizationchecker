@@ -12,18 +12,46 @@ import {
   CheckCircle2,
   Sparkles,
   Layers,
+  Search,
 } from 'lucide-react';
 import { HeroCheckerClient } from '@/components/tools/HeroCheckerClient';
 import { HomeFaqClient } from '@/components/tools/HomeFaqClient';
 import { TOOLS } from '@/lib/constants/site';
 import { ToolIcon, CategoryIcon } from '@/components/common/ToolIcon';
-import { constructMetadata, generateWebSiteSchema, generateOrganizationSchema, generateFAQSchema } from '@/lib/seo';
+import {
+  constructMetadata,
+  generateWebSiteSchema,
+  generateOrganizationSchema,
+  generateFAQSchema,
+  generateSiteNavigationSchema,
+} from '@/lib/seo';
+import { TOOL_SEO_MAP } from '@/lib/constants/tool-seo';
+
+const ALL_TOP_KEYWORDS = Object.values(TOOL_SEO_MAP).flatMap((t) => t.keywords.slice(0, 3));
 
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Tools & Monetization Checker',
+  title: 'YouTube Monetization Checker & Free Creator Tools Suite (2026)',
   description:
-    'Free YouTube tools to check monetization signals, find channel IDs, estimate earnings, download thumbnails, extract tags, and explore YouTube data.',
+    'Free YouTube tools to check monetization signals, find channel IDs, calculate earnings, download 4K thumbnails, extract SEO tags, view dislikes, and pick giveaway winners.',
   path: '/',
+  keywords: [
+    'YouTube Monetization Checker',
+    'free youtube monetization checker online',
+    'how to check if youtube channel is monetized',
+    'YouTube Channel ID Finder',
+    'YouTube Earnings Calculator',
+    'YouTube Thumbnail Downloader',
+    'YouTube Tag Extractor',
+    'YouTube Dislike & Sentiment Checker',
+    'YouTube Random Comment Picker',
+    'YouTube Description Extractor',
+    'Private YouTube Viewer',
+    'YouTube Data Viewer',
+    'YouTube Shadowban Detector',
+    'YouTube Unlisted Video Finder',
+    'YouTube Image Downloader',
+    'free youtube tools no login',
+  ],
 });
 
 const HOME_FAQS = [
@@ -49,6 +77,13 @@ export default function HomePage() {
   const websiteSchema = generateWebSiteSchema();
   const organizationSchema = generateOrganizationSchema();
   const faqSchema = generateFAQSchema(HOME_FAQS);
+  const navigationSchema = generateSiteNavigationSchema(
+    TOOLS.map((tool) => ({
+      name: tool.name,
+      url: tool.path,
+      description: tool.description,
+    }))
+  );
 
   return (
     <>
@@ -63,6 +98,10 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(navigationSchema) }}
       />
 
       <div className="space-y-24 py-4 relative">
@@ -386,6 +425,44 @@ export default function HomePage() {
               <span>View all creator FAQs</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </section>
+
+        {/* 6. POPULAR CREATOR SEARCH QUERIES DIRECTORY */}
+        <section id="search-directory-section" className="space-y-6 pt-4 border-t border-[#EDE8F9]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Search className="w-4 h-4 text-[#7C3AED]" />
+                <h2 className="text-[18px] md:text-[20px] font-bold text-[#181135]">
+                  Popular YouTube Creator Search Queries
+                </h2>
+              </div>
+              <p className="text-[13px] text-[#635B80]">
+                Explore quick search terms, keyword lookups, and creator tool entry points:
+              </p>
+            </div>
+            <span className="text-[11px] font-bold text-[#7C3AED] bg-[#F3EEFE] px-3 py-1 rounded-full border border-[#DDD0FA] w-fit">
+              100% Free Lookups
+            </span>
+          </div>
+
+          <div className="flex flex-wrap gap-2 pt-1">
+            {TOOLS.map((tool) => {
+              const toolData = TOOL_SEO_MAP[tool.id];
+              const topQuery = toolData?.searchQueries?.[0] || tool.name;
+              return (
+                <Link
+                  key={tool.id}
+                  href={tool.path}
+                  id={`home-keyword-${tool.id}`}
+                  className="px-3.5 py-2 text-[12.5px] font-medium text-[#554E70] bg-white hover:bg-[#F3EEFE] hover:text-[#7C3AED] border border-[#EDE8F9] hover:border-[#DDD0FA] rounded-xl transition-all shadow-2xs flex items-center gap-1.5"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED]/60" />
+                  <span>{topQuery}</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
       </div>

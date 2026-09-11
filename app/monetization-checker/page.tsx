@@ -2,42 +2,51 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
+import { PopularSearchQueries } from '@/components/common/PopularSearchQueries';
 import { MonetizationCheckerClient } from '@/components/tools/MonetizationCheckerClient';
 import { constructMetadata, generateWebApplicationSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
+import { TOOL_SEO_MAP } from '@/lib/constants/tool-seo';
 import { HelpCircle, CheckCircle2, AlertCircle, Info, DollarSign } from 'lucide-react';
 import Link from 'next/link';
 
+const seo = TOOL_SEO_MAP['monetization-checker'];
+
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Monetization Checker',
-  description:
-    'Check publicly available YouTube monetization signals for a channel or video with our free YouTube Monetization Checker and understand what the results indicate.',
+  title: seo.title,
+  description: seo.metaDescription,
   path: '/monetization-checker',
+  keywords: seo.keywords,
 });
 
 const faqs = [
   {
-    q: 'Can I officially see whether a YouTube channel is in the YouTube Partner Program?',
-    a: 'No third-party tool has private access to YouTube internal creator dashboards or AdSense banking contracts. YT MONETIZE inspects publicly observable signals such as channel memberships, ad break cues, verified merch shelves, and public metrics to provide an objective, confidence-weighted estimate.',
+    q: 'How to check if a YouTube channel is monetized online free?',
+    a: 'Paste any YouTube channel link, handle (e.g. @MrBeast), or video URL into our checker. YT MONETIZE inspects public monetization markers including channel memberships, merch shelf integrations, ad break cues, and subscriber milestones to provide an objective confidence score.',
   },
   {
-    q: 'What information does the YouTube Monetization Checker use?',
-    a: 'The checker evaluates channel subscriber thresholds (minimum 1,000 subscribers required for YPP), public video ad cues, channel membership buttons, official merchandise integration, and video category classifications.',
+    q: 'How to know if a YouTube channel is making money and what is its RPM/CPM?',
+    a: 'While private AdSense dashboards are not publicly accessible, our checker evaluates view volume, video length, niche categories, and observed ad placement signals to calculate realistic RPM and revenue estimates.',
   },
   {
-    q: 'Why can a YouTube monetization result be uncertain?',
-    a: 'A creator may be accepted into the YouTube Partner Program but choose not to monetize certain videos, or a brand new channel may have applied and be awaiting manual YPP review. In such cases, the tool transparently returns "Unable to Determine" rather than a misleading false positive.',
+    q: 'What are the official YouTube Partner Program (YPP) requirements in 2026?',
+    a: 'To qualify for YouTube monetization (YPP), creators typically need 1,000 subscribers and 4,000 valid public watch hours in the past 12 months, or 1,000 subscribers and 10 million valid public Shorts views in the last 90 days.',
   },
   {
-    q: 'Does checking a channel alert the creator or affect their account?',
-    a: 'No. All lookups are completely anonymous, client-safe, and read-only from public YouTube endpoints. It does not send any notification to the channel owner.',
+    q: 'Why can a YouTube monetization result show "Unable to Determine"?',
+    a: 'A channel might be enrolled in YPP but have demonetized a specific video, or an account might be pending manual review. Our tool transparently indicates when data is inconclusive rather than fabricating misleading results.',
+  },
+  {
+    q: 'How to check YouTube channel monetization without logging in?',
+    a: 'All lookups on YT MONETIZE are 100% free, anonymous, and operate entirely through public endpoints without requiring your YouTube login or channel authorization.',
   },
 ];
 
 export default function MonetizationCheckerPage() {
   const appSchema = generateWebApplicationSchema({
-    name: 'YouTube Monetization Checker',
-    description: 'Check public YouTube monetization signals for any channel or video with YT MONETIZE.',
+    name: seo.name,
+    description: seo.metaDescription,
     path: '/monetization-checker',
+    keywords: seo.keywords,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -63,140 +72,95 @@ export default function MonetizationCheckerPage() {
       />
 
       <div className="space-y-12 py-4">
-        {/* Breadcrumb */}
+        {/* Breadcrumbs */}
         <Breadcrumbs items={[{ label: 'Monetization Checker' }]} />
 
         {/* Header & Tool Intro */}
-        <div className="space-y-3 max-w-[840px]">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill text-[12px] font-semibold text-[#7C3AED] shadow-2xs">
+        <div className="space-y-3 max-w-[800px]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
             <DollarSign className="w-3.5 h-3.5 text-[#7C3AED]" />
-            <span>Real-time Public Monetization Diagnostic</span>
+            <span>YPP Status &amp; Ad Signal Checker</span>
           </div>
-          <h1 className="text-[30px] md:text-[42px] font-extrabold text-[#181135] tracking-tight leading-[1.12]">
-            YouTube Monetization Checker
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
+            YouTube Monetization Checker (Channel &amp; Video Status)
           </h1>
           <p className="text-[16px] text-[#635B80] leading-relaxed">
-            Check publicly observable monetization signals for any YouTube channel, handle, or video. Enter any link below to get a clear, confidence-weighted analysis in seconds.
+            Check publicly observable YouTube monetization signals, ad delivery markers, RPM metrics, and Partner Program indicators for any channel or video free without login.
           </p>
         </div>
 
         {/* Interactive Tool Widget */}
         <MonetizationCheckerClient />
 
-        {/* How The Tool Works */}
+        {/* How The Monetization Checker Works */}
         <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135] tracking-tight">
-              How the YouTube Monetization Checker Works
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
+              How the YouTube Monetization Checker Evaluates Channels
             </h2>
             <p className="text-[15px] text-[#635B80] leading-relaxed">
-              Our automated diagnostic engine inspects multiple public layers of YouTube channel and video data to detect evidence of commercial monetization:
+              Because private YouTube Partner Program agreements are never exposed publicly, our tool analyzes a multi-layered matrix of observable indicators:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="tool-card-3d p-6 space-y-2.5">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
-                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                <h3>1. YPP Milestone Thresholds</h3>
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <h3>1. YPP Eligibility Criteria</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Channels must have a minimum of 1,000 subscribers and active public uploads to meet standard YouTube Partner Program baseline qualification criteria.
+                Evaluates subscriber milestones against the 1,000-subscriber YPP threshold and verified channel badge statuses.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2.5">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
-                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                <h3>2. Commercial Features</h3>
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <h3>2. Commercial Monetization Features</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                The presence of channel memberships (the &quot;Join&quot; button), Super Thanks, or official connected merchandising store shelves confirms approved Partner Program status.
+                Checks for active &quot;Join&quot; channel memberships, verified merchandise storefronts, and Super Thanks enablement.
               </p>
             </div>
 
-            <div className="tool-card-3d p-6 space-y-2.5">
+            <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
-                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                <h3>3. Public Ad Signals</h3>
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <h3>3. Ad Placement Signals</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Public stream player manifests and video response tags indicate whether ad inventory cues and commercial monetization placements are active.
+                Inspects public video stream metadata for mid-roll ad cue availability and commercial topic category markers.
               </p>
-            </div>
-          </div>
-
-          {/* Contextual Links */}
-          <div className="p-5 bg-white/80 backdrop-blur-md border border-white rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-xs">
-            <p>
-              Need to look up the permanent channel identifier first? Use our{' '}
-              <Link href="/channel-id-finder" className="text-[#7C3AED] font-semibold hover:underline">
-                YouTube Channel ID Finder
-              </Link>
-              . To calculate potential channel ad revenue from daily views, visit the{' '}
-              <Link href="/earnings-calculator" className="text-[#7C3AED] font-semibold hover:underline">
-                YouTube Earnings Calculator
-              </Link>
-              .
-            </p>
-          </div>
-
-          {/* Transparent Notice */}
-          <div className="p-5 border border-[#E8E7E3] bg-[#FCFCFB] flex items-start gap-3">
-            <HelpCircle className="w-5 h-5 text-[#5B6169] shrink-0 mt-0.5" />
-            <div className="text-[13px] text-[#5B6169] leading-relaxed space-y-1">
-              <div className="font-semibold text-[#16181C]">Important Transparency Notice</div>
-              <p>
-                This result is an estimate based on publicly observable signals and does not confirm a creator&apos;s private contract or AdSense status. YT MONETIZE is an independent creator utility and is not affiliated with YouTube or Google LLC.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
-            When to Use This Tool
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Competitor Research:</strong>
-              Check if competing channels in your niche have successfully unlocked ad revenue and commercial features.
-            </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Brand Sponsorship Vetting:</strong>
-              Marketers and sponsors can quickly verify whether an influencer is actively running ad campaigns.
-            </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Channel Monetization Tracking:</strong>
-              Track your own channel growth milestones as you progress toward YouTube Partner Program qualification.
-            </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Due Diligence for Acquisitions:</strong>
-              Inspect public health metrics before partnering with or acquiring a digital creator brand.
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             Frequently Asked Questions
           </h2>
-          <div className="divide-y divide-[#E8E7E3] border border-[#E8E7E3] bg-white">
+          <div className="divide-y divide-[#EDE8F9] border border-[#EDE8F9] bg-white/80 backdrop-blur-md rounded-2xl shadow-xs overflow-hidden">
             {faqs.map((faq, idx) => (
               <div key={idx} className="p-5 space-y-2">
-                <h3 className="text-[16px] font-semibold text-[#16181C] flex items-center gap-2">
-                  <Info className="w-4 h-4 text-[#5B6169]" />
+                <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
+                  <Info className="w-4 h-4 text-[#7C3AED]" />
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed pl-6">
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-6">
                   {faq.a}
                 </p>
               </div>
             ))}
           </div>
         </section>
+
+        {/* Popular SEO Search Queries */}
+        <PopularSearchQueries
+          mainKeyword={seo.mainKeyword}
+          searchQueries={seo.searchQueries}
+        />
 
         {/* Related Tools */}
         <RelatedTools currentToolId="monetization-checker" />

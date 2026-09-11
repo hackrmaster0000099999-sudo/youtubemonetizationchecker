@@ -1,9 +1,3 @@
-export type MonetizationStatus =
-  | 'Likely Monetized'
-  | 'Monetization Signals Detected'
-  | 'No Clear Monetization Signals'
-  | 'Unable to Determine';
-
 export interface MonetizationSignal {
   name: string;
   detected: boolean;
@@ -11,7 +5,11 @@ export interface MonetizationSignal {
 }
 
 export interface MonetizationAnalysis {
-  status: MonetizationStatus;
+  status:
+    | 'Likely Monetized'
+    | 'Monetization Signals Detected'
+    | 'No Clear Monetization Signals'
+    | 'Unable to Determine';
   confidence: 'high' | 'medium' | 'low';
   signals: MonetizationSignal[];
   reason: string;
@@ -21,20 +19,20 @@ export interface MonetizationAnalysis {
 export interface ChannelData {
   id: string;
   title: string;
-  handle: string;
+  handle?: string;
+  customUrl?: string;
   description: string;
   avatarUrl: string;
   bannerUrl?: string | null;
-  subscriberCount: number | null;
-  subscriberText: string;
-  viewCount: number | null;
-  viewCountText: string;
-  videoCount: number | null;
-  videoCountText: string;
-  publishedAt: string | null;
-  country: string | null;
-  customUrl?: string;
-  channelUrl: string;
+  subscriberCount?: number | null;
+  subscriberText?: string;
+  viewCount?: number | null;
+  viewCountText?: string;
+  videoCount?: number | null;
+  videoCountText?: string;
+  publishedAt?: string | null;
+  country?: string | null;
+  channelUrl?: string;
   monetization: MonetizationAnalysis;
 }
 
@@ -56,11 +54,11 @@ export interface VideoData {
   tags: string[];
   description: string;
   thumbnails: {
-    maxres?: string | null;
-    standard?: string | null;
-    high?: string | null;
-    medium?: string | null;
-    default?: string | null;
+    maxres?: string;
+    standard?: string;
+    high?: string;
+    medium?: string;
+    default?: string;
   };
   restrictions: {
     isAgeRestricted: boolean;
@@ -79,8 +77,9 @@ export interface YouTubeComment {
   text: string;
   likeCount: number;
   publishedAt: string;
-  replyCount: number;
+  replyCount?: number;
   isPinned?: boolean;
+  isHearted?: boolean;
 }
 
 export interface VideoCommentsResult {
@@ -90,14 +89,14 @@ export interface VideoCommentsResult {
     channelTitle: string;
     channelId: string;
     thumbnail: string;
-    commentCount: number | null;
+    commentCount?: number | null;
     viewCount?: number | null;
     likeCount?: number | null;
     publishedAt?: string | null;
   };
   comments: YouTubeComment[];
   totalLoaded: number;
-  nextPageToken?: string | null;
+  nextPageToken: string | null;
   commentsDisabled?: boolean;
 }
 
@@ -190,42 +189,3 @@ export interface HiddenVideoScanResult {
   }>;
   explanation: string;
 }
-
-export type DownloadFormatType = 'video' | 'audio';
-
-export interface VideoDownloadOption {
-  id: string;
-  label: string;
-  resolution: string;
-  quality: string;
-  extension: 'mp4' | 'webm' | 'mp3' | 'm4a';
-  type: DownloadFormatType;
-  bitrateKbps: number;
-  fps?: number;
-  codec: string;
-  hasAudio: boolean;
-  hasVideo: boolean;
-  sizeBytes: number;
-  sizeFormatted: string;
-  downloadUrl: string;
-  note?: string;
-  isPopular?: boolean;
-}
-
-export interface VideoDownloadResult {
-  video: {
-    id: string;
-    title: string;
-    channelTitle: string;
-    channelId: string;
-    thumbnail: string;
-    duration: string;
-    durationSeconds: number;
-    viewCount?: number | null;
-    viewCountText?: string;
-    publishedAt?: string | null;
-  };
-  options: VideoDownloadOption[];
-}
-
-

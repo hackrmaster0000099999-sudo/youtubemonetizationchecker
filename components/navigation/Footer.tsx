@@ -21,7 +21,6 @@ import {
   ThumbsDown,
   EyeOff,
   FolderSearch,
-  Film,
 } from 'lucide-react';
 import { Logo } from '@/components/common/Logo';
 import { CategoryIcon } from '@/components/common/ToolIcon';
@@ -92,12 +91,6 @@ export function Footer() {
             </div>
             <ul className="space-y-2.5 text-[13px] text-[#635B80]">
               <li>
-                <Link href="/video-downloader" id="footer-link-video-downloader" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors font-semibold text-[#181135]">
-                  <Film className="w-3.5 h-3.5 text-[#7C3AED] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Video Downloader</span>
-                </Link>
-              </li>
-              <li>
                 <Link href="/earnings-calculator" id="footer-link-earnings" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <Calculator className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
                   <span>YouTube Earnings Calculator</span>
@@ -158,15 +151,9 @@ export function Footer() {
           <div className="space-y-3">
             <div className="flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wider text-[#181135]">
               <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />
-              <span>Information &amp; Trust</span>
+              <span>Trust &amp; Legal</span>
             </div>
             <ul className="space-y-2.5 text-[13px] text-[#635B80]">
-              <li>
-                <Link href="/faq" id="footer-link-faq" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
-                  <HelpCircle className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>Frequently Asked Questions</span>
-                </Link>
-              </li>
               <li>
                 <Link href="/privacy-policy" id="footer-link-privacy" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
@@ -176,34 +163,74 @@ export function Footer() {
               <li>
                 <Link href="/terms-of-use" id="footer-link-terms" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <FileText className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>Terms of Use</span>
+                  <span>Terms of Service</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" id="footer-link-faq" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <HelpCircle className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
+                  <span>Platform FAQs</span>
                 </Link>
               </li>
               <li>
                 <Link href="/contact" id="footer-link-contact" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <Mail className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>Contact Support</span>
+                  <span>Contact &amp; Inquiries</span>
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Disclaimer & Copyright */}
-        <div className="pt-8 space-y-4 text-[13px] text-[#635B80] leading-relaxed">
-          <div id="footer-disclaimer" className="flex items-start gap-2.5 p-4 rounded-2xl bg-[#F8F5FE] border border-[#EDE8F9]">
-            <AlertCircle className="w-4 h-4 text-[#7C3AED] shrink-0 mt-0.5" />
-            <p>
-              <strong>Disclaimer:</strong> YT MONETIZE is an independent third-party creator utility and is not affiliated with, endorsed by, or sponsored by YouTube, LLC or Google LLC. YouTube and the YouTube logo are trademarks of Google LLC. All estimations and public signals are calculated for educational and diagnostic purposes.
-            </p>
+        {/* Site-Wide SEO Crawl & Linking Hub */}
+        <div className="py-8 border-b border-[#EDE8F9] space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[12px] font-bold uppercase tracking-wider text-[#181135]">
+              Quick Creator Utilities &amp; Index
+            </span>
+            <span className="text-[11px] text-[#8E87A8]">
+              No Login Required • 100% Free
+            </span>
           </div>
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-2 border-t border-[#EDE8F9] text-[12px]">
-            <div>© {new Date().getFullYear()} YT MONETIZE (youtubemonetizationchecker.online). All rights reserved.</div>
-            <div className="flex items-center gap-4">
-              <span>English (US)</span>
-              <span>•</span>
-              <span className="text-[#10B981] font-bold">100% Free Service</span>
-            </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-[12px] text-[#635B80]">
+            <Link href="/monetization-checker" className="hover:text-[#7C3AED] transition-colors">YouTube Monetization Checker</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/channel-id-finder" className="hover:text-[#7C3AED] transition-colors">Channel ID Finder</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/earnings-calculator" className="hover:text-[#7C3AED] transition-colors">YouTube Earnings Calculator</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/thumbnail-downloader" className="hover:text-[#7C3AED] transition-colors">Thumbnail Downloader HD</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/tag-extractor" className="hover:text-[#7C3AED] transition-colors">YouTube Tag Extractor</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/dislike-checker" className="hover:text-[#7C3AED] transition-colors">YouTube Dislike Checker</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/random-comment-picker" className="hover:text-[#7C3AED] transition-colors">Random Comment Giveaway Picker</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/description-viewer" className="hover:text-[#7C3AED] transition-colors">Description Grabber</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/comment-viewer" className="hover:text-[#7C3AED] transition-colors">Comment Search &amp; Viewer</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/data-viewer" className="hover:text-[#7C3AED] transition-colors">Metadata &amp; Upload Time Viewer</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/private-viewer" className="hover:text-[#7C3AED] transition-colors">Private Incognito Viewer</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/shadowban-detector" className="hover:text-[#7C3AED] transition-colors">Shadowban Diagnostic</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/hidden-video-finder" className="hover:text-[#7C3AED] transition-colors">Unlisted Video Search</Link>
+            <span className="text-[#DDD0FA]">•</span>
+            <Link href="/image-downloader" className="hover:text-[#7C3AED] transition-colors">Banner &amp; Avatar Downloader</Link>
+          </div>
+        </div>
+
+        {/* Bottom Bar / Disclaimers */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-[#635B80]">
+          <div>
+            © {new Date().getFullYear()} {process.env.NEXT_PUBLIC_SITE_NAME || 'YT MONETIZE'}. All rights reserved.
+          </div>
+          <div className="flex items-center gap-2 text-center md:text-right">
+            <AlertCircle className="w-3.5 h-3.5 text-[#8E87A8] shrink-0" />
+            <span>Independent third-party tool. Not affiliated with, endorsed by, or sponsored by YouTube, LLC or Google LLC.</span>
           </div>
         </div>
       </div>

@@ -155,17 +155,6 @@ export const TOOLS: ToolItem[] = [
     badge: 'NEW',
   },
   {
-    id: 'video-downloader',
-    name: 'YouTube Video Downloader',
-    slug: 'video-downloader',
-    path: '/video-downloader',
-    description: 'Download YouTube videos in MP4, WEBM, and MP3 formats across all resolutions (1080p, 720p, 480p, 360p, 240p, 144p) with real-time file size calculation.',
-    category: 'Video',
-    icon: 'video-downloader',
-    featured: true,
-    badge: 'NEW',
-  },
-  {
     id: 'hidden-video-finder',
     name: 'YouTube Unlisted & Hidden Video Finder',
     slug: 'hidden-video-finder',
@@ -179,20 +168,18 @@ export const TOOLS: ToolItem[] = [
 ];
 
 export const RELATED_TOOLS_MAP: Record<string, string[]> = {
-  'video-downloader': ['thumbnail-downloader', 'tag-extractor', 'data-viewer'],
   'monetization-checker': ['channel-id-finder', 'earnings-calculator', 'data-viewer'],
   'channel-id-finder': ['monetization-checker', 'image-downloader', 'data-viewer'],
   'earnings-calculator': ['monetization-checker', 'data-viewer', 'channel-id-finder'],
-  'thumbnail-downloader': ['video-downloader', 'private-viewer', 'description-viewer'],
+  'thumbnail-downloader': ['private-viewer', 'description-viewer', 'data-viewer'],
   'image-downloader': ['thumbnail-downloader', 'channel-id-finder', 'monetization-checker'],
-  'tag-extractor': ['video-downloader', 'description-viewer', 'dislike-checker'],
+  'tag-extractor': ['description-viewer', 'dislike-checker', 'data-viewer'],
   'shadowban-detector': ['monetization-checker', 'data-viewer', 'channel-id-finder'],
-  'data-viewer': ['video-downloader', 'private-viewer', 'description-viewer'],
+  'data-viewer': ['private-viewer', 'description-viewer', 'tag-extractor'],
   'comment-viewer': ['private-viewer', 'description-viewer', 'random-comment-picker'],
   'random-comment-picker': ['comment-viewer', 'dislike-checker', 'description-viewer'],
-  'dislike-checker': ['video-downloader', 'private-viewer', 'description-viewer'],
-  'description-viewer': ['video-downloader', 'private-viewer', 'tag-extractor'],
-  'private-viewer': ['video-downloader', 'hidden-video-finder', 'description-viewer'],
+  'dislike-checker': ['private-viewer', 'description-viewer', 'comment-viewer'],
+  'description-viewer': ['private-viewer', 'tag-extractor', 'thumbnail-downloader'],
+  'private-viewer': ['hidden-video-finder', 'description-viewer', 'data-viewer'],
   'hidden-video-finder': ['private-viewer', 'data-viewer', 'channel-id-finder'],
 };
-

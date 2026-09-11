@@ -2,42 +2,51 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { RelatedTools } from '@/components/common/RelatedTools';
+import { PopularSearchQueries } from '@/components/common/PopularSearchQueries';
 import { TagExtractorClient } from '@/components/tools/TagExtractorClient';
 import { constructMetadata, generateWebApplicationSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
-import { CheckCircle2, Info } from 'lucide-react';
+import { TOOL_SEO_MAP } from '@/lib/constants/tool-seo';
+import { CheckCircle2, Info, Tag } from 'lucide-react';
 import Link from 'next/link';
 
+const seo = TOOL_SEO_MAP['tag-extractor'];
+
 export const metadata: Metadata = constructMetadata({
-  title: 'YouTube Tag Extractor',
-  description:
-    'Extract available tags from a YouTube video URL, then view and copy the tags with our free YouTube Tag Extractor.',
+  title: seo.title,
+  description: seo.metaDescription,
   path: '/tag-extractor',
+  keywords: seo.keywords,
 });
 
 const faqs = [
   {
-    q: 'How do I view tags on a YouTube video?',
-    a: 'YouTube hides video tags by default on watch pages. Paste any YouTube video URL into our Tag Extractor to inspect every hidden keyword tag embedded in the video metadata.',
+    q: 'How to see tags on YouTube video free?',
+    a: 'YouTube hides video tags in standard watch pages. Paste any YouTube video or Shorts link into our Tag Extractor to inspect, extract, and copy every hidden keyword tag embedded in the video metadata without installing browser extensions.',
   },
   {
-    q: 'Do YouTube tags still help with video rankings?',
-    a: 'According to YouTube official Creator documentation, tags play a modest role in helping search algorithms correct common spelling mistakes or search synonym variations. Titles, descriptions, and watch retention remain the primary ranking drivers.',
+    q: 'How to copy competitor YouTube video tags online?',
+    a: 'Paste your competitor&apos;s video URL into our tool. Once the tags are parsed, click the "Copy All Tags" button to copy a ready-to-paste comma-separated list formatted for YouTube Studio.',
   },
   {
-    q: 'Can I copy all extracted tags at once?',
-    a: 'Yes. Our tool formats all discovered tags into a comma-separated list that can be copied with one click and pasted directly into YouTube Studio upload metadata.',
+    q: 'Can I extract tags and keywords from YouTube Shorts?',
+    a: 'Yes. Paste any YouTube Shorts URL into the search bar to inspect the specific tags and SEO keywords used by the creator to optimize discovery on the Shorts feed.',
   },
   {
-    q: 'Is this YouTube Tag Extractor free?',
-    a: 'Yes, 100% free with unlimited extractions and no sign-up required.',
+    q: 'Do YouTube tags help video ranking and getting high views?',
+    a: 'Tags help YouTube search algorithms understand contextual synonyms, misspellings, and related topics. When combined with an optimized title, detailed description, and high click-through thumbnail, tags boost search visibility.',
+  },
+  {
+    q: 'Is this YouTube tag grabber and keyword finder free?',
+    a: 'Yes, 100% free with unlimited extractions, zero sign-up requirements, and instant one-click copying.',
   },
 ];
 
 export default function TagExtractorPage() {
   const appSchema = generateWebApplicationSchema({
-    name: 'YouTube Tag Extractor',
-    description: 'Extract hidden SEO tags and keywords from any public YouTube video with YT MONETIZE.',
+    name: seo.name,
+    description: seo.metaDescription,
     path: '/tag-extractor',
+    keywords: seo.keywords,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -69,28 +78,28 @@ export default function TagExtractorPage() {
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#7C3AED] animate-pulse" />
-            <span>SEO Tag Discovery</span>
+            <Tag className="w-3.5 h-3.5 text-[#7C3AED]" />
+            <span>SEO &amp; Keyword Extractor</span>
           </div>
           <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
-            YouTube Video Tag Extractor
+            YouTube Tag Extractor &amp; Video Keyword Finder
           </h1>
           <p className="text-[16px] text-[#635B80] leading-relaxed">
-            Extract public SEO keywords and search tags embedded in any public YouTube video to analyze competitor strategies and optimize your own video metadata.
+            Extract, inspect, and copy hidden SEO tags and topic keywords from any public YouTube video or Shorts link in one click.
           </p>
         </div>
 
         {/* Interactive Tool Widget */}
         <TagExtractorClient />
 
-        {/* How The Tool Works */}
+        {/* SEO Best Practices Guide */}
         <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
             <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-              How YouTube Video Tag Extraction Works
+              How to Use Extracted YouTube Tags for Video SEO
             </h2>
             <p className="text-[15px] text-[#635B80] leading-relaxed">
-              When a creator uploads a video and adds tags in YouTube Studio, they are stored in the video&apos;s public DOM schema:
+              Analyze successful competitor keywords to optimize your YouTube upload metadata:
             </p>
           </div>
 
@@ -98,20 +107,20 @@ export default function TagExtractorPage() {
             <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>1. Video URL Parse</h3>
+                <h3>1. Niche Benchmark</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Paste any standard watch URL (<code className="font-mono-data text-[12px] bg-white/60 px-1 py-0.5 rounded border border-[#EDE8F9]">watch?v=...</code>) or mobile short URL.
+                Extract tags from the top 5 ranking videos in your search niche to identify common keyword patterns.
               </p>
             </div>
 
             <div className="p-6 tool-card-3d space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-[#181135]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h3>2. Keyword Parsing</h3>
+                <h3>2. Long-Tail Keywords</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Our server queries the public video manifest and isolates keyword tag arrays attached to the video ID.
+                Identify specific multi-word search queries where ranking competition is lower.
               </p>
             </div>
 
@@ -121,48 +130,8 @@ export default function TagExtractorPage() {
                 <h3>3. One-Click Copy</h3>
               </div>
               <p className="text-[14px] text-[#635B80] leading-relaxed">
-                Copy individual tags or the complete comma-separated string to easily paste into your own video upload metadata.
+                Copy formatted comma-separated tags ready to paste into your YouTube Studio tag box.
               </p>
-            </div>
-          </div>
-
-          {/* Contextual Links */}
-          <div className="p-4.5 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-2xs">
-            <p>
-              Want to see all public video metadata in one place? Use our{' '}
-              <Link href="/data-viewer" className="text-[#7C3AED] font-bold hover:underline">
-                YouTube Metadata Viewer
-              </Link>{' '}
-              or download thumbnail artwork using the{' '}
-              <Link href="/thumbnail-downloader" className="text-[#7C3AED] font-bold hover:underline">
-                YouTube Thumbnail Downloader
-              </Link>
-              .
-            </p>
-          </div>
-        </section>
-
-        {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#EDE8F9]">
-          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
-            When to Extract YouTube Tags
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">Competitor Keyword Analysis:</strong>
-              Discover which long-tail search queries top-ranking creators in your niche are targeting.
-            </div>
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">Content Brainstorming:</strong>
-              Identify related search keywords to expand on in future video titles and descriptions.
-            </div>
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">SEO Audits:</strong>
-              Inspect older uploads to ensure your metadata aligns with modern search queries.
-            </div>
-            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
-              <strong className="text-[#181135] block font-bold">Upload Efficiency:</strong>
-              Quickly generate clean comma-separated tag lists ready for YouTube Studio.
             </div>
           </div>
         </section>
@@ -186,6 +155,12 @@ export default function TagExtractorPage() {
             ))}
           </div>
         </section>
+
+        {/* Popular SEO Search Queries */}
+        <PopularSearchQueries
+          mainKeyword={seo.mainKeyword}
+          searchQueries={seo.searchQueries}
+        />
 
         {/* Related Tools */}
         <RelatedTools currentToolId="tag-extractor" />

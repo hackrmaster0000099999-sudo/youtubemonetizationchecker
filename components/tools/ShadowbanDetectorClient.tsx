@@ -156,7 +156,7 @@ export function ShadowbanDetectorClient() {
                   title: channel.title,
                   handle: channel.handle,
                   avatarUrl: channel.avatarUrl || undefined,
-                  url: channel.channelUrl,
+                  url: channel.channelUrl || `https://www.youtube.com/channel/${channel.id}`,
                   metaText: 'Healthy Visibility Signals',
                   badgeType: 'success',
                   summary: `${checks.length} diagnostic checks passed • Public indexing verified`,
