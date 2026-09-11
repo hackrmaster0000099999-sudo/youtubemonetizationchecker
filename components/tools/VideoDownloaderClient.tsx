@@ -10,17 +10,14 @@ import {
   Music,
   Sparkles,
   AlertCircle,
-  Clock,
   Eye,
   Play,
-  RotateCcw,
   SlidersHorizontal,
   Bookmark,
   BookmarkCheck,
   HardDrive,
   CheckCircle2,
-  FileVideo,
-  FileAudio,
+  ExternalLink,
 } from 'lucide-react';
 import { VideoDownloadOption, VideoDownloadResult } from '@/lib/youtube/types';
 import { useSavedItems } from '@/lib/saved-items/storage';
@@ -112,29 +109,49 @@ export function VideoDownloaderClient() {
     }
   };
 
-  // Direct 1-Click File Download without any popup modal or external redirection
-  const handleDirectDownload = (option: VideoDownloadOption) => {
+  // Direct 1-Click File Download
+  const handleDirectDownload = async (option: VideoDownloadOption) => {
     if (!result) return;
-    
+
     setDownloadingId(option.id);
-    
-    // Construct direct API download URL
-    const downloadUrl = `/api/youtube/download?id=${result.video.id}&quality=${option.quality}&format=${option.extension}&title=${encodeURIComponent(result.video.title)}`;
-    
-    // Trigger direct browser download using hidden iframe
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = downloadUrl;
-    document.body.appendChild(iframe);
-    
-    setTimeout(() => {
-      try {
-        document.body.removeChild(iframe);
-      } catch (e) {}
+
+    try {
+      const res = await fetch('/api/youtube/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          videoId: result.video.id,
+          quality: option.quality,
+          format: option.extension,
+          title: result.video.title,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success && data.downloadUrl) {
+        // Direct download trigger
+        const link = document.createElement('a');
+        link.href = data.downloadUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('download', `${result.video.title}.${option.extension}`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setDownloadSuccessId(option.id);
+        setTimeout(() => setDownloadSuccessId(null), 3000);
+      } else {
+        // Direct stream fallback
+        window.open(`https://yewtu.be/watch?v=${result.video.id}`, '_blank');
+      }
+    } catch (err) {
+      console.error('Download trigger error:', err);
+      window.open(`https://www.youtube.com/watch?v=${result.video.id}`, '_blank');
+    } finally {
       setDownloadingId(null);
-      setDownloadSuccessId(option.id);
-      setTimeout(() => setDownloadSuccessId(null), 3000);
-    }, 2000);
+    }
   };
 
   const filteredOptions = result?.options.filter((opt) => {
@@ -196,12 +213,12 @@ export function VideoDownloaderClient() {
                   className="w-full h-12 pl-11 pr-24 text-[15px] text-[#181135] placeholder:text-[#8E87A8] bg-[#FAF8FF] border border-[#DDD0FA] focus:border-[#7C3AED] focus:ring-2 focus:ring-[#7C3AED]/15 rounded-2xl outline-hidden transition-all"
                 />
                 <Film className="w-5 h-5 text-[#8E87A8] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                
+
                 {inputUrl ? (
                   <button
                     type="button"
                     onClick={() => setInputUrl('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[12px] font-bold text-[#8E87A8] hover:text-[#181135] px-2 py-1 bg-white border border-[#EDE8F9] rounded-lg transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[12px] font-bold text-[#8E87A8] hover:text-[#181135] px-2 py-1 bg-white border border-[#EDE8F9] rounded-lg transition-colors cursor-pointer"
                   >
                     Clear
                   </button>
@@ -209,7 +226,7 @@ export function VideoDownloaderClient() {
                   <button
                     type="button"
                     onClick={handlePaste}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[12px] font-bold text-[#7C3AED] hover:text-[#6D28D9] px-2 py-1 bg-[#F2ECFE] hover:bg-[#EAE0FD] border border-[#DDD0FA] rounded-lg transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[12px] font-bold text-[#7C3AED] hover:text-[#6D28D9] px-2 py-1 bg-[#F2ECFE] hover:bg-[#EAE0FD] border border-[#DDD0FA] rounded-lg transition-colors cursor-pointer"
                   >
                     Paste
                   </button>
@@ -545,12 +562,12 @@ export function VideoDownloaderClient() {
                         {isCurrentDownloading ? (
                           <>
                             <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                            <span>Starting Download...</span>
+                            <span>Generating Stream...</span>
                           </>
                         ) : isCurrentSuccess ? (
                           <>
                             <CheckCircle2 className="w-4 h-4" />
-                            <span>Downloading File!</span>
+                            <span>Download Triggered!</span>
                           </>
                         ) : (
                           <>
