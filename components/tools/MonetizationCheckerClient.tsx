@@ -8,7 +8,8 @@ import { MonetizationResultView } from '@/components/tools/MonetizationResultVie
 import { RecentlyCheckedSection } from '@/components/common/RecentlyCheckedSection';
 import { ChannelData, VideoData } from '@/lib/youtube/types';
 import { saveUserRecentCheck } from '@/lib/recent-checks/client';
-import { ShieldCheck, ThumbsUp, ThumbsDown, Flag, Bookmark, Share2 } from 'lucide-react';
+import { useSavedItems } from '@/lib/saved-items/storage';
+import { ShieldCheck, ThumbsUp, ThumbsDown, Flag, Bookmark, BookmarkCheck, Share2 } from 'lucide-react';
 
 export function MonetizationCheckerClient() {
   const [loading, setLoading] = useState(false);
@@ -18,12 +19,37 @@ export function MonetizationCheckerClient() {
   const [hasLiked, setHasLiked] = useState(false);
   const [dislikesCount, setDislikesCount] = useState(352);
   const [hasDisliked, setHasDisliked] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
+  const { isSaved, toggle } = useSavedItems();
+  const [justSavedTool, setJustSavedTool] = useState(false);
   const [result, setResult] = useState<{
     type: 'CHANNEL' | 'VIDEO';
     channelData?: ChannelData;
     videoData?: VideoData;
   } | null>(null);
+
+  const isToolSaved = isSaved('monetization-checker', '/monetization-checker', 'tool_monetization_checker');
+
+  const handleToggleToolSave = () => {
+    const wasAdded = toggle({
+      id: 'tool_monetization_checker',
+      toolId: 'monetization-checker',
+      toolName: 'Monetization Checker',
+      category: 'Monetization',
+      targetType: 'CHANNEL',
+      title: 'YouTube Monetization Checker Tool',
+      url: '/monetization-checker',
+      metaText: 'Quick Access Bookmark',
+      badgeType: 'neutral',
+      summary: 'Analyze monetization status & ad eligibility signals.',
+    });
+
+    if (wasAdded) {
+      setJustSavedTool(true);
+      setTimeout(() => setJustSavedTool(false), 2000);
+    } else {
+      setJustSavedTool(false);
+    }
+  };
 
   const handleCheck = async (input: string) => {
     setLoading(true);
@@ -179,14 +205,21 @@ export function MonetizationCheckerClient() {
             <span className="text-[#DDD0FA]">•</span>
 
             <button
-              onClick={() => setIsSaved(!isSaved)}
+              type="button"
+              onClick={handleToggleToolSave}
               className={`flex items-center gap-1.5 transition-colors cursor-pointer ${
-                isSaved ? 'text-[#7C3AED] font-bold' : 'hover:text-[#181135]'
+                isToolSaved ? 'text-[#7C3AED] font-bold' : 'hover:text-[#181135]'
               }`}
-              title="Save tool"
+              title={isToolSaved ? 'Saved in Browser (Click to remove)' : 'Save tool to Browser'}
             >
-              <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-current text-[#7C3AED]' : ''}`} />
-              <span className="hidden sm:inline">{isSaved ? 'Saved' : 'Save'}</span>
+              {isToolSaved ? (
+                <BookmarkCheck className="w-4 h-4 fill-[#7C3AED] text-white" />
+              ) : (
+                <Bookmark className="w-4 h-4 text-inherit" />
+              )}
+              <span className="hidden sm:inline">
+                {justSavedTool ? 'Saved in Browser!' : isToolSaved ? 'Saved' : 'Save'}
+              </span>
             </button>
           </div>
         </div>

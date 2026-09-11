@@ -21,12 +21,10 @@ import { TOOLS } from '@/lib/constants/site';
 import { Logo } from '@/components/common/Logo';
 import { ToolIcon, CategoryIcon } from '@/components/common/ToolIcon';
 import { useSavedItems } from '@/lib/saved-items/storage';
-import { SavedItemsDrawer } from '@/components/common/SavedItemsDrawer';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
-  const [savedDrawerOpen, setSavedDrawerOpen] = useState(false);
   const { count, isClient } = useSavedItems();
   const pathname = usePathname();
 
@@ -189,12 +187,11 @@ export function Navbar() {
           </Link>
 
           {/* Saved Items Button (Browser Cache) */}
-          <button
-            type="button"
+          <Link
+            href="/saved"
             id="nav-saved-btn"
-            onClick={() => setSavedDrawerOpen(true)}
             className={`flex items-center gap-1.5 text-[13px] font-semibold py-1.5 px-3 rounded-xl border transition-all cursor-pointer ${
-              pathname === '/saved' || savedDrawerOpen
+              pathname === '/saved'
                 ? 'text-[#7C3AED] border-[#DDD0FA] bg-[#F3EEFE]'
                 : 'text-[#181135] border-[#EDE8F9] bg-white hover:border-[#DDD0FA]'
             }`}
@@ -207,7 +204,7 @@ export function Navbar() {
                 {count}
               </span>
             )}
-          </button>
+          </Link>
 
           <div
             id="lang-indicator"
@@ -220,10 +217,9 @@ export function Navbar() {
 
         {/* Mobile menu right side: Saved button + Menu toggle */}
         <div className="flex md:hidden items-center gap-2">
-          <button
-            type="button"
+          <Link
+            href="/saved"
             id="mobile-saved-toggle"
-            onClick={() => setSavedDrawerOpen(true)}
             className="flex items-center gap-1 p-2 text-[13px] font-bold text-[#181135] border border-[#EDE8F9] rounded-xl bg-[#F8F5FE] transition-colors cursor-pointer"
             aria-label="Open saved items"
           >
@@ -233,7 +229,7 @@ export function Navbar() {
                 {count}
               </span>
             )}
-          </button>
+          </Link>
 
           <button
             id="mobile-menu-toggle"
@@ -354,12 +350,6 @@ export function Navbar() {
           </div>
         </div>
       )}
-
-      {/* Saved Items Drawer (Client-Side Storage) */}
-      <SavedItemsDrawer
-        isOpen={savedDrawerOpen}
-        onClose={() => setSavedDrawerOpen(false)}
-      />
     </header>
   );
 }
