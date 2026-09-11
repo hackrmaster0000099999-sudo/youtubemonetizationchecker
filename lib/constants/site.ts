@@ -2,6 +2,8 @@ export const SITE_NAME = 'YT MONETIZE';
 export const SITE_DOMAIN = 'youtubemonetizationchecker.online';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://youtubemonetizationchecker.online';
 
+export type ToolBadgeType = 'MOST POPULAR' | 'POPULAR' | 'NEW';
+
 export interface ToolItem {
   id: string;
   name: string;
@@ -11,6 +13,7 @@ export interface ToolItem {
   category: 'Monetization' | 'Channel' | 'Video' | 'Analytics';
   icon: string;
   featured?: boolean;
+  badge?: ToolBadgeType;
 }
 
 export const TOOLS: ToolItem[] = [
@@ -23,6 +26,7 @@ export const TOOLS: ToolItem[] = [
     category: 'Monetization',
     icon: 'DollarSign',
     featured: true,
+    badge: 'MOST POPULAR',
   },
   {
     id: 'channel-id-finder',
@@ -33,6 +37,7 @@ export const TOOLS: ToolItem[] = [
     category: 'Channel',
     icon: 'Search',
     featured: true,
+    badge: 'POPULAR',
   },
   {
     id: 'earnings-calculator',
@@ -43,6 +48,7 @@ export const TOOLS: ToolItem[] = [
     category: 'Analytics',
     icon: 'Calculator',
     featured: true,
+    badge: 'POPULAR',
   },
   {
     id: 'thumbnail-downloader',
@@ -53,6 +59,7 @@ export const TOOLS: ToolItem[] = [
     category: 'Video',
     icon: 'Image',
     featured: true,
+    badge: 'POPULAR',
   },
   {
     id: 'image-downloader',
@@ -113,6 +120,7 @@ export const TOOLS: ToolItem[] = [
     category: 'Video',
     icon: 'Trophy',
     featured: true,
+    badge: 'NEW',
   },
   {
     id: 'dislike-checker',
@@ -123,6 +131,7 @@ export const TOOLS: ToolItem[] = [
     category: 'Video',
     icon: 'ThumbsDown',
     featured: true,
+    badge: 'NEW',
   },
   {
     id: 'description-viewer',
@@ -143,6 +152,18 @@ export const TOOLS: ToolItem[] = [
     category: 'Video',
     icon: 'EyeOff',
     featured: true,
+    badge: 'NEW',
+  },
+  {
+    id: 'video-downloader',
+    name: 'YouTube Video Downloader',
+    slug: 'video-downloader',
+    path: '/video-downloader',
+    description: 'Download YouTube videos in MP4, WEBM, and MP3 formats across all resolutions (1080p, 720p, 480p, 360p, 240p, 144p) with real-time file size calculation.',
+    category: 'Video',
+    icon: 'video-downloader',
+    featured: true,
+    badge: 'NEW',
   },
   {
     id: 'hidden-video-finder',
@@ -153,23 +174,25 @@ export const TOOLS: ToolItem[] = [
     category: 'Channel',
     icon: 'FolderSearch',
     featured: true,
+    badge: 'NEW',
   },
 ];
 
 export const RELATED_TOOLS_MAP: Record<string, string[]> = {
+  'video-downloader': ['thumbnail-downloader', 'tag-extractor', 'data-viewer'],
   'monetization-checker': ['channel-id-finder', 'earnings-calculator', 'data-viewer'],
   'channel-id-finder': ['monetization-checker', 'image-downloader', 'data-viewer'],
   'earnings-calculator': ['monetization-checker', 'data-viewer', 'channel-id-finder'],
-  'thumbnail-downloader': ['private-viewer', 'description-viewer', 'dislike-checker'],
+  'thumbnail-downloader': ['video-downloader', 'private-viewer', 'description-viewer'],
   'image-downloader': ['thumbnail-downloader', 'channel-id-finder', 'monetization-checker'],
-  'tag-extractor': ['description-viewer', 'dislike-checker', 'data-viewer'],
+  'tag-extractor': ['video-downloader', 'description-viewer', 'dislike-checker'],
   'shadowban-detector': ['monetization-checker', 'data-viewer', 'channel-id-finder'],
-  'data-viewer': ['private-viewer', 'description-viewer', 'dislike-checker'],
+  'data-viewer': ['video-downloader', 'private-viewer', 'description-viewer'],
   'comment-viewer': ['private-viewer', 'description-viewer', 'random-comment-picker'],
   'random-comment-picker': ['comment-viewer', 'dislike-checker', 'description-viewer'],
-  'dislike-checker': ['private-viewer', 'description-viewer', 'comment-viewer'],
-  'description-viewer': ['private-viewer', 'tag-extractor', 'thumbnail-downloader'],
-  'private-viewer': ['hidden-video-finder', 'description-viewer', 'dislike-checker'],
+  'dislike-checker': ['video-downloader', 'private-viewer', 'description-viewer'],
+  'description-viewer': ['video-downloader', 'private-viewer', 'tag-extractor'],
+  'private-viewer': ['video-downloader', 'hidden-video-finder', 'description-viewer'],
   'hidden-video-finder': ['private-viewer', 'data-viewer', 'channel-id-finder'],
 };
 

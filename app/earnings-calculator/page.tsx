@@ -68,14 +68,14 @@ export default function EarningsCalculatorPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E3E2DE] text-[12px] font-bold text-[#5B6169] uppercase tracking-wider shadow-2xs">
-            <Calculator className="w-3.5 h-3.5 text-[#D6293C]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
+            <Calculator className="w-3.5 h-3.5 text-[#7C3AED]" />
             <span>Revenue Analytics</span>
           </div>
-          <h1 className="text-[28px] md:text-[38px] font-bold text-[#16181C] tracking-tight leading-[1.15]">
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
             YouTube Earnings Calculator &amp; Revenue Estimator
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Estimate prospective video or channel earnings by pasting any YouTube link, or calculate custom revenue based on views, CPM/RPM, and audience ad-rates.
           </p>
         </div>
@@ -84,57 +84,57 @@ export default function EarningsCalculatorPage() {
         <EarningsCalculatorClient />
 
         {/* How The Calculator Works */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               Understanding YouTube Revenue &amp; RPM
             </h2>
-            <p className="text-[15px] text-[#5B6169] leading-relaxed">
+            <p className="text-[15px] text-[#635B80] leading-relaxed">
               Actual creator income fluctuates based on key variables that influence ad inventory supply and advertiser demand:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>1. Audience Geography</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Viewers in Tier-1 countries (US, UK, Canada, Australia) command substantially higher CPMs compared to regions with lower digital ad spend.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>2. Video Length &amp; Mid-rolls</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Videos longer than 8 minutes are eligible for multiple mid-roll ad placements, which can double or triple effective RPM rates.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>3. Content Seasonality</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Advertiser budgets peak during Q4 (holiday shopping in November and December) and typically contract in January (Q1 drop).
               </p>
             </div>
           </div>
 
           {/* Contextual Links */}
-          <div className="p-4 bg-[#FCFCFB] border border-[#E8E7E3] text-[14px] text-[#5B6169] space-y-2">
+          <div className="p-4.5 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-2xs">
             <p>
               Want to see if a channel is already monetized? Check with our{' '}
-              <Link href="/monetization-checker" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/monetization-checker" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Monetization Checker
               </Link>{' '}
               or inspect video tags and metadata with the{' '}
-              <Link href="/tag-extractor" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/tag-extractor" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Tag Extractor
               </Link>
               .
@@ -142,10 +142,10 @@ export default function EarningsCalculatorPage() {
           </div>
 
           {/* Transparent Notice */}
-          <div className="p-5 border border-[#E8E7E3] bg-[#FCFCFB] flex items-start gap-3">
-            <HelpCircle className="w-5 h-5 text-[#5B6169] shrink-0 mt-0.5" />
-            <div className="text-[13px] text-[#5B6169] leading-relaxed space-y-1">
-              <div className="font-semibold text-[#16181C]">Disclaimer: Revenue Estimates</div>
+          <div className="p-5 border border-[#EDE8F9] bg-white/70 backdrop-blur-md rounded-2xl flex items-start gap-3 shadow-2xs">
+            <HelpCircle className="w-5 h-5 text-[#7C3AED] shrink-0 mt-0.5" />
+            <div className="text-[13px] text-[#635B80] leading-relaxed space-y-1">
+              <div className="font-bold text-[#181135]">Disclaimer: Revenue Estimates</div>
               <p>
                 This calculation provides an estimate based on mathematical RPM averages and publicly observable metrics. Actual creator payouts are governed directly by YouTube and Google AdSense according to specific contractual terms and viewer interaction.
               </p>
@@ -154,18 +154,18 @@ export default function EarningsCalculatorPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             Frequently Asked Questions
           </h2>
-          <div className="divide-y divide-[#E8E7E3] border border-[#E8E7E3] bg-white">
+          <div className="divide-y divide-[#EDE8F9] border border-[#EDE8F9] bg-white/80 backdrop-blur-md rounded-2xl shadow-xs overflow-hidden">
             {faqs.map((faq, idx) => (
               <div key={idx} className="p-5 space-y-2">
-                <h3 className="text-[16px] font-semibold text-[#16181C] flex items-center gap-2">
-                  <Info className="w-4 h-4 text-[#5B6169]" />
+                <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
+                  <Info className="w-4 h-4 text-[#7C3AED]" />
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed pl-6">
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-6">
                   {faq.a}
                 </p>
               </div>

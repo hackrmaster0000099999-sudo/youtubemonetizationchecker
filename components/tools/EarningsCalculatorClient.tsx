@@ -220,41 +220,41 @@ export function EarningsCalculatorClient() {
 
   return (
     <div className="space-y-6">
-      {/* 1. Live Channel or Video Fetcher Card (Native Android Surface) */}
-      <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-7 shadow-xs space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#F0EFEB] pb-4">
+      {/* 1. Live Channel or Video Fetcher Card (Liquid Glass Surface) */}
+      <div className="tool-card-3d p-6 sm:p-8 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EDE8F9] pb-4">
           <div className="space-y-1">
-            <h2 className="text-[18px] sm:text-[20px] font-bold text-[#16181C]">
+            <h2 className="text-[18px] sm:text-[20px] font-bold text-[#181135]">
               Channel Real Earnings &amp; RPM Analyzer
             </h2>
-            <p className="text-[13px] text-[#5B6169]">
+            <p className="text-[13px] text-[#635B80]">
               Enter any YouTube channel URL, @handle, or video link to evaluate verified real view metrics and revenue projections.
             </p>
           </div>
-          <span className="self-start sm:self-center px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#16181C] bg-[#F2F1EE] border border-[#E3E2DE] rounded-full shrink-0">
+          <span className="self-start sm:self-center px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#7C3AED] bg-[#EDE8F9]/60 border border-[#DDD0FA] rounded-full shrink-0">
             Real Data Engine
           </span>
         </div>
 
         <form onSubmit={handleLiveLookup} className="space-y-3">
-          <div className="flex flex-col sm:flex-row gap-2.5">
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#5B6169]">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#7C3AED]">
                 <Search className="w-4 h-4" />
               </div>
               <input
                 type="text"
                 value={urlInput}
                 onChange={(e) => setUrlInput(e.target.value)}
-                placeholder="Paste channel URL or @handle (e.g. @MrBeast, @nazar, or youtube.com/@handle)"
+                placeholder="Paste channel URL or @handle (e.g. @MrBeast, @mkbhd, or youtube.com/@handle)"
                 disabled={isFetching}
-                className="w-full pl-10 pr-4 py-3 text-[14px] text-[#16181C] bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl placeholder-[#8E95A0] focus:outline-none focus:bg-white focus:border-[#16181C] transition-all"
+                className="w-full pl-11 pr-4 py-3.5 text-[14px] text-[#181135] bg-white/70 backdrop-blur-md border border-[#DDD0FA] rounded-2xl placeholder-[#8C82A6] focus:outline-none focus:bg-white focus:border-[#7C3AED] transition-colors shadow-xs"
               />
             </div>
             <button
               type="submit"
               disabled={isFetching || !urlInput.trim()}
-              className="px-6 py-3 text-[14px] font-bold text-white bg-[#16181C] hover:bg-[#2A2E35] active:bg-[#000000] disabled:opacity-50 disabled:cursor-not-allowed rounded-xl transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+              className="px-7 py-3.5 text-[14px] font-bold text-white btn-siampay-primary disabled:opacity-50 disabled:cursor-not-allowed rounded-2xl flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-sm"
             >
               {isFetching ? (
                 <>
@@ -271,8 +271,8 @@ export function EarningsCalculatorClient() {
           </div>
 
           {fetchError && (
-            <div className="p-3.5 rounded-xl bg-[#FFF1F2] border border-[#FECDD3] text-[#9F1239] text-[13px] flex items-center gap-2.5">
-              <AlertCircle className="w-4 h-4 shrink-0 text-[#D6293C]" />
+            <div className="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-red-700 text-[13px] flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
               <span>{fetchError}</span>
             </div>
           )}
@@ -280,36 +280,36 @@ export function EarningsCalculatorClient() {
 
         {/* Display Fetched Resource & Real Metrics */}
         {fetchedResource && (
-          <div className="p-4 sm:p-5 bg-[#F9F9F8] border border-[#E3E2DE] rounded-2xl space-y-5">
+          <div className="p-5 bg-white/60 backdrop-blur-md border border-[#EDE8F9] rounded-2xl space-y-5">
             {fetchedResource.type === 'CHANNEL' && fetchedResource.channel && (
               <>
                 {/* Channel Header Details */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8E7E3]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#EDE8F9]">
                   <div className="flex items-center gap-3 min-w-0">
                     {fetchedResource.channel.avatarUrl ? (
                       <img
                         src={fetchedResource.channel.avatarUrl}
                         alt={fetchedResource.channel.title}
-                        className="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover border border-[#E3E2DE] shrink-0"
+                        className="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover border border-[#DDD0FA] shrink-0 shadow-xs"
                         referrerPolicy="no-referrer"
                       />
                     ) : (
-                      <div className="w-13 h-13 rounded-full bg-[#E8E7E3] flex items-center justify-center font-bold text-[#16181C] shrink-0">
+                      <div className="w-13 h-13 rounded-full bg-[#EDE8F9] flex items-center justify-center font-bold text-[#7C3AED] shrink-0">
                         {fetchedResource.channel.title.charAt(0)}
                       </div>
                     )}
                     <div className="min-w-0 space-y-1">
-                      <h3 className="text-[17px] sm:text-[19px] font-bold text-[#16181C] leading-snug">
+                      <h3 className="text-[17px] sm:text-[19px] font-bold text-[#181135] leading-snug">
                         {fetchedResource.channel.title}
                       </h3>
-                      <div className="flex flex-wrap items-center gap-2 text-[12px] text-[#5B6169]">
+                      <div className="flex flex-wrap items-center gap-2 text-[12px] text-[#635B80]">
                         {fetchedResource.channel.handle && (
-                          <span className="font-mono-data font-semibold text-[#16181C]">
+                          <span className="font-mono-data font-semibold text-[#181135]">
                             {fetchedResource.channel.handle}
                           </span>
                         )}
-                        <span className="text-[#C4C4C0]">•</span>
-                        <span className="font-mono-data text-[#5B6169] text-[11px] sm:text-[12px] break-all">
+                        <span className="text-[#DDD0FA]">•</span>
+                        <span className="font-mono-data text-[#635B80] text-[11px] sm:text-[12px] break-all">
                           {fetchedResource.channel.id}
                         </span>
                         <CopyButton textToCopy={fetchedResource.channel.id} label="Copy ID" />
@@ -337,121 +337,109 @@ export function EarningsCalculatorClient() {
                       }}
                     />
 
-                    {fetchedResource.isMonetized ? (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold text-white bg-[#1E9E6B] shrink-0">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                        Monetized
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold text-white bg-[#D6293C] shrink-0">
-                        <AlertCircle className="w-3.5 h-3.5" />
-                        Not Monetized
-                      </span>
-                    )}
-
                     <a
                       href={fetchedResource.channel.channelUrl || `https://youtube.com/channel/${fetchedResource.channel.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1 text-[12px] font-medium text-[#16181C] bg-white border border-[#E3E2DE] hover:border-[#16181C] rounded-lg shrink-0 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1 text-[12px] font-semibold text-[#181135] bg-white/80 border border-[#DDD0FA] hover:border-[#7C3AED] rounded-full shrink-0 transition-colors shadow-xs"
                     >
-                      <span>Open</span>
-                      <ExternalLink className="w-3 h-3 text-[#5B6169]" />
+                      <span>Open Channel</span>
+                      <ExternalLink className="w-3 h-3 text-[#7C3AED]" />
                     </a>
                   </div>
                 </div>
 
-                {/* 4 Metric Cards (Native Android Tiles - Zero Clipping) */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
-                  <div className="p-3.5 bg-white border border-[#E3E2DE] rounded-xl space-y-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5B6169]">
-                      <Users className="w-3.5 h-3.5 text-[#5B6169]" />
+                {/* 4 Public Stats Cards */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                  <div className="p-3.5 bg-white/80 border border-[#EDE8F9] rounded-xl space-y-1 shadow-2xs">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#635B80]">
+                      <Users className="w-3.5 h-3.5 text-[#7C3AED]" />
                       <span>Subscribers</span>
                     </div>
-                    <div className="text-[17px] sm:text-[19px] font-mono-data font-bold text-[#16181C]">
+                    <div className="text-[17px] sm:text-[19px] font-mono-data font-bold text-[#181135]">
                       {formatNumber(fetchedResource.channel.subscriberCount ?? 0)}
                     </div>
                     <div className="text-[11px] leading-tight">
                       {(fetchedResource.channel.subscriberCount ?? 0) >= 1000 ? (
-                        <span className="text-[#1E9E6B] font-semibold">✓ Meets 1K YPP</span>
+                        <span className="text-emerald-600 font-semibold">✓ Meets 1K YPP</span>
                       ) : (
-                        <span className="text-[#D6293C] font-semibold">Below 1K YPP</span>
+                        <span className="text-red-500 font-semibold">Below 1K YPP</span>
                       )}
                     </div>
                   </div>
 
-                  <div className="p-3.5 bg-white border border-[#E3E2DE] rounded-xl space-y-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5B6169]">
-                      <Eye className="w-3.5 h-3.5 text-[#5B6169]" />
+                  <div className="p-3.5 bg-white/80 border border-[#EDE8F9] rounded-xl space-y-1 shadow-2xs">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#635B80]">
+                      <Eye className="w-3.5 h-3.5 text-[#7C3AED]" />
                       <span>Lifetime Views</span>
                     </div>
-                    <div className="text-[17px] sm:text-[19px] font-mono-data font-bold text-[#16181C]">
+                    <div className="text-[17px] sm:text-[19px] font-mono-data font-bold text-[#181135]">
                       {formatNumber(fetchedResource.channel.viewCount ?? 0)}
                     </div>
-                    <div className="text-[11px] text-[#5B6169] leading-tight">Total audience</div>
+                    <div className="text-[11px] text-[#635B80] leading-tight">Total audience</div>
                   </div>
 
-                  <div className="p-3.5 bg-white border border-[#E3E2DE] rounded-xl space-y-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5B6169]">
-                      <Video className="w-3.5 h-3.5 text-[#5B6169]" />
+                  <div className="p-3.5 bg-white/80 border border-[#EDE8F9] rounded-xl space-y-1 shadow-2xs">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#635B80]">
+                      <Video className="w-3.5 h-3.5 text-[#7C3AED]" />
                       <span>Videos</span>
                     </div>
-                    <div className="text-[17px] sm:text-[19px] font-mono-data font-bold text-[#16181C]">
+                    <div className="text-[17px] sm:text-[19px] font-mono-data font-bold text-[#181135]">
                       {formatNumber(fetchedResource.channel.videoCount ?? 0)}
                     </div>
-                    <div className="text-[11px] text-[#5B6169] leading-tight">Indexed uploads</div>
+                    <div className="text-[11px] text-[#635B80] leading-tight">Indexed uploads</div>
                   </div>
 
-                  <div className="p-3.5 bg-white border border-[#E3E2DE] rounded-xl space-y-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5B6169]">
-                      <Calendar className="w-3.5 h-3.5 text-[#5B6169]" />
+                  <div className="p-3.5 bg-white/80 border border-[#EDE8F9] rounded-xl space-y-1 shadow-2xs">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#635B80]">
+                      <Calendar className="w-3.5 h-3.5 text-[#7C3AED]" />
                       <span>Registration</span>
                     </div>
-                    <div className="text-[14px] sm:text-[15px] font-bold text-[#16181C] leading-snug">
+                    <div className="text-[14px] sm:text-[15px] font-bold text-[#181135] leading-snug">
                       {fetchedResource.channel.publishedAt ? formatDate(fetchedResource.channel.publishedAt) : 'Not specified'}
                     </div>
-                    <div className="text-[11px] text-[#5B6169] leading-tight">Channel launch</div>
+                    <div className="text-[11px] text-[#635B80] leading-tight">Channel launch</div>
                   </div>
                 </div>
 
                 {/* Real YouTube Channel Revenue & Velocity Box */}
                 {fetchedResource.isMonetized && fetchedResource.realAnalytics ? (
-                  <div className="p-4 sm:p-5 bg-white border border-[#E3E2DE] rounded-2xl space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F0EFEB] pb-3">
+                  <div className="p-5 bg-white/90 border border-white rounded-2xl space-y-4 shadow-xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#EDE8F9] pb-3">
                       <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg bg-[#1E9E6B]/10 text-[#1E9E6B] flex items-center justify-center">
+                        <div className="w-6 h-6 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
                           <DollarSign className="w-3.5 h-3.5" />
                         </div>
-                        <span className="text-[13px] font-bold text-[#16181C]">
+                        <span className="text-[13px] font-bold text-[#181135]">
                           Real Channel Ad Revenue Range
                         </span>
                       </div>
-                      <span className="text-[11px] text-[#5B6169]">
+                      <span className="text-[11px] text-[#635B80]">
                         Grounded in {formatNumber(fetchedResource.realAnalytics.daysActive)} days active lifespan
                       </span>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      <div className="p-3.5 rounded-xl bg-[#F9F9F8] border border-[#EAE9E5] space-y-1">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#5B6169]">
+                      <div className="p-4 rounded-xl bg-white/80 border border-[#EDE8F9] space-y-1">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#635B80]">
                           Estimated Monthly Earnings
                         </span>
-                        <div className="text-[20px] sm:text-[22px] font-mono-data font-extrabold text-[#16181C]">
+                        <div className="text-[20px] sm:text-[22px] font-mono-data font-extrabold text-[#181135]">
                           {formatCurrency(fetchedResource.realAnalytics.lowMonthlyRevenue)} – {formatCurrency(fetchedResource.realAnalytics.highMonthlyRevenue)}
                         </div>
-                        <p className="text-[11px] text-[#5B6169]">
+                        <p className="text-[11px] text-[#635B80]">
                           Based on ~{formatNumber(fetchedResource.realAnalytics.monthlyVelocity)} monthly views @ $1.50 - $7.50 RPM
                         </p>
                       </div>
 
-                      <div className="p-3.5 rounded-xl bg-[#F9F9F8] border border-[#EAE9E5] space-y-1">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#5B6169]">
+                      <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20 space-y-1">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800">
                           Estimated Yearly Earnings
                         </span>
-                        <div className="text-[20px] sm:text-[22px] font-mono-data font-extrabold text-[#1E9E6B]">
+                        <div className="text-[20px] sm:text-[22px] font-mono-data font-extrabold text-emerald-700">
                           {formatCurrency(fetchedResource.realAnalytics.lowYearlyRevenue)} – {formatCurrency(fetchedResource.realAnalytics.highYearlyRevenue)}
                         </div>
-                        <p className="text-[11px] text-[#5B6169]">
+                        <p className="text-[11px] text-emerald-700/80">
                           Annualized projection based on channel current view momentum
                         </p>
                       </div>
@@ -459,29 +447,29 @@ export function EarningsCalculatorClient() {
 
                     {/* Secondary Real Analytics Grid */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-[12px]">
-                      <div className="p-2.5 rounded-lg bg-[#F9F9F8] border border-[#EAE9E5]">
-                        <span className="text-[#5B6169] block text-[11px]">Daily View Velocity</span>
-                        <span className="font-mono-data font-bold text-[#16181C]">
+                      <div className="p-3 rounded-xl bg-white/70 border border-[#EDE8F9]">
+                        <span className="text-[#635B80] block text-[11px]">Daily View Velocity</span>
+                        <span className="font-mono-data font-bold text-[#181135]">
                           ~{formatNumber(fetchedResource.realAnalytics.dailyAvgViews)} views/day
                         </span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-[#F9F9F8] border border-[#EAE9E5]">
-                        <span className="text-[#5B6169] block text-[11px]">Average Per Video</span>
-                        <span className="font-mono-data font-bold text-[#16181C]">
+                      <div className="p-3 rounded-xl bg-white/70 border border-[#EDE8F9]">
+                        <span className="text-[#635B80] block text-[11px]">Average Per Video</span>
+                        <span className="font-mono-data font-bold text-[#181135]">
                           ~{formatNumber(fetchedResource.realAnalytics.avgViewsPerVideo)} views
                         </span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-[#F9F9F8] border border-[#EAE9E5] col-span-2 sm:col-span-1">
-                        <span className="text-[#5B6169] block text-[11px]">Upload Frequency</span>
-                        <span className="font-mono-data font-bold text-[#16181C]">
+                      <div className="p-3 rounded-xl bg-white/70 border border-[#EDE8F9] col-span-2 sm:col-span-1">
+                        <span className="text-[#635B80] block text-[11px]">Upload Frequency</span>
+                        <span className="font-mono-data font-bold text-[#181135]">
                           ~{fetchedResource.realAnalytics.uploadsPerMonth} uploads/mo
                         </span>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="p-4 rounded-xl bg-[#FFF1F2] border border-[#FECDD3] text-[#9F1239] text-[13px] leading-relaxed flex items-start gap-2.5">
-                    <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-[#D6293C]" />
+                  <div className="p-4 rounded-xl bg-red-50/80 border border-red-200 text-red-700 text-[13px] leading-relaxed flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-red-500" />
                     <div>
                       <span className="font-bold block">Unmonetized Channel — Estimated Earnings: $0.00</span>
                       <span>
@@ -499,22 +487,22 @@ export function EarningsCalculatorClient() {
                   <img
                     src={fetchedResource.video.thumbnails.medium || fetchedResource.video.thumbnails.default || ''}
                     alt={fetchedResource.video.title}
-                    className="w-28 h-18 object-cover rounded-xl border border-[#E3E2DE] shrink-0"
+                    className="w-28 h-18 object-cover rounded-xl border border-[#DDD0FA] shrink-0 shadow-xs"
                     referrerPolicy="no-referrer"
                   />
                   <div className="space-y-1 flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 text-[11px] font-bold uppercase text-[#16181C] bg-[#E8E7E3] rounded-md">
+                      <span className="px-2.5 py-0.5 text-[11px] font-bold uppercase text-[#7C3AED] bg-[#EDE8F9] rounded-md">
                         Video Found
                       </span>
-                      <span className="text-[12px] text-[#5B6169]">
+                      <span className="text-[12px] text-[#635B80]">
                         by {fetchedResource.video.channelTitle}
                       </span>
                     </div>
-                    <h3 className="text-[15px] font-bold text-[#16181C] leading-snug">
+                    <h3 className="text-[15px] font-bold text-[#181135] leading-snug">
                       {fetchedResource.video.title}
                     </h3>
-                    <div className="text-[12px] text-[#5B6169] flex flex-wrap items-center gap-x-2">
+                    <div className="text-[12px] text-[#635B80] flex flex-wrap items-center gap-x-2">
                       <span><strong>Live Views:</strong> {formatNumber(fetchedResource.video.viewCount)}</span>
                       <span>•</span>
                       <span><strong>Duration:</strong> {fetchedResource.video.duration || 'Standard'}</span>
@@ -546,33 +534,33 @@ export function EarningsCalculatorClient() {
         )}
       </div>
 
-      {/* 2. Interactive Simulator (Native Android Segmented Controls & Sliders) */}
+      {/* 2. Interactive Simulator (Liquid Glass Segmented Controls & Sliders) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Controls Column */}
-        <div className="lg:col-span-7 bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
-          <div className="flex items-center justify-between border-b border-[#F0EFEB] pb-4">
-            <h2 className="text-[17px] font-bold text-[#16181C] flex items-center gap-2">
-              <Sliders className="w-4 h-4 text-[#16181C]" />
+        <div className="lg:col-span-7 tool-card-3d p-6 sm:p-7 space-y-6">
+          <div className="flex items-center justify-between border-b border-[#EDE8F9] pb-4">
+            <h2 className="text-[17px] font-bold text-[#181135] flex items-center gap-2">
+              <Sliders className="w-4 h-4 text-[#7C3AED]" />
               Simulator &amp; Custom Projection
             </h2>
-            <span className="text-[12px] text-[#5B6169]">Fine-tune variables</span>
+            <span className="text-[12px] text-[#635B80]">Fine-tune variables</span>
           </div>
 
-          {/* Android Segmented Controls */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 p-3.5 bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl">
+          {/* Liquid Glass Segmented Controls */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 p-3.5 bg-white/60 backdrop-blur-md border border-[#EDE8F9] rounded-2xl">
             {/* Revenue Window */}
             <div className="space-y-1.5">
-              <label className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
+              <label className="text-[11px] font-bold text-[#635B80] uppercase tracking-wider">
                 Revenue Window
               </label>
-              <div className="flex rounded-lg p-1 bg-[#EAE9E5]">
+              <div className="flex rounded-xl p-1 bg-[#EDE8F9]/60">
                 <button
                   type="button"
                   onClick={() => setTimeframe('MONTHLY')}
-                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-[12px] font-bold rounded-lg transition-all cursor-pointer ${
                     timeframe === 'MONTHLY'
-                      ? 'bg-white text-[#16181C] shadow-xs'
-                      : 'text-[#5B6169] hover:text-[#16181C]'
+                      ? 'bg-white text-[#181135] shadow-xs'
+                      : 'text-[#635B80] hover:text-[#181135]'
                   }`}
                 >
                   Monthly
@@ -580,10 +568,10 @@ export function EarningsCalculatorClient() {
                 <button
                   type="button"
                   onClick={() => setTimeframe('YEARLY')}
-                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-[12px] font-bold rounded-lg transition-all cursor-pointer ${
                     timeframe === 'YEARLY'
-                      ? 'bg-white text-[#16181C] shadow-xs'
-                      : 'text-[#5B6169] hover:text-[#16181C]'
+                      ? 'bg-white text-[#181135] shadow-xs'
+                      : 'text-[#635B80] hover:text-[#181135]'
                   }`}
                 >
                   Yearly
@@ -593,17 +581,17 @@ export function EarningsCalculatorClient() {
 
             {/* Content Format */}
             <div className="space-y-1.5">
-              <label className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
+              <label className="text-[11px] font-bold text-[#635B80] uppercase tracking-wider">
                 Content Format
               </label>
-              <div className="flex rounded-lg p-1 bg-[#EAE9E5]">
+              <div className="flex rounded-xl p-1 bg-[#EDE8F9]/60">
                 <button
                   type="button"
                   onClick={() => handleFormatChange('LONG_FORM')}
-                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-[12px] font-bold rounded-lg transition-all cursor-pointer ${
                     contentFormat === 'LONG_FORM'
-                      ? 'bg-white text-[#16181C] shadow-xs'
-                      : 'text-[#5B6169] hover:text-[#16181C]'
+                      ? 'bg-white text-[#181135] shadow-xs'
+                      : 'text-[#635B80] hover:text-[#181135]'
                   }`}
                 >
                   Long-form
@@ -611,10 +599,10 @@ export function EarningsCalculatorClient() {
                 <button
                   type="button"
                   onClick={() => handleFormatChange('SHORTS')}
-                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-[12px] font-bold rounded-lg transition-all cursor-pointer ${
                     contentFormat === 'SHORTS'
-                      ? 'bg-white text-[#16181C] shadow-xs'
-                      : 'text-[#5B6169] hover:text-[#16181C]'
+                      ? 'bg-white text-[#181135] shadow-xs'
+                      : 'text-[#635B80] hover:text-[#181135]'
                   }`}
                 >
                   Shorts
@@ -626,7 +614,7 @@ export function EarningsCalculatorClient() {
           {/* Views Slider & Input */}
           <div className="space-y-2.5">
             <div className="flex justify-between items-center">
-              <label htmlFor={viewsInputId} className="text-[13px] font-bold text-[#16181C]">
+              <label htmlFor={viewsInputId} className="text-[13px] font-bold text-[#181135]">
                 {timeframe === 'MONTHLY' ? 'Monthly Monetizable Views' : 'Annual Monetizable Views'}
               </label>
               <input
@@ -636,63 +624,51 @@ export function EarningsCalculatorClient() {
                 step={1000}
                 value={views}
                 onChange={(e) => setViews(Math.max(0, Number(e.target.value)))}
-                className="w-32 text-right font-mono-data text-[15px] font-bold text-[#16181C] bg-[#F9F9F8] px-2.5 py-1 rounded-lg border border-[#E3E2DE] focus:outline-none focus:border-[#16181C]"
+                className="w-36 text-right font-mono-data text-[15px] font-bold text-[#181135] bg-white/80 px-3 py-1.5 rounded-xl border border-[#DDD0FA] focus:outline-none focus:border-[#7C3AED] shadow-2xs"
               />
             </div>
             <input
               id={viewsInputId}
               type="range"
-              min={0}
-              max={contentFormat === 'SHORTS' ? 20000000 : 5000000}
-              step={contentFormat === 'SHORTS' ? 10000 : 2500}
+              min={1000}
+              max={contentFormat === 'SHORTS' ? 50000000 : 5000000}
+              step={contentFormat === 'SHORTS' ? 100000 : 10000}
               value={views}
               onChange={(e) => setViews(Number(e.target.value))}
-              className="w-full accent-[#16181C] cursor-pointer h-2 bg-[#EAE9E5] rounded-lg"
+              className="w-full accent-[#7C3AED] cursor-pointer h-2 bg-[#EDE8F9] rounded-lg"
             />
-            <div className="flex justify-between text-[11px] text-[#5B6169] font-mono-data">
-              <span>0</span>
-              <span>100K</span>
-              <span>1M</span>
-              <span>2.5M</span>
-              <span>{contentFormat === 'SHORTS' ? '20M+' : '5M+'}</span>
+          </div>
+
+          {/* Niche Preset Quick Select */}
+          <div className="space-y-2">
+            <label className="text-[12px] font-bold text-[#635B80] block">
+              Popular Niche Presets (RPM Benchmark)
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {NICHES.map((niche) => (
+                <button
+                  key={niche.name}
+                  type="button"
+                  onClick={() => setRpm(niche.rpm)}
+                  className={`px-3 py-1 text-[12px] font-medium rounded-full border transition-all cursor-pointer ${
+                    rpm === niche.rpm
+                      ? 'bg-[#7C3AED] text-white border-[#7C3AED] shadow-xs'
+                      : 'bg-white/70 border-[#DDD0FA] text-[#181135] hover:bg-white hover:border-[#7C3AED]'
+                  }`}
+                >
+                  {niche.name} (${niche.rpm.toFixed(1)})
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Android Horizontal Scrollable Niche Chips */}
-          {contentFormat === 'LONG_FORM' && (
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-[12px] font-bold text-[#5B6169] uppercase tracking-wider">
-                  Select Niche Preset (RPM Benchmark)
-                </label>
-                <span className="text-[11px] text-[#5B6169]">Swipe horizontally →</span>
-              </div>
-              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none touch-pan-x -mx-1 px-1">
-                {NICHES.map((n) => (
-                  <button
-                    key={n.name}
-                    type="button"
-                    onClick={() => setRpm(n.rpm)}
-                    className={`px-3 py-1.5 text-[12px] rounded-xl border transition-all cursor-pointer font-medium whitespace-nowrap shrink-0 ${
-                      rpm === n.rpm
-                        ? 'border-[#16181C] bg-[#16181C] text-white shadow-xs'
-                        : 'border-[#E3E2DE] bg-white text-[#16181C] hover:border-[#16181C]'
-                    }`}
-                  >
-                    {n.name} (${n.rpm.toFixed(1)})
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Custom RPM Slider */}
+          {/* RPM Slider */}
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label htmlFor={rpmInputId} className="text-[13px] font-bold text-[#16181C]">
+              <label htmlFor={rpmInputId} className="text-[13px] font-bold text-[#181135]">
                 {contentFormat === 'SHORTS' ? 'Shorts RPM ($/1K views)' : 'Video RPM ($/1K views)'}
               </label>
-              <div className="font-mono-data text-[15px] font-bold text-[#16181C]">
+              <div className="font-mono-data text-[15px] font-bold text-[#7C3AED]">
                 ${rpm.toFixed(2)}
               </div>
             </div>
@@ -704,17 +680,17 @@ export function EarningsCalculatorClient() {
               step={contentFormat === 'SHORTS' ? 0.01 : 0.1}
               value={rpm}
               onChange={(e) => setRpm(Number(e.target.value))}
-              className="w-full accent-[#16181C] cursor-pointer h-2 bg-[#EAE9E5] rounded-lg"
+              className="w-full accent-[#7C3AED] cursor-pointer h-2 bg-[#EDE8F9] rounded-lg"
             />
           </div>
 
           {/* Monetized Playback Coverage */}
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label htmlFor={monetizedPctInputId} className="text-[13px] font-bold text-[#16181C]">
+              <label htmlFor={monetizedPctInputId} className="text-[13px] font-bold text-[#181135]">
                 Monetized Playback Coverage
               </label>
-              <div className="font-mono-data text-[15px] font-bold text-[#16181C]">
+              <div className="font-mono-data text-[15px] font-bold text-[#181135]">
                 {monetizedPct}%
               </div>
             </div>
@@ -726,21 +702,21 @@ export function EarningsCalculatorClient() {
               step={5}
               value={monetizedPct}
               onChange={(e) => setMonetizedPct(Number(e.target.value))}
-              className="w-full accent-[#16181C] cursor-pointer h-2 bg-[#EAE9E5] rounded-lg"
+              className="w-full accent-[#7C3AED] cursor-pointer h-2 bg-[#EDE8F9] rounded-lg"
             />
-            <p className="text-[11px] text-[#5B6169]">
+            <p className="text-[11px] text-[#635B80]">
               Accounts for ad blockers, geographic inventory variations, and viewers without ads.
             </p>
           </div>
         </div>
 
-        {/* Results Projection Column (Android Material Card) */}
+        {/* Results Projection Column (Liquid Glass Surface) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-6 shadow-xs space-y-5">
+          <div className="tool-card-3d p-6 sm:p-7 space-y-5">
             {/* Big Prominent Revenue Display */}
-            <div className="space-y-1 border-b border-[#F0EFEB] pb-5">
+            <div className="space-y-1 border-b border-[#EDE8F9] pb-5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#5B6169]">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#635B80]">
                   Simulated {timeframe.toLowerCase()} revenue
                 </span>
                 <SaveButton
@@ -763,42 +739,42 @@ export function EarningsCalculatorClient() {
                 />
               </div>
               <div className="flex items-baseline gap-2 pt-1">
-                <span className="font-mono-data text-[36px] sm:text-[42px] font-extrabold text-[#16181C] tracking-tight">
+                <span className="font-mono-data text-[38px] sm:text-[44px] font-black text-[#181135] tracking-tight">
                   {formatCurrency(displayedRevenue)}
                 </span>
-                <span className="text-[14px] font-bold text-[#5B6169]">USD</span>
+                <span className="text-[14px] font-bold text-[#7C3AED]">USD</span>
               </div>
-              <div className="text-[12px] text-[#5B6169]">
+              <div className="text-[12px] text-[#635B80]">
                 Based on {formatNumber(Math.round(effectiveViews * activeMultiplier))} monetized views @ ${rpm.toFixed(2)} RPM
               </div>
             </div>
 
             {/* Scale Comparison Cards */}
-            <div className="grid grid-cols-2 gap-2.5">
-              <div className="p-3 rounded-xl bg-[#F9F9F8] border border-[#EAE9E5]">
-                <div className="text-[11px] text-[#5B6169]">Monthly Basis</div>
-                <div className="font-mono-data font-bold text-[16px] text-[#16181C]">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3.5 rounded-xl bg-white/70 border border-[#EDE8F9] shadow-2xs">
+                <div className="text-[11px] text-[#635B80]">Monthly Basis</div>
+                <div className="font-mono-data font-bold text-[16px] text-[#181135]">
                   {formatCurrency(baseRevenue)}
                 </div>
-                <div className="text-[10px] text-[#5B6169] font-mono-data">
+                <div className="text-[10px] text-[#635B80] font-mono-data">
                   {formatNumber(views)} views
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#F9F9F8] border border-[#EAE9E5]">
-                <div className="text-[11px] text-[#5B6169]">Annual Basis</div>
-                <div className="font-mono-data font-bold text-[16px] text-[#1E9E6B]">
+              <div className="p-3.5 rounded-xl bg-emerald-500/5 border border-emerald-500/20 shadow-2xs">
+                <div className="text-[11px] text-emerald-800">Annual Basis</div>
+                <div className="font-mono-data font-bold text-[16px] text-emerald-700">
                   {formatCurrency(baseRevenue * 12)}
                 </div>
-                <div className="text-[10px] text-[#5B6169] font-mono-data">
+                <div className="text-[10px] text-emerald-700/80 font-mono-data">
                   {formatNumber(yearlyEstimatedViews)} views
                 </div>
               </div>
             </div>
 
-            {/* Milestone Benchmarks (Protected layout - Zero Clipping) */}
+            {/* Milestone Benchmarks */}
             <div className="space-y-2.5 pt-1">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-[#5B6169]">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-[#635B80]">
                 Scale Benchmarks ({timeframe.toLowerCase()})
               </div>
               <div className="space-y-2">
@@ -810,12 +786,12 @@ export function EarningsCalculatorClient() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-[#F9F9F8] border border-[#EAE9E5] text-[13px]"
+                    className="flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-white/60 border border-[#EDE8F9] text-[13px]"
                   >
-                    <span className="text-[#5B6169] font-medium whitespace-nowrap">
+                    <span className="text-[#635B80] font-medium whitespace-nowrap">
                       {item.label}
                     </span>
-                    <span className="font-mono-data font-bold text-[#16181C] text-right shrink-0">
+                    <span className="font-mono-data font-bold text-[#181135] text-right shrink-0">
                       {formatCurrency(calcMilestone(item.count))}
                     </span>
                   </div>

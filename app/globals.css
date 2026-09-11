@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #FCFCFB;
+  --color-paper: #F6F4FD;
   --color-surface: #FFFFFF;
-  --color-ink: #16181C;
-  --color-ink-muted: #5B6169;
-  --color-accent: #D6293C;
-  --color-accent-hover: #B8202F;
-  --color-positive: #1E9E6B;
-  --color-caution: #C77C11;
-  --color-border: #E8E7E3;
+  --color-ink: #181135;
+  --color-ink-muted: #635B80;
+  --color-accent: #7C3AED;
+  --color-accent-hover: #6D28D9;
+  --color-positive: #10B981;
+  --color-caution: #F59E0B;
+  --color-border: #EDE8F9;
 }
 
 :root {
-  --paper: #FCFCFB;
+  --paper: #F6F4FD;
   --surface: #FFFFFF;
-  --ink: #16181C;
-  --ink-muted: #5B6169;
-  --accent: #D6293C;
-  --accent-hover: #B8202F;
-  --positive: #1E9E6B;
-  --caution: #C77C11;
-  --border: #E8E7E3;
+  --ink: #181135;
+  --ink-muted: #635B80;
+  --accent: #7C3AED;
+  --accent-hover: #6D28D9;
+  --positive: #10B981;
+  --caution: #F59E0B;
+  --border: #EDE8F9;
 }
 
 body {
@@ -38,13 +38,13 @@ body {
 
 /* Badge styles per PRD Section 38 */
 .badge-positive {
-  background-color: rgba(30, 158, 107, 0.12);
-  color: #1E9E6B;
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #10B981;
 }
 
 .badge-caution {
-  background-color: rgba(199, 124, 17, 0.12);
-  color: #C77C11;
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #D97706;
 }
 
 /* Snappy Native Click Micro-Interactions & Tap Feedback (Android-like response) */
@@ -53,78 +53,127 @@ a,
 input[type="button"], 
 input[type="submit"], 
 .clickable-item {
-  -webkit-tap-highlight-color: rgba(214, 41, 60, 0.1);
-  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), 
-              background-color 0.15s ease, 
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, 
               border-color 0.15s ease, 
-              box-shadow 0.15s ease;
-}
-
-button:active:not(:disabled),
-a:active,
-.clickable-item:active {
-  transform: scale(0.98);
-}
-
-.tap-press:active {
-  transform: scale(0.96);
-  opacity: 0.92;
+              box-shadow 0.15s ease,
+              color 0.15s ease;
 }
 
 /* Instant active ripple & feedback effect */
 .btn-interactive {
   position: relative;
   overflow: hidden;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn-interactive:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
+  transition: all 0.15s ease;
 }
 
 .card-interactive {
-  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.15s ease, background-color 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .card-interactive:hover {
-  border-color: #16181C;
+  border-color: #7C3AED;
 }
 
 .card-interactive:active {
-  transform: scale(0.985);
-  background-color: #F7F6F3;
+  background-color: #F8F5FE;
 }
 
-/* Premium 3D Tool Cards with Rounded Corners & Depth Shadow */
+/* iOS 26 / Android 16 Liquid Glass Theme (Ultra-clear water glass with frosted white depth) */
+.glass-liquid {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 20px 48px -12px rgba(124, 58, 237, 0.07),
+    0 4px 16px -2px rgba(24, 17, 53, 0.03),
+    inset 0 1.5px 0.5px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(124, 58, 237, 0.04);
+}
+
+.glass-liquid-subtle {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 
+    0 8px 24px -6px rgba(124, 58, 237, 0.05),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.9);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 4px 16px -2px rgba(124, 58, 237, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Clear, Delineated Card Design with Distinct Rounded Border & Ambient Violet Glow */
 .tool-card-3d {
   position: relative;
-  background-color: #FFFFFF;
-  border-radius: 24px; /* Distinctive smooth rounded corner */
-  border: 1px solid rgba(220, 219, 214, 0.95);
-  /* Multi-layered 3D shadow with visible bottom depth & top highlight */
+  background: #FFFFFF;
+  border-radius: 26px; /* Smooth card rounded corners per user reference */
+  border: 1.5px solid #DDD0FA; /* Crisp visible border */
   box-shadow: 
-    0 10px 25px -4px rgba(22, 24, 28, 0.10),
-    0 4px 10px -2px rgba(22, 24, 28, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -3px 0 rgba(22, 24, 28, 0.06);
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    0 12px 36px -8px rgba(124, 58, 237, 0.08),
+    0 4px 14px -2px rgba(24, 17, 53, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tool-card-3d:hover {
-  transform: translateY(-6px);
-  border-color: rgba(22, 24, 28, 0.35);
+  border-color: #7C3AED;
   box-shadow: 
-    0 22px 40px -6px rgba(22, 24, 28, 0.16),
-    0 10px 18px -4px rgba(22, 24, 28, 0.09),
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    inset 0 -4px 0 rgba(214, 41, 60, 0.18);
+    0 22px 48px -10px rgba(124, 58, 237, 0.16),
+    0 8px 20px -4px rgba(124, 58, 237, 0.09);
 }
 
-.tool-card-3d:active {
-  transform: translateY(-1px) scale(0.985);
-  box-shadow: 
-    0 8px 16px -2px rgba(22, 24, 28, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -2px 0 rgba(22, 24, 28, 0.08);
+/* SiamPay Signature Gradient Button with Sheen */
+.btn-siampay-primary {
+  position: relative;
+  background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #6D28D9 100%);
+  color: #FFFFFF;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.42);
+  transition: filter 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+
+.btn-siampay-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.btn-siampay-primary:hover:not(:disabled) {
+  box-shadow: 0 12px 28px -4px rgba(124, 58, 237, 0.5);
+  filter: brightness(1.05);
+}
+
+.btn-siampay-primary:active:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+/* Secondary 3D Pill button */
+.btn-siampay-secondary {
+  background-color: #F3EEFE;
+  color: #7C3AED;
+  border: 1px solid #DDD0FA;
+  border-radius: 18px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-siampay-secondary:hover:not(:disabled) {
+  background-color: #EAE1FC;
+  border-color: #CBB9F7;
+  color: #6D28D9;
 }

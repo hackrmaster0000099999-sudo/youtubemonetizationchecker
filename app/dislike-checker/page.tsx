@@ -77,14 +77,14 @@ export default function DislikeCheckerPage() {
 
         {/* Header Intro */}
         <div className="space-y-3 max-w-[820px]">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#D6293C]/10 text-[#D6293C] text-[12px] font-bold tracking-wide rounded-full">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-white/80 border border-[#DDD0FA] text-[#7C3AED] text-[12px] font-bold tracking-wide rounded-full shadow-2xs">
             <ThumbsDown className="w-3.5 h-3.5" />
             <span>Video Sentiment &amp; Ratio Inspector</span>
           </div>
-          <h1 className="text-[28px] md:text-[38px] font-semibold text-[#16181C] tracking-tight leading-[1.15]">
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
             YouTube Dislike &amp; Sentiment Checker
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Uncover hidden YouTube dislike counts, visualize like-to-dislike ratios, and evaluate true audience approval ratings without installing third-party browser extensions.
           </p>
         </div>
@@ -93,43 +93,43 @@ export default function DislikeCheckerPage() {
         <DislikeCheckerClient />
 
         {/* Contextual & Educational Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               Understanding YouTube Dislike Metrics
             </h2>
-            <p className="text-[15px] text-[#5B6169] leading-relaxed">
+            <p className="text-[15px] text-[#635B80] leading-relaxed">
               Why dislike ratios matter for viewers, creators, and marketers:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <h3>Verify Tutorial Credibility</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Before spending time on a tutorial or repair guide, inspect the dislike ratio to avoid misleading or outdated advice.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <BarChart2 className="w-4 h-4 text-[#2563EB]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <BarChart2 className="w-4 h-4 text-blue-600" />
                 <h3>Creator Retention Feedback</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Creators can assess whether a format change, sponsorship, or thumbnail style resonated positively with their community.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#D6293C]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-[#7C3AED]" />
                 <h3>Brand Safety &amp; Sponsorships</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Brands and sponsors can verify that influencer videos maintain strong approval ratings before partnering on campaigns.
               </p>
             </div>
@@ -138,41 +138,41 @@ export default function DislikeCheckerPage() {
 
         {/* Benchmarks Section */}
         <section className="space-y-4 pt-4">
-          <h2 className="text-[20px] md:text-[24px] font-semibold text-[#16181C]">
+          <h2 className="text-[20px] md:text-[24px] font-bold text-[#181135]">
             YouTube Like vs. Dislike Ratio Benchmarks
           </h2>
-          <div className="p-6 bg-white border border-[#E8E7E3] space-y-4 text-[15px] text-[#383B40] leading-relaxed">
+          <div className="tool-card-3d p-6 sm:p-8 space-y-4 text-[15px] text-[#181135] leading-relaxed">
             <p>
               Audience reception on YouTube typically follows clear statistical patterns across different niches:
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-[13px]">
                 <thead>
-                  <tr className="border-b border-[#E8E7E3] bg-[#F9F9F8] text-[#16181C]">
+                  <tr className="border-b border-[#EDE8F9] bg-white/50 text-[#181135]">
                     <th className="py-2.5 px-3 font-bold">Approval %</th>
                     <th className="py-2.5 px-3 font-bold">Sentiment Grade</th>
                     <th className="py-2.5 px-3 font-bold">Audience Interpretation</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E8E7E3] text-[#5B6169]">
+                <tbody className="divide-y divide-[#EDE8F9] text-[#635B80]">
                   <tr>
-                    <td className="py-2.5 px-3 font-bold text-[#1E9E6B]">95% – 100%</td>
-                    <td className="py-2.5 px-3 font-semibold text-[#16181C]">Overwhelmingly Positive</td>
+                    <td className="py-2.5 px-3 font-bold text-emerald-600">95% – 100%</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#181135]">Overwhelmingly Positive</td>
                     <td className="py-2.5 px-3">Exceptional satisfaction, viral quality, strong viewer trust.</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-3 font-bold text-[#2563EB]">85% – 94%</td>
-                    <td className="py-2.5 px-3 font-semibold text-[#16181C]">Mostly Positive</td>
+                    <td className="py-2.5 px-3 font-bold text-blue-600">85% – 94%</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#181135]">Mostly Positive</td>
                     <td className="py-2.5 px-3">Normal healthy engagement for mainstream YouTube videos.</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-3 font-bold text-[#B45309]">70% – 84%</td>
-                    <td className="py-2.5 px-3 font-semibold text-[#16181C]">Mixed Sentiment</td>
+                    <td className="py-2.5 px-3 font-bold text-amber-600">70% – 84%</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#181135]">Mixed Sentiment</td>
                     <td className="py-2.5 px-3">Debatable topic, polarizing opinions, or minor pacing issues.</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-3 font-bold text-[#D6293C]">&lt; 70%</td>
-                    <td className="py-2.5 px-3 font-semibold text-[#16181C]">High Dislike Ratio</td>
+                    <td className="py-2.5 px-3 font-bold text-[#7C3AED]">&lt; 70%</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#181135]">High Dislike Ratio</td>
                     <td className="py-2.5 px-3">Significant community disapproval, misleading content, or clickbait.</td>
                   </tr>
                 </tbody>
@@ -182,24 +182,24 @@ export default function DislikeCheckerPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               Frequently Asked Questions
             </h2>
-            <p className="text-[15px] text-[#5B6169]">
+            <p className="text-[15px] text-[#635B80]">
               Common questions about YouTube dislikes and community sentiment analysis.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-                <h3 className="text-[15px] font-semibold text-[#16181C] flex items-start gap-2">
-                  <span className="text-[#D6293C] font-bold">Q.</span>
+              <div key={index} className="tool-card-3d p-5 space-y-2">
+                <h3 className="text-[15px] font-bold text-[#181135] flex items-start gap-2">
+                  <span className="text-[#7C3AED] font-bold">Q.</span>
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed pl-5">{faq.a}</p>
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-5">{faq.a}</p>
               </div>
             ))}
           </div>

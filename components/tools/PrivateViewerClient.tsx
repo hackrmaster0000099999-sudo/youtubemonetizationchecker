@@ -122,7 +122,7 @@ export function PrivateViewerClient() {
   return (
     <div className="space-y-6">
       {/* Input Form */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
+      <div className="tool-card-3d p-6 md:p-8 space-y-4">
         <YouTubeInputForm
           id="private-viewer-form"
           initialValue={inputValue}
@@ -132,29 +132,9 @@ export function PrivateViewerClient() {
           isLoading={loading}
           onSubmit={handleLoadVideo}
         />
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 text-[13px] text-[#5B6169]">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
-            <span>Powered by official YouTube Privacy-Enhanced Mode (No-Cookie).</span>
-          </div>
-          <div className="flex items-center gap-2 text-[12px]">
-            <span className="text-[#5B6169]">Try sample:</span>
-            <button
-              type="button"
-              onClick={() => handleLoadVideo('https://www.youtube.com/watch?v=jfKfPfyJRdk')}
-              className="text-[#D6293C] font-semibold hover:underline cursor-pointer"
-            >
-              Lofi Girl Focus
-            </button>
-            <span className="text-[#E8E7E3]">•</span>
-            <button
-              type="button"
-              onClick={() => handleLoadVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ')}
-              className="text-[#D6293C] font-semibold hover:underline cursor-pointer"
-            >
-              Rick Astley
-            </button>
-          </div>
+        <div className="flex items-center gap-2 text-[13px] text-[#635B80]">
+          <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          <span>Powered by official YouTube Privacy-Enhanced Mode (No-Cookie).</span>
         </div>
       </div>
 
@@ -171,49 +151,49 @@ export function PrivateViewerClient() {
         <div className="space-y-6 animate-in fade-in duration-200">
           {/* Privacy Guarantees Banner */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            <div className="p-3.5 bg-white border border-[#E8E7E3] flex items-center gap-2.5 shadow-2xs">
-              <Lock className="w-4 h-4 text-[#1E9E6B] shrink-0" />
+            <div className="tool-card-3d p-4 flex items-center gap-3">
+              <Lock className="w-4 h-4 text-emerald-600 shrink-0" />
               <div className="text-[12px]">
-                <strong className="block text-[#16181C]">No Watch History</strong>
-                <span className="text-[#5B6169]">Will not pollute YouTube profile</span>
+                <strong className="block text-[#181135]">No Watch History</strong>
+                <span className="text-[#635B80]">Will not pollute YouTube profile</span>
               </div>
             </div>
 
-            <div className="p-3.5 bg-white border border-[#E8E7E3] flex items-center gap-2.5 shadow-2xs">
-              <EyeOff className="w-4 h-4 text-[#2563EB] shrink-0" />
+            <div className="tool-card-3d p-4 flex items-center gap-3">
+              <EyeOff className="w-4 h-4 text-blue-600 shrink-0" />
               <div className="text-[12px]">
-                <strong className="block text-[#16181C]">No Tracking Cookies</strong>
-                <span className="text-[#5B6169]">youtube-nocookie.com embed</span>
+                <strong className="block text-[#181135]">No Tracking Cookies</strong>
+                <span className="text-[#635B80]">youtube-nocookie.com embed</span>
               </div>
             </div>
 
-            <div className="p-3.5 bg-white border border-[#E8E7E3] flex items-center gap-2.5 shadow-2xs">
-              <Tv className="w-4 h-4 text-[#F59E0B] shrink-0" />
+            <div className="tool-card-3d p-4 flex items-center gap-3">
+              <Tv className="w-4 h-4 text-amber-500 shrink-0" />
               <div className="text-[12px]">
-                <strong className="block text-[#16181C]">No Algorithm Bias</strong>
-                <span className="text-[#5B6169]">No recommendation traps</span>
+                <strong className="block text-[#181135]">No Algorithm Bias</strong>
+                <span className="text-[#635B80]">No recommendation traps</span>
               </div>
             </div>
 
-            <div className="p-3.5 bg-white border border-[#E8E7E3] flex items-center gap-2.5 shadow-2xs">
-              <ShieldCheck className="w-4 h-4 text-[#D6293C] shrink-0" />
+            <div className="tool-card-3d p-4 flex items-center gap-3">
+              <ShieldCheck className="w-4 h-4 text-[#7C3AED] shrink-0" />
               <div className="text-[12px]">
-                <strong className="block text-[#16181C]">100% Anonymous</strong>
-                <span className="text-[#5B6169]">No sign-in or data logging</span>
+                <strong className="block text-[#181135]">100% Anonymous</strong>
+                <span className="text-[#635B80]">No sign-in or data logging</span>
               </div>
             </div>
           </div>
 
           {/* Player Controls Bar */}
-          <div className="bg-white border border-[#E8E7E3] p-4 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+          <div className="tool-card-3d p-4 flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2 text-[12px]">
               <button
                 type="button"
                 onClick={() => setIsTheaterMode(!isTheaterMode)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 border transition-colors cursor-pointer font-medium ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-colors cursor-pointer font-bold ${
                   isTheaterMode
-                    ? 'bg-[#16181C] text-white border-[#16181C]'
-                    : 'bg-[#F9F9F8] text-[#16181C] border-[#E8E7E3] hover:bg-[#F0EFEB]'
+                    ? 'btn-siampay-primary text-white border-transparent'
+                    : 'bg-white/80 text-[#181135] border-[#EDE8F9] hover:bg-white'
                 }`}
               >
                 {isTheaterMode ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
@@ -223,10 +203,10 @@ export function PrivateViewerClient() {
               <button
                 type="button"
                 onClick={() => setLoop(!loop)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 border transition-colors cursor-pointer font-medium ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-colors cursor-pointer font-bold ${
                   loop
-                    ? 'bg-[#1E9E6B] text-white border-[#1E9E6B]'
-                    : 'bg-[#F9F9F8] text-[#16181C] border-[#E8E7E3] hover:bg-[#F0EFEB]'
+                    ? 'bg-emerald-600 text-white border-transparent'
+                    : 'bg-white/80 text-[#181135] border-[#EDE8F9] hover:bg-white'
                 }`}
                 title="Automatically repeat video playback"
               >
@@ -237,10 +217,10 @@ export function PrivateViewerClient() {
               <button
                 type="button"
                 onClick={() => setAutoplay(!autoplay)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 border transition-colors cursor-pointer font-medium ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-colors cursor-pointer font-bold ${
                   autoplay
-                    ? 'bg-[#2563EB] text-white border-[#2563EB]'
-                    : 'bg-[#F9F9F8] text-[#16181C] border-[#E8E7E3] hover:bg-[#F0EFEB]'
+                    ? 'bg-blue-600 text-white border-transparent'
+                    : 'bg-white/80 text-[#181135] border-[#EDE8F9] hover:bg-white'
                 }`}
               >
                 <Play className="w-3.5 h-3.5" />
@@ -269,16 +249,16 @@ export function PrivateViewerClient() {
               <button
                 type="button"
                 onClick={handleCopyEmbedUrl}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F9F9F8] border border-[#E8E7E3] text-[12px] font-semibold text-[#16181C] hover:bg-[#F0EFEB] transition-colors cursor-pointer whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/80 border border-[#DDD0FA] rounded-xl text-[12px] font-bold text-[#181135] hover:bg-white hover:text-[#7C3AED] transition-colors cursor-pointer whitespace-nowrap shadow-2xs"
               >
                 {copiedLink ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-[#1E9E6B]" />
-                    <span className="text-[#1E9E6B]">Link Copied!</span>
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="text-emerald-600">Link Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5 text-[#5B6169]" />
+                    <Copy className="w-3.5 h-3.5 text-[#7C3AED]" />
                     <span>Copy Private Link</span>
                   </>
                 )}
@@ -288,7 +268,7 @@ export function PrivateViewerClient() {
                 href={`https://www.youtube-nocookie.com/embed/${videoId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D6293C] text-white text-[12px] font-semibold hover:bg-[#B81E2F] transition-colors cursor-pointer whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 btn-siampay-primary text-white text-[12px] font-bold rounded-xl cursor-pointer whitespace-nowrap"
               >
                 <span>Fullscreen Tab</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -298,7 +278,7 @@ export function PrivateViewerClient() {
 
           {/* Video Player Frame Container */}
           <div
-            className={`transition-all duration-300 mx-auto bg-black border border-[#E8E7E3] shadow-md ${
+            className={`transition-all duration-300 mx-auto bg-black rounded-2xl overflow-hidden border border-[#EDE8F9] shadow-md ${
               isTheaterMode ? 'w-full max-w-6xl' : 'w-full max-w-4xl'
             }`}
           >
@@ -316,34 +296,34 @@ export function PrivateViewerClient() {
 
           {/* Video Information Card */}
           {videoTitle && (
-            <div className="bg-white border border-[#E8E7E3] p-5 sm:p-6 shadow-xs space-y-3">
+            <div className="tool-card-3d p-5 sm:p-6 space-y-3">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold text-[#1E9E6B] uppercase tracking-wider flex items-center gap-1.5">
+                <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Now Playing in Anonymous Isolation</span>
                 </span>
-                <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C] leading-snug">
+                <h2 className="text-[18px] sm:text-[22px] font-bold text-[#181135] leading-snug">
                   {videoTitle}
                 </h2>
                 {channelTitle && (
-                  <p className="text-[14px] text-[#5B6169]">
-                    Channel: <span className="text-[#16181C] font-semibold">{channelTitle}</span>
+                  <p className="text-[14px] text-[#635B80]">
+                    Channel: <span className="text-[#181135] font-semibold">{channelTitle}</span>
                   </p>
                 )}
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#E8E7E3] text-[12px]">
+              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#EDE8F9] text-[12px]">
                 {viewCount !== null && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F9F9F8] border border-[#E8E7E3] font-medium text-[#16181C]">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#EDE8F9] rounded-lg font-medium text-[#181135]">
                     <span>{formatNumber(viewCount)} Views</span>
                   </div>
                 )}
                 {publishedAt && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F9F9F8] border border-[#E8E7E3] font-medium text-[#5B6169]">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#EDE8F9] rounded-lg font-medium text-[#635B80]">
                     <span>Published: {publishedAt}</span>
                   </div>
                 )}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F0FDF4] border border-[#A7F3D0] text-[#065F46] font-semibold">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-700 font-bold">
                   <span>Privacy Mode Active</span>
                 </div>
               </div>
@@ -351,10 +331,10 @@ export function PrivateViewerClient() {
           )}
 
           {/* Privacy Technical Notice */}
-          <div className="p-4 bg-[#FCFCFB] border border-[#E8E7E3] flex items-start gap-3 text-[13px] text-[#5B6169] leading-relaxed">
-            <Info className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
+          <div className="p-5 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl flex items-start gap-3 text-[13px] text-[#635B80] leading-relaxed shadow-2xs">
+            <Info className="w-5 h-5 text-[#7C3AED] shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <span className="font-semibold text-[#16181C]">How Anonymous Viewing Works:</span>
+              <span className="font-bold text-[#181135]">How Anonymous Viewing Works:</span>
               <p>
                 This viewer embeds video content from <code>youtube-nocookie.com</code>, an official privacy domain maintained by Google. In this mode, YouTube will not store information about visitors on your web page unless they actively play the video, and the session will never be linked to your signed-in Google account watch history or influence your personal recommendation algorithm.
               </p>

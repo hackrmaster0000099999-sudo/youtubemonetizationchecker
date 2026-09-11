@@ -77,7 +77,7 @@ export function ImageDownloaderClient() {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
+      <div className="tool-card-3d p-6 md:p-8 space-y-4">
         <YouTubeInputForm
           id="image-downloader-form"
           initialValue={inputValue}
@@ -87,8 +87,8 @@ export function ImageDownloaderClient() {
           isLoading={loading}
           onSubmit={handleFetch}
         />
-        <div className="flex items-center gap-2 text-[13px] text-[#5B6169]">
-          <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
+        <div className="flex items-center gap-2 text-[13px] text-[#635B80]">
+          <ShieldCheck className="w-4 h-4 text-emerald-600" />
           <span>Retrieves original high-resolution channel banners, logos, and profile avatars.</span>
         </div>
       </div>
@@ -103,27 +103,27 @@ export function ImageDownloaderClient() {
       )}
 
       {channel && (
-        <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#F0EFEB]">
+        <div className="tool-card-3d p-6 sm:p-7 space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#EDE8F9]">
             <div className="flex items-center gap-3.5">
               {channel.avatarUrl ? (
                 <img
                   src={channel.avatarUrl}
                   alt={channel.title}
-                  className="w-14 h-14 rounded-full border border-[#E3E2DE] object-cover bg-[#F9F9F8] shrink-0"
+                  className="w-14 h-14 rounded-full border border-[#DDD0FA] object-cover bg-white shadow-xs shrink-0"
                   referrerPolicy="no-referrer"
                 />
               ) : (
-                <div className="w-14 h-14 rounded-full bg-[#EAE9E5] border border-[#E3E2DE] flex items-center justify-center font-bold text-[#16181C] shrink-0">
+                <div className="w-14 h-14 rounded-full bg-[#EDE8F9] border border-[#DDD0FA] flex items-center justify-center font-bold text-[18px] text-[#7C3AED] shrink-0">
                   {channel.title.charAt(0)}
                 </div>
               )}
               <div className="space-y-0.5">
-                <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C]">
+                <h2 className="text-[18px] sm:text-[22px] font-bold text-[#181135]">
                   {channel.title}
                 </h2>
-                <div className="text-[13px] text-[#5B6169] flex flex-wrap items-center gap-2">
-                  <span className="font-medium text-[#16181C]">{channel.handle}</span>
+                <div className="text-[13px] text-[#635B80] flex flex-wrap items-center gap-2">
+                  <span className="font-semibold text-[#181135]">{channel.handle}</span>
                   {channel.subscriberText && <span>• {channel.subscriberText}</span>}
                 </div>
               </div>
@@ -151,10 +151,10 @@ export function ImageDownloaderClient() {
                 href={channel.channelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#DDD0FA] bg-white/80 hover:border-[#7C3AED] rounded-xl text-[13px] font-semibold text-[#181135] transition-colors shadow-2xs"
               >
                 <span>View Channel</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
+                <ExternalLink className="w-3.5 h-3.5 text-[#7C3AED]" />
               </a>
             </div>
           </div>
@@ -163,11 +163,11 @@ export function ImageDownloaderClient() {
           <div className="space-y-3.5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="text-[15px] font-bold text-[#16181C] flex items-center gap-2">
-                  <ImageIcon className="w-4 h-4 text-[#5B6169]" />
+                <h3 className="text-[15px] font-bold text-[#181135] flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-[#7C3AED]" />
                   <span>Channel Header Banner / Cover Art</span>
                 </h3>
-                <p className="text-[12px] text-[#5B6169] mt-0.5">
+                <p className="text-[12px] text-[#635B80] mt-0.5">
                   Original high-resolution widescreen banner artwork.
                 </p>
               </div>
@@ -180,7 +180,7 @@ export function ImageDownloaderClient() {
                       `youtube-banner-${channel.id}.jpg`
                     )
                   }
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white bg-[#16181C] hover:bg-[#2A2E35] active:bg-black rounded-xl shrink-0 cursor-pointer transition-colors"
+                  className="btn-siampay-primary px-4 py-2.5 text-[13px] font-bold rounded-xl shrink-0 cursor-pointer inline-flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download Banner</span>
@@ -189,7 +189,7 @@ export function ImageDownloaderClient() {
             </div>
 
             {channel.bannerUrl ? (
-              <div className="w-full h-36 sm:h-56 bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl overflow-hidden">
+              <div className="w-full h-36 sm:h-56 bg-white/40 border border-[#EDE8F9] rounded-2xl overflow-hidden shadow-2xs">
                 <img
                   src={channel.bannerUrl}
                   alt={`${channel.title} banner`}
@@ -198,21 +198,21 @@ export function ImageDownloaderClient() {
                 />
               </div>
             ) : (
-              <div className="p-6 border border-dashed border-[#E3E2DE] bg-[#F9F9F8] rounded-xl text-center text-[13px] text-[#5B6169]">
+              <div className="p-6 border border-dashed border-[#EDE8F9] bg-white/40 rounded-2xl text-center text-[13px] text-[#635B80]">
                 This channel has not uploaded a custom channel header banner.
               </div>
             )}
           </div>
 
           {/* Section 2: Channel Profile / Avatar */}
-          <div className="space-y-3.5 pt-5 border-t border-[#F0EFEB]">
+          <div className="space-y-3.5 pt-5 border-t border-[#EDE8F9]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="text-[15px] font-bold text-[#16181C] flex items-center gap-2">
-                  <ImageIcon className="w-4 h-4 text-[#5B6169]" />
+                <h3 className="text-[15px] font-bold text-[#181135] flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-[#7C3AED]" />
                   <span>Channel Profile Avatar / Logo (HD)</span>
                 </h3>
-                <p className="text-[12px] text-[#5B6169] mt-0.5">
+                <p className="text-[12px] text-[#635B80] mt-0.5">
                   Full-resolution 800x800 avatar image.
                 </p>
               </div>
@@ -225,7 +225,7 @@ export function ImageDownloaderClient() {
                       `youtube-avatar-${channel.id}.jpg`
                     )
                   }
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white bg-[#16181C] hover:bg-[#2A2E35] active:bg-black rounded-xl shrink-0 cursor-pointer transition-colors"
+                  className="btn-siampay-primary px-4 py-2.5 text-[13px] font-bold rounded-xl shrink-0 cursor-pointer inline-flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download HD Avatar</span>
@@ -234,17 +234,17 @@ export function ImageDownloaderClient() {
             </div>
 
             {channel.avatarUrl && (
-              <div className="flex items-center gap-4 p-4 bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl">
+              <div className="flex items-center gap-4 p-5 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl shadow-2xs">
                 <img
                   src={channel.avatarUrl.replace(/=s\d+/, '=s800')}
                   alt={`${channel.title} profile avatar`}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border border-[#E3E2DE] object-cover bg-white shrink-0"
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border border-[#DDD0FA] object-cover bg-white shadow-xs shrink-0"
                   referrerPolicy="no-referrer"
                 />
-                <div className="space-y-1 text-[13px] text-[#5B6169]">
-                  <div className="font-semibold text-[#16181C]">Format: High Resolution JPG / PNG</div>
+                <div className="space-y-1 text-[13px] text-[#635B80]">
+                  <div className="font-bold text-[#181135]">Format: High Resolution JPG / PNG</div>
                   <div>Aspect Ratio: 1:1 Square (Circular Crop)</div>
-                  <div className="text-[11px] text-[#5B6169]">Source: Official Google UserContent CDN</div>
+                  <div className="text-[11px] text-[#635B80]">Source: Official Google UserContent CDN</div>
                 </div>
               </div>
             )}

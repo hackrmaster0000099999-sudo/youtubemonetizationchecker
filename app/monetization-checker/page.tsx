@@ -67,15 +67,15 @@ export default function MonetizationCheckerPage() {
         <Breadcrumbs items={[{ label: 'Monetization Checker' }]} />
 
         {/* Header & Tool Intro */}
-        <div className="space-y-3 max-w-[800px]">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E3E2DE] text-[12px] font-bold text-[#5B6169] uppercase tracking-wider shadow-2xs">
-            <DollarSign className="w-3.5 h-3.5 text-[#D6293C]" />
-            <span>Monetization Diagnostic</span>
+        <div className="space-y-3 max-w-[840px]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill text-[12px] font-semibold text-[#7C3AED] shadow-2xs">
+            <DollarSign className="w-3.5 h-3.5 text-[#7C3AED]" />
+            <span>Real-time Public Monetization Diagnostic</span>
           </div>
-          <h1 className="text-[28px] md:text-[38px] font-bold text-[#16181C] tracking-tight leading-[1.15]">
+          <h1 className="text-[30px] md:text-[42px] font-extrabold text-[#181135] tracking-tight leading-[1.12]">
             YouTube Monetization Checker
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Check publicly observable monetization signals for any YouTube channel, handle, or video. Enter any link below to get a clear, confidence-weighted analysis in seconds.
           </p>
         </div>
@@ -84,57 +84,57 @@ export default function MonetizationCheckerPage() {
         <MonetizationCheckerClient />
 
         {/* How The Tool Works */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135] tracking-tight">
               How the YouTube Monetization Checker Works
             </h2>
-            <p className="text-[15px] text-[#5B6169] leading-relaxed">
+            <p className="text-[15px] text-[#635B80] leading-relaxed">
               Our automated diagnostic engine inspects multiple public layers of YouTube channel and video data to detect evidence of commercial monetization:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
                 <h3>1. YPP Milestone Thresholds</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Channels must have a minimum of 1,000 subscribers and active public uploads to meet standard YouTube Partner Program baseline qualification criteria.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
                 <h3>2. Commercial Features</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 The presence of channel memberships (the &quot;Join&quot; button), Super Thanks, or official connected merchandising store shelves confirms approved Partner Program status.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
                 <h3>3. Public Ad Signals</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Public stream player manifests and video response tags indicate whether ad inventory cues and commercial monetization placements are active.
               </p>
             </div>
           </div>
 
           {/* Contextual Links */}
-          <div className="p-4 bg-[#FCFCFB] border border-[#E8E7E3] text-[14px] text-[#5B6169] space-y-2">
+          <div className="p-5 bg-white/80 backdrop-blur-md border border-white rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-xs">
             <p>
               Need to look up the permanent channel identifier first? Use our{' '}
-              <Link href="/channel-id-finder" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/channel-id-finder" className="text-[#7C3AED] font-semibold hover:underline">
                 YouTube Channel ID Finder
               </Link>
               . To calculate potential channel ad revenue from daily views, visit the{' '}
-              <Link href="/earnings-calculator" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/earnings-calculator" className="text-[#7C3AED] font-semibold hover:underline">
                 YouTube Earnings Calculator
               </Link>
               .

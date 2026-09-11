@@ -19,12 +19,13 @@ export function ContactFormClient() {
   if (submitted) {
     return (
       <div className="p-8 text-center space-y-4">
-        <div className="w-12 h-12 rounded-full bg-[rgba(30,158,107,0.12)] text-[#1E9E6B] flex items-center justify-center mx-auto">
+        <div className="w-12 h-12 rounded-2xl bg-[#10B981]/15 text-[#10B981] flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-6 h-6" />
         </div>
-        <h2 className="text-[20px] font-semibold text-[#16181C]">Message Received</h2>
-        <p className="text-[14px] text-[#5B6169] max-w-[420px] mx-auto leading-relaxed">
-          Thank you for reaching out. We review all creator suggestions, feature requests, and bug reports promptly.
+        <h2 className="text-[20px] font-bold text-[#181135]">Message Received</h2>
+        <p className="text-[14px] text-[#635B80] max-w-[420px] mx-auto leading-relaxed">
+          Thank you for reaching out. We review all creator suggestions, feature requests, and bug reports promptly. You will receive a response at{' '}
+          <strong className="text-[#181135]">{email}</strong> within 24–48 hours.
         </p>
         <button
           type="button"
@@ -32,7 +33,7 @@ export function ContactFormClient() {
             setSubmitted(false);
             setMessage('');
           }}
-          className="px-4 py-2 text-[14px] font-medium text-[#16181C] border border-[#E8E7E3] hover:border-[#16181C] active:scale-95 transition-all cursor-pointer"
+          className="px-5 py-2.5 text-[14px] font-bold text-[#181135] bg-white/80 border border-[#DDD0FA] hover:border-[#7C3AED] rounded-2xl transition-colors cursor-pointer"
         >
           Send Another Message
         </button>
@@ -41,9 +42,9 @@ export function ContactFormClient() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div className="space-y-1.5">
-        <label htmlFor="contact-name" className="text-[14px] font-medium text-[#16181C]">
+        <label htmlFor="contact-name" className="text-[14px] font-bold text-[#181135]">
           Your Name (Optional)
         </label>
         <input
@@ -52,13 +53,13 @@ export function ContactFormClient() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Alex or Channel Name"
-          className="w-full px-3.5 py-2.5 text-[14px] text-[#16181C] bg-[#FCFCFB] border border-[#E8E7E3] focus:border-[#16181C] focus:bg-white focus:outline-none transition-colors"
+          className="w-full px-4 py-3 text-[14px] text-[#181135] bg-white/70 border border-[#EDE8F9] rounded-2xl focus:border-[#7C3AED] focus:bg-white focus:outline-none transition-colors"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="contact-email" className="text-[14px] font-medium text-[#16181C]">
-          Email Address <span className="text-[#D6293C]">*</span>
+        <label htmlFor="contact-email" className="text-[14px] font-bold text-[#181135]">
+          Email Address <span className="text-[#EF4444]">*</span>
         </label>
         <input
           id="contact-email"
@@ -67,19 +68,19 @@ export function ContactFormClient() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="creator@example.com"
-          className="w-full px-3.5 py-2.5 text-[14px] text-[#16181C] bg-[#FCFCFB] border border-[#E8E7E3] focus:border-[#16181C] focus:bg-white focus:outline-none transition-colors"
+          className="w-full px-4 py-3 text-[14px] text-[#181135] bg-white/70 border border-[#EDE8F9] rounded-2xl focus:border-[#7C3AED] focus:bg-white focus:outline-none transition-colors"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="contact-subject" className="text-[14px] font-medium text-[#16181C]">
+        <label htmlFor="contact-subject" className="text-[14px] font-bold text-[#181135]">
           Inquiry Topic
         </label>
         <select
           id="contact-subject"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          className="w-full px-3.5 py-2.5 text-[14px] text-[#16181C] bg-[#FCFCFB] border border-[#E8E7E3] focus:border-[#16181C] focus:bg-white focus:outline-none transition-colors"
+          className="w-full px-4 py-3 text-[14px] text-[#181135] bg-white/70 border border-[#EDE8F9] rounded-2xl focus:border-[#7C3AED] focus:bg-white focus:outline-none transition-colors"
         >
           <option value="General Feedback">General Feedback</option>
           <option value="Bug Report">Bug Report</option>
@@ -90,8 +91,8 @@ export function ContactFormClient() {
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="contact-message" className="text-[14px] font-medium text-[#16181C]">
-          Message <span className="text-[#D6293C]">*</span>
+        <label htmlFor="contact-message" className="text-[14px] font-bold text-[#181135]">
+          Message <span className="text-[#EF4444]">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -100,13 +101,13 @@ export function ContactFormClient() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Describe your inquiry, link to the relevant YouTube channel or video..."
-          className="w-full px-3.5 py-2.5 text-[14px] text-[#16181C] bg-[#FCFCFB] border border-[#E8E7E3] focus:border-[#16181C] focus:bg-white focus:outline-none transition-colors"
+          className="w-full px-4 py-3 text-[14px] text-[#181135] bg-white/70 border border-[#EDE8F9] rounded-2xl focus:border-[#7C3AED] focus:bg-white focus:outline-none transition-colors resize-none"
         />
       </div>
 
       <button
         type="submit"
-        className="btn-interactive w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 text-[14px] font-semibold text-white bg-[#D6293C] hover:bg-[#B8202F] active:scale-95 transition-all cursor-pointer"
+        className="btn-siampay-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 text-[14px] font-bold text-white transition-colors cursor-pointer"
       >
         <span>Send Message</span>
         <Send className="w-3.5 h-3.5" />

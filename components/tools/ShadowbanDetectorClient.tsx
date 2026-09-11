@@ -93,7 +93,7 @@ export function ShadowbanDetectorClient() {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
+      <div className="tool-card-3d p-6 md:p-8 space-y-4">
         <YouTubeInputForm
           id="shadowban-detector-form"
           initialValue={inputValue}
@@ -103,8 +103,8 @@ export function ShadowbanDetectorClient() {
           isLoading={loading}
           onSubmit={handleScan}
         />
-        <div className="flex items-center gap-2 text-[13px] text-[#5B6169]">
-          <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
+        <div className="flex items-center gap-2 text-[13px] text-[#635B80]">
+          <ShieldCheck className="w-4 h-4 text-emerald-600" />
           <span>Inspects public search indexability, canonical redirects, and recommendation flags.</span>
         </div>
       </div>
@@ -119,27 +119,27 @@ export function ShadowbanDetectorClient() {
       )}
 
       {channel && checks.length > 0 && (
-        <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#F0EFEB]">
+        <div className="tool-card-3d p-5 sm:p-7 space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#EDE8F9]">
             <div className="flex items-center gap-3.5">
               {channel.avatarUrl ? (
                 <img
                   src={channel.avatarUrl}
                   alt={channel.title}
-                  className="w-14 h-14 rounded-full border border-[#E3E2DE] object-cover bg-[#F9F9F8] shrink-0"
+                  className="w-14 h-14 rounded-full border border-[#EDE8F9] object-cover bg-white/60 shrink-0 shadow-2xs"
                   referrerPolicy="no-referrer"
                 />
               ) : (
-                <div className="w-14 h-14 rounded-full bg-[#EAE9E5] border border-[#E3E2DE] flex items-center justify-center font-bold text-[18px] text-[#16181C] shrink-0">
+                <div className="w-14 h-14 rounded-full bg-white/80 border border-[#EDE8F9] flex items-center justify-center font-bold text-[18px] text-[#181135] shrink-0 shadow-2xs">
                   {channel.title.charAt(0)}
                 </div>
               )}
               <div className="space-y-0.5">
-                <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C]">
+                <h2 className="text-[18px] sm:text-[22px] font-bold text-[#181135]">
                   {channel.title}
                 </h2>
-                <div className="text-[13px] text-[#5B6169] flex flex-wrap items-center gap-2">
-                  <span className="font-semibold text-[#16181C]">{channel.handle}</span>
+                <div className="text-[13px] text-[#635B80] flex flex-wrap items-center gap-2">
+                  <span className="font-semibold text-[#181135]">{channel.handle}</span>
                   {channel.subscriberText && <span>• {channel.subscriberText}</span>}
                 </div>
               </div>
@@ -167,22 +167,22 @@ export function ShadowbanDetectorClient() {
                 href={channel.channelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-white hover:border-[#16181C] rounded-xl text-[13px] font-medium text-[#16181C] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#DDD0FA] bg-white/80 hover:bg-white rounded-xl text-[13px] font-semibold text-[#181135] hover:text-[#7C3AED] transition-colors shadow-2xs cursor-pointer"
               >
                 <span>View Channel</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[#5B6169]" />
+                <ExternalLink className="w-3.5 h-3.5 text-[#7C3AED]" />
               </a>
             </div>
           </div>
 
           {/* Overall Health Banner */}
-          <div className="p-4 sm:p-5 border border-[#1E9E6B]/30 bg-[#E8F8F0] rounded-2xl flex items-start gap-3.5">
-            <CheckCircle2 className="w-6 h-6 text-[#1E9E6B] shrink-0 mt-0.5" />
+          <div className="p-4 sm:p-5 border border-emerald-500/20 bg-emerald-500/10 rounded-2xl flex items-start gap-3.5">
+            <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <div className="font-bold text-[15px] sm:text-[16px] text-[#16181C]">
+              <div className="font-bold text-[15px] sm:text-[16px] text-[#181135]">
                 Healthy Public Visibility Signals Detected
               </div>
-              <p className="text-[13px] sm:text-[14px] text-[#3D444D] leading-relaxed">
+              <p className="text-[13px] sm:text-[14px] text-[#635B80] leading-relaxed">
                 No public shadowban flags or canonical indexing anomalies detected. The channel is fully discoverable via public endpoints and search routing.
               </p>
             </div>
@@ -190,21 +190,21 @@ export function ShadowbanDetectorClient() {
 
           {/* Detailed Check Items */}
           <div className="space-y-3 pt-1">
-            <div className="text-[14px] font-bold text-[#16181C]">
+            <div className="text-[14px] font-bold text-[#181135]">
               Diagnostic Signal Breakdown
             </div>
             <div className="space-y-2.5">
               {checks.map((chk, idx) => (
                 <div
                   key={idx}
-                  className="p-4 border border-[#E3E2DE] bg-[#F9F9F8] rounded-xl flex items-start justify-between gap-3"
+                  className="p-4 border border-[#EDE8F9] bg-white/70 backdrop-blur-sm rounded-2xl flex items-start justify-between gap-3 shadow-2xs"
                 >
                   <div className="space-y-0.5 min-w-0">
-                    <div className="font-bold text-[14px] text-[#16181C]">{chk.name}</div>
-                    <p className="text-[12px] sm:text-[13px] text-[#5B6169] leading-relaxed">{chk.description}</p>
+                    <div className="font-bold text-[14px] text-[#181135]">{chk.name}</div>
+                    <p className="text-[12px] sm:text-[13px] text-[#635B80] leading-relaxed">{chk.description}</p>
                   </div>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold text-[#1E9E6B] bg-white border border-[#1E9E6B]/40 rounded-lg shrink-0">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg shrink-0">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     Passed
                   </span>
                 </div>
@@ -213,10 +213,10 @@ export function ShadowbanDetectorClient() {
           </div>
 
           {/* Realism Notice */}
-          <div className="p-4 border border-[#E3E2DE] bg-[#F9F9F8] rounded-xl flex items-start gap-3 text-[12px] sm:text-[13px] text-[#5B6169]">
-            <HelpCircle className="w-4 h-4 text-[#5B6169] shrink-0 mt-0.5" />
+          <div className="p-4 border border-[#EDE8F9] bg-white/70 backdrop-blur-sm rounded-2xl flex items-start gap-3 text-[12px] sm:text-[13px] text-[#635B80] shadow-2xs">
+            <HelpCircle className="w-4 h-4 text-[#7C3AED] shrink-0 mt-0.5" />
             <p className="leading-relaxed">
-              <strong className="text-[#16181C]">Important Note:</strong> YouTube does not possess an official setting labeled &quot;shadowban&quot;. Sudden viewership drops are almost universally attributed to shifts in algorithmic viewer demand, CTR variance, or audience retention fluctuations rather than secret channel penalties.
+              <strong className="text-[#181135]">Important Note:</strong> YouTube does not possess an official setting labeled &quot;shadowban&quot;. Sudden viewership drops are almost universally attributed to shifts in algorithmic viewer demand, CTR variance, or audience retention fluctuations rather than secret channel penalties.
             </p>
           </div>
         </div>

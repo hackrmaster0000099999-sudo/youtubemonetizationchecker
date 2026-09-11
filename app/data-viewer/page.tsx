@@ -68,10 +68,10 @@ export default function DataViewerPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
-          <h1 className="text-[28px] md:text-[38px] font-semibold text-[#16181C] tracking-tight leading-[1.15]">
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
             YouTube Metadata &amp; Raw Data Viewer
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Inspect public channel and video technical metadata, upload dates, lifetime statistics, and raw structured JSON data payloads.
           </p>
         </div>
@@ -80,57 +80,57 @@ export default function DataViewerPage() {
         <DataViewerClient />
 
         {/* How The Tool Works */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               How the YouTube Data Viewer Works
             </h2>
-            <p className="text-[15px] text-[#5B6169] leading-relaxed">
+            <p className="text-[15px] text-[#635B80] leading-relaxed">
               Our inspection engine normalizes public API schemas into accessible structured views and developer JSON objects:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>1. Input Resource</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Provide any valid YouTube video link, channel URL, or creator handle to initiate inspection.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>2. Schema Normalization</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 The engine cleans and maps raw YouTube fields into standardized technical attributes like ISO timestamps and duration codes.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>3. Formatted &amp; Raw JSON</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Review data in a clean key-value table or switch to the raw JSON tab with a one-click copy button.
               </p>
             </div>
           </div>
 
           {/* Contextual Links */}
-          <div className="p-4 bg-[#FCFCFB] border border-[#E8E7E3] text-[14px] text-[#5B6169] space-y-2">
+          <div className="p-4 tool-card-3d text-[14px] text-[#635B80] space-y-2">
             <p>
               Looking to extract specific video tags? Use our{' '}
-              <Link href="/tag-extractor" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/tag-extractor" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Tag Extractor
               </Link>{' '}
               or find canonical channel IDs with the{' '}
-              <Link href="/channel-id-finder" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/channel-id-finder" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Channel ID Finder
               </Link>
               .
@@ -139,43 +139,43 @@ export default function DataViewerPage() {
         </section>
 
         {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-4 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             When to Use the YouTube Data Viewer
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Developer Debugging:</strong>
+            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
+              <strong className="text-[#181135] block mb-1 font-bold">Developer Debugging:</strong>
               Inspect raw payload shapes and field names when building custom YouTube API integrations or webhooks.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Historical Auditing:</strong>
+            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
+              <strong className="text-[#181135] block mb-1 font-bold">Historical Auditing:</strong>
               Check exact channel creation timestamps and upload dates without relying on rounded UI badges.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Channel Valuation:</strong>
+            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
+              <strong className="text-[#181135] block mb-1 font-bold">Channel Valuation:</strong>
               Review aggregate metrics, video volume, and engagement indicators when assessing digital creator assets.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Content Research:</strong>
+            <div className="tool-card-3d p-5 text-[14px] text-[#635B80]">
+              <strong className="text-[#181135] block mb-1 font-bold">Content Research:</strong>
               Analyze publishing cadences and metadata structures used by leading channels in any category.
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             Frequently Asked Questions
           </h2>
-          <div className="divide-y divide-[#E8E7E3] border border-[#E8E7E3] bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="p-5 space-y-2">
-                <h3 className="text-[16px] font-semibold text-[#16181C] flex items-center gap-2">
-                  <Info className="w-4 h-4 text-[#5B6169]" />
+              <div key={idx} className="tool-card-3d p-5 space-y-2">
+                <h3 className="text-[15px] font-bold text-[#181135] flex items-center gap-2">
+                  <span className="text-[#7C3AED] font-bold">Q.</span>
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed pl-6">
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-5">
                   {faq.a}
                 </p>
               </div>

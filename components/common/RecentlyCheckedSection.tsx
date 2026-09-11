@@ -130,24 +130,24 @@ export function RecentlyCheckedSection({
   return (
     <div
       id="recently-checked-section"
-      className={`rounded-2xl border border-[#E8E7E3] bg-white p-5 sm:p-7 shadow-xs ${className}`}
+      className={`tool-card-3d p-6 sm:p-7 ${className}`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between gap-3 pb-4 mb-3 border-b border-[#F0EFEB]">
+      <div className="flex items-center justify-between gap-3 pb-4 mb-3 border-b border-[#EDE8F9]">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-[17px] sm:text-[19px] font-bold text-[#16181C] tracking-tight">
+            <h3 className="text-[17px] sm:text-[19px] font-bold text-[#181135] tracking-tight">
               {title}
             </h3>
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EBF7F2] text-[#1E9E6B] text-[11px] font-semibold tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#1E9E6B] animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/25 text-[#059669] text-[11px] font-semibold tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
               Live
             </span>
           </div>
           {description ? (
-            <p className="text-[13px] text-[#5B6169] mt-0.5">{description}</p>
+            <p className="text-[13px] text-[#635B80] mt-0.5">{description}</p>
           ) : (
-            <p className="text-[12px] text-[#5B6169] mt-0.5">
+            <p className="text-[12px] text-[#635B80] mt-0.5">
               Verified real-time creator lookups on YT MONETIZE
             </p>
           )}
@@ -155,10 +155,10 @@ export function RecentlyCheckedSection({
       </div>
 
       {/* List */}
-      <div className="divide-y divide-[#F5F4F0]">
+      <div className="divide-y divide-[#EDE8F9]/60">
         {loading && items.length === 0 ? (
-          <div className="py-8 text-center text-[13px] text-[#5B6169] space-y-2">
-            <div className="w-6 h-6 border-2 border-[#D6293C] border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="py-8 text-center text-[13px] text-[#635B80] space-y-2">
+            <div className="w-6 h-6 border-2 border-[#7C3AED] border-t-transparent rounded-full animate-spin mx-auto" />
             <p>Loading real recent lookups...</p>
           </div>
         ) : (
@@ -175,11 +175,11 @@ export function RecentlyCheckedSection({
               <div
                 key={item.id || idx}
                 onClick={() => handleItemClick(item)}
-                className="group flex items-center justify-between py-3.5 px-2 -mx-2 rounded-xl hover:bg-[#F9F9F8] transition-all cursor-pointer select-none"
+                className="group flex items-center justify-between py-3 px-2.5 -mx-1.5 rounded-xl hover:bg-white/70 transition-colors cursor-pointer select-none"
               >
                 <div className="flex items-center gap-3.5 min-w-0">
                   {/* Channel / Video Avatar */}
-                  <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full shrink-0 overflow-hidden bg-[#F0EFEB] border border-[#E3E2DE] shadow-2xs flex items-center justify-center">
+                  <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full shrink-0 overflow-hidden bg-white/80 border border-[#DDD0FA] shadow-xs flex items-center justify-center">
                     {!isFailed && item.avatarUrl ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
@@ -194,7 +194,7 @@ export function RecentlyCheckedSection({
                         }
                       />
                     ) : (
-                      <span className="text-[15px] font-bold text-[#5B6169] uppercase">
+                      <span className="text-[15px] font-bold text-[#635B80] uppercase">
                         {item.title.charAt(0) || 'Y'}
                       </span>
                     )}
@@ -202,27 +202,29 @@ export function RecentlyCheckedSection({
 
                   {/* Channel Title & Status */}
                   <div className="min-w-0">
-                    <h4 className="text-[14px] sm:text-[15px] font-semibold text-[#16181C] group-hover:text-[#D6293C] transition-colors truncate">
+                    <h4 className="text-[14px] sm:text-[15px] font-semibold text-[#181135] group-hover:text-[#7C3AED] transition-colors truncate">
                       {item.title}
                     </h4>
 
                     <div className="flex items-center gap-2 mt-0.5">
                       {isMonetized ? (
-                        <span className="text-[13px] font-semibold text-[#1E9E6B] flex items-center gap-1">
+                        <span className="text-[12px] font-semibold text-[#059669] flex items-center gap-1">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
                           Monetized
                         </span>
                       ) : isNotMonetized ? (
-                        <span className="text-[13px] font-semibold text-[#D6293C] flex items-center gap-1">
+                        <span className="text-[12px] font-semibold text-[#EF4444] flex items-center gap-1">
+                          <XCircle className="w-3.5 h-3.5" />
                           Not Monetized
                         </span>
                       ) : (
-                        <span className="text-[12px] font-medium text-[#5B6169]">
+                        <span className="text-[12px] font-medium text-[#635B80]">
                           {item.statusText}
                         </span>
                       )}
 
                       {item.metaText && (
-                        <span className="text-[11px] text-[#8C939E] hidden xs:inline truncate">
+                        <span className="text-[11px] text-[#8C82A6] hidden xs:inline truncate">
                           · {item.metaText}
                         </span>
                       )}
@@ -232,9 +234,9 @@ export function RecentlyCheckedSection({
 
                 {/* Right side action button */}
                 <div className="shrink-0 pl-2">
-                  <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[12px] font-semibold text-[#5B6169] group-hover:text-[#D6293C] group-hover:bg-[#F0EFEB] transition-all">
+                  <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[12px] font-semibold text-[#635B80] group-hover:text-[#7C3AED] group-hover:bg-[#EDE8F9]/60 transition-colors">
                     <span>Inspect</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </div>
               </div>

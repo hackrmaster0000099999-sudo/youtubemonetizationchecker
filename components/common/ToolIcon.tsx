@@ -10,6 +10,7 @@ import {
   BarChart2,
   UserCheck,
   Film,
+  Video,
   TrendingUp,
   HelpCircle,
   Sparkles,
@@ -29,8 +30,11 @@ interface ToolIconProps extends LucideProps {
   className?: string;
 }
 
-export function ToolIcon({ name, className = 'w-5 h-5 text-[#16181C]', ...props }: ToolIconProps) {
+export function ToolIcon({ name, className = 'w-5 h-5 text-[#7C3AED]', ...props }: ToolIconProps) {
   switch (name) {
+    case 'video-downloader':
+    case 'Video':
+      return <Video className={className} {...props} />;
     case 'FolderSearch':
     case 'hidden-video-finder':
       return <FolderSearch className={className} {...props} />;
@@ -87,6 +91,35 @@ export function ToolIcon({ name, className = 'w-5 h-5 text-[#16181C]', ...props 
     default:
       return <Layers className={className} {...props} />;
   }
+}
+
+export function ToolIconBox({
+  name,
+  size = 'md',
+  className = '',
+}: {
+  name: string;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}) {
+  const sizeClasses = {
+    sm: 'w-9 h-9 rounded-[13px]',
+    md: 'w-11 h-11 rounded-[16px]',
+    lg: 'w-12 h-12 rounded-[18px]',
+  };
+  const iconSizes = {
+    sm: 'w-4.5 h-4.5',
+    md: 'w-5 h-5',
+    lg: 'w-6 h-6',
+  };
+
+  return (
+    <div
+      className={`bg-[#F2ECFE] border border-[#DDD0FA] text-[#7C3AED] flex items-center justify-center shrink-0 shadow-2xs ${sizeClasses[size]} ${className}`}
+    >
+      <ToolIcon name={name} className={`${iconSizes[size]} text-[#7C3AED]`} />
+    </div>
+  );
 }
 
 export function CategoryIcon({ category, className = 'w-3.5 h-3.5' }: { category: string; className?: string }) {

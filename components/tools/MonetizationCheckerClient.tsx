@@ -132,8 +132,8 @@ export function MonetizationCheckerClient() {
 
   return (
     <div className="space-y-8">
-      {/* Search Input Box */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] rounded-2xl space-y-5 shadow-xs">
+      {/* Search Input Box - Liquid Glass Card */}
+      <div className="tool-card-3d p-6 sm:p-8 space-y-5">
         <YouTubeInputForm
           id="monetization-page-form"
           initialValue={inputValue}
@@ -145,17 +145,17 @@ export function MonetizationCheckerClient() {
         />
 
         {/* Action feedback bar */}
-        <div className="flex items-center justify-between pt-2 border-t border-[#F0EFEB] flex-wrap gap-4 text-[13px] text-[#5B6169]">
+        <div className="flex items-center justify-between pt-3 border-t border-[#EDE8F9] flex-wrap gap-4 text-[13px] text-[#635B80]">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
-            <span>Real-time public signal evaluation · 100% Free</span>
+            <ShieldCheck className="w-4 h-4 text-[#10B981]" />
+            <span className="font-medium">Real-time public signal evaluation · 100% Free</span>
           </div>
 
           <div className="flex items-center gap-4">
             <button
               onClick={handleLike}
               className={`flex items-center gap-1.5 transition-colors cursor-pointer ${
-                hasLiked ? 'text-[#1E9E6B] font-bold' : 'hover:text-[#16181C]'
+                hasLiked ? 'text-[#10B981] font-bold' : 'hover:text-[#181135]'
               }`}
               title="Helpful tool"
             >
@@ -163,12 +163,12 @@ export function MonetizationCheckerClient() {
               <span>{likesCount.toLocaleString()}</span>
             </button>
 
-            <span className="text-[#E8E7E3]">|</span>
+            <span className="text-[#DDD0FA]">•</span>
 
             <button
               onClick={handleDislike}
               className={`flex items-center gap-1.5 transition-colors cursor-pointer ${
-                hasDisliked ? 'text-[#D6293C] font-bold' : 'hover:text-[#16181C]'
+                hasDisliked ? 'text-[#EF4444] font-bold' : 'hover:text-[#181135]'
               }`}
               title="Not helpful"
             >
@@ -176,16 +176,16 @@ export function MonetizationCheckerClient() {
               <span>{dislikesCount.toLocaleString()}</span>
             </button>
 
-            <span className="text-[#E8E7E3]">|</span>
+            <span className="text-[#DDD0FA]">•</span>
 
             <button
               onClick={() => setIsSaved(!isSaved)}
               className={`flex items-center gap-1.5 transition-colors cursor-pointer ${
-                isSaved ? 'text-[#D6293C] font-bold' : 'hover:text-[#16181C]'
+                isSaved ? 'text-[#7C3AED] font-bold' : 'hover:text-[#181135]'
               }`}
               title="Save tool"
             >
-              <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} />
+              <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-current text-[#7C3AED]' : ''}`} />
               <span className="hidden sm:inline">{isSaved ? 'Saved' : 'Save'}</span>
             </button>
           </div>

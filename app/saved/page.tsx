@@ -20,15 +20,15 @@ export default function SavedPage() {
         ]}
       />
 
-      <div className="border-b border-[#E3E2DE] pb-5">
-        <div className="flex items-center gap-2 text-[12px] font-bold text-[#D6293C] uppercase tracking-wider mb-1">
-          <Bookmark className="w-4 h-4 fill-[#D6293C]" />
+      <div className="border-b border-[#EDE8F9] pb-5">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/80 border border-[#DDD0FA] text-[#7C3AED] text-[12px] font-bold tracking-wide rounded-full shadow-2xs mb-3">
+          <Bookmark className="w-3.5 h-3.5 fill-[#7C3AED]" />
           <span>Offline Browser Storage</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#16181C]">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#181135]">
           Saved Creator Records
         </h1>
-        <p className="text-[14px] text-[#5B6169] mt-1">
+        <p className="text-[15px] text-[#635B80] mt-1">
           Access your bookmarked channels, monetization checks, calculators, and media saved privately on your device.
         </p>
       </div>

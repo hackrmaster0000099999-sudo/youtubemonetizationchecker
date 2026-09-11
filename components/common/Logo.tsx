@@ -71,9 +71,9 @@ export const Logo: React.FC<LogoProps> = ({
       )}
 
       {showText && (
-        <div className="flex items-baseline tracking-tight font-bold font-sans">
-          <span className="text-[19px] text-[#16181C]">YT</span>
-          <span className="text-[19px] text-[#D6293C] ml-1">MONETIZE</span>
+        <div className="flex items-baseline tracking-tight font-black font-sans">
+          <span className="text-[19px] text-[#181135]">YT</span>
+          <span className="text-[19px] text-[#7C3AED] ml-1">MONETIZE</span>
         </div>
       )}
     </div>

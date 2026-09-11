@@ -68,10 +68,14 @@ export default function TagExtractorPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
-          <h1 className="text-[28px] md:text-[38px] font-semibold text-[#16181C] tracking-tight leading-[1.15]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[#7C3AED] animate-pulse" />
+            <span>SEO Tag Discovery</span>
+          </div>
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
             YouTube Video Tag Extractor
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Extract public SEO keywords and search tags embedded in any public YouTube video to analyze competitor strategies and optimize your own video metadata.
           </p>
         </div>
@@ -80,57 +84,57 @@ export default function TagExtractorPage() {
         <TagExtractorClient />
 
         {/* How The Tool Works */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               How YouTube Video Tag Extraction Works
             </h2>
-            <p className="text-[15px] text-[#5B6169] leading-relaxed">
+            <p className="text-[15px] text-[#635B80] leading-relaxed">
               When a creator uploads a video and adds tags in YouTube Studio, they are stored in the video&apos;s public DOM schema:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>1. Video URL Parse</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
-                Paste any standard watch URL (<code className="font-mono-data text-[12px] bg-[#FCFCFB] px-1">watch?v=...</code>) or mobile short URL.
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
+                Paste any standard watch URL (<code className="font-mono-data text-[12px] bg-white/60 px-1 py-0.5 rounded border border-[#EDE8F9]">watch?v=...</code>) or mobile short URL.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>2. Keyword Parsing</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Our server queries the public video manifest and isolates keyword tag arrays attached to the video ID.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>3. One-Click Copy</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Copy individual tags or the complete comma-separated string to easily paste into your own video upload metadata.
               </p>
             </div>
           </div>
 
           {/* Contextual Links */}
-          <div className="p-4 bg-[#FCFCFB] border border-[#E8E7E3] text-[14px] text-[#5B6169] space-y-2">
+          <div className="p-4.5 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-2xs">
             <p>
               Want to see all public video metadata in one place? Use our{' '}
-              <Link href="/data-viewer" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/data-viewer" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Metadata Viewer
               </Link>{' '}
               or download thumbnail artwork using the{' '}
-              <Link href="/thumbnail-downloader" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/thumbnail-downloader" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Thumbnail Downloader
               </Link>
               .
@@ -139,43 +143,43 @@ export default function TagExtractorPage() {
         </section>
 
         {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-4 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             When to Extract YouTube Tags
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Competitor Keyword Analysis:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">Competitor Keyword Analysis:</strong>
               Discover which long-tail search queries top-ranking creators in your niche are targeting.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Content Brainstorming:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">Content Brainstorming:</strong>
               Identify related search keywords to expand on in future video titles and descriptions.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">SEO Audits:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">SEO Audits:</strong>
               Inspect older uploads to ensure your metadata aligns with modern search queries.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Upload Efficiency:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">Upload Efficiency:</strong>
               Quickly generate clean comma-separated tag lists ready for YouTube Studio.
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             Frequently Asked Questions
           </h2>
-          <div className="divide-y divide-[#E8E7E3] border border-[#E8E7E3] bg-white">
+          <div className="divide-y divide-[#EDE8F9] border border-[#EDE8F9] bg-white/80 backdrop-blur-md rounded-2xl shadow-xs overflow-hidden">
             {faqs.map((faq, idx) => (
               <div key={idx} className="p-5 space-y-2">
-                <h3 className="text-[16px] font-semibold text-[#16181C] flex items-center gap-2">
-                  <Info className="w-4 h-4 text-[#5B6169]" />
+                <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
+                  <Info className="w-4 h-4 text-[#7C3AED]" />
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed pl-6">
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-6">
                   {faq.a}
                 </p>
               </div>

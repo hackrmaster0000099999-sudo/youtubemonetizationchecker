@@ -191,4 +191,41 @@ export interface HiddenVideoScanResult {
   explanation: string;
 }
 
+export type DownloadFormatType = 'video' | 'audio';
+
+export interface VideoDownloadOption {
+  id: string;
+  label: string;
+  resolution: string;
+  quality: string;
+  extension: 'mp4' | 'webm' | 'mp3' | 'm4a';
+  type: DownloadFormatType;
+  bitrateKbps: number;
+  fps?: number;
+  codec: string;
+  hasAudio: boolean;
+  hasVideo: boolean;
+  sizeBytes: number;
+  sizeFormatted: string;
+  downloadUrl: string;
+  note?: string;
+  isPopular?: boolean;
+}
+
+export interface VideoDownloadResult {
+  video: {
+    id: string;
+    title: string;
+    channelTitle: string;
+    channelId: string;
+    thumbnail: string;
+    duration: string;
+    durationSeconds: number;
+    viewCount?: number | null;
+    viewCountText?: string;
+    publishedAt?: string | null;
+  };
+  options: VideoDownloadOption[];
+}
+
 

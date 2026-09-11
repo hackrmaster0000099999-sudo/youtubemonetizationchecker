@@ -72,16 +72,16 @@ export function SavedPageClient() {
   return (
     <div className="space-y-6">
       {/* Privacy Guarantee Banner */}
-      <div className="p-4 bg-white border border-[#E3E2DE] rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+      <div className="tool-card-3d p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[rgba(30,158,107,0.1)] border border-[#1E9E6B]/20 flex items-center justify-center text-[#1E9E6B] shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-[14px] font-bold text-[#16181C]">
+            <h3 className="text-[14px] font-bold text-[#181135]">
               100% Client-Side Private Storage
             </h3>
-            <p className="text-[12px] text-[#5B6169]">
+            <p className="text-[13px] text-[#635B80]">
               All items below are stored in your device&apos;s browser cache (localStorage). None of this data is ever sent to or saved on any server.
             </p>
           </div>
@@ -92,14 +92,14 @@ export function SavedPageClient() {
             <button
               type="button"
               onClick={exportSavedItemsJson}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold text-[#16181C] bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl hover:border-[#16181C] transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-bold text-[#181135] bg-white/80 border border-[#DDD0FA] rounded-xl hover:text-[#7C3AED] hover:bg-white transition-all cursor-pointer shadow-2xs"
             >
-              <Download className="w-3.5 h-3.5 text-[#5B6169]" />
+              <Download className="w-3.5 h-3.5 text-[#635B80]" />
               <span>Export JSON</span>
             </button>
 
             {confirmClear ? (
-              <div className="flex items-center gap-2 bg-red-50 p-1 rounded-xl border border-red-200">
+              <div className="flex items-center gap-2 bg-red-50/80 backdrop-blur-md p-1.5 rounded-xl border border-red-200">
                 <span className="text-[11px] text-red-700 font-bold px-1">Clear all?</span>
                 <button
                   type="button"
@@ -114,7 +114,7 @@ export function SavedPageClient() {
                 <button
                   type="button"
                   onClick={() => setConfirmClear(false)}
-                  className="text-[11px] text-[#5B6169] px-1 hover:text-[#16181C]"
+                  className="text-[11px] text-[#635B80] px-1 hover:text-[#181135]"
                 >
                   Cancel
                 </button>
@@ -123,7 +123,7 @@ export function SavedPageClient() {
               <button
                 type="button"
                 onClick={() => setConfirmClear(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold text-red-600 bg-white border border-red-200 rounded-xl hover:bg-red-50 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-bold text-red-600 bg-white/80 border border-red-200 rounded-xl hover:bg-red-50 transition-all cursor-pointer shadow-2xs"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>Clear All</span>
@@ -134,23 +134,23 @@ export function SavedPageClient() {
       </div>
 
       {/* Search & Filter Header */}
-      <div className="p-4 bg-white border border-[#E3E2DE] rounded-2xl space-y-3 shadow-2xs">
+      <div className="tool-card-3d p-4 space-y-3">
         <div className="flex flex-col sm:flex-row items-center gap-3">
           {/* Search Box */}
           <div className="relative flex-1 w-full">
-            <Search className="w-4 h-4 text-[#5B6169] absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#635B80] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search saved channels, videos, handles, or tools..."
-              className="w-full pl-9 pr-8 py-2 text-[13px] bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl text-[#16181C] placeholder:text-[#8C929D] focus:outline-hidden focus:border-[#16181C] focus:bg-white transition-all"
+              className="w-full pl-10 pr-8 py-2.5 text-[13px] bg-white/80 border border-[#DDD0FA] rounded-xl text-[#181135] placeholder:text-[#8C929D] focus:outline-hidden focus:border-[#7C3AED] focus:bg-white transition-all shadow-2xs"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8C929D] hover:text-[#16181C]"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8C929D] hover:text-[#181135]"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -159,8 +159,8 @@ export function SavedPageClient() {
 
           {/* Total Count */}
           <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
-            <span className="text-[12px] font-mono-data text-[#5B6169]">
-              Total Records: <strong>{count}</strong>
+            <span className="text-[12px] font-mono text-[#635B80]">
+              Total Records: <strong className="text-[#181135]">{count}</strong>
             </span>
           </div>
         </div>
@@ -173,10 +173,10 @@ export function SavedPageClient() {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`text-[12px] font-semibold px-3 py-1.5 rounded-xl border transition-all shrink-0 cursor-pointer ${
+                className={`text-[12px] font-bold px-3 py-1.5 rounded-xl border transition-all shrink-0 cursor-pointer shadow-2xs ${
                   selectedCategory === cat
-                    ? 'bg-[#16181C] text-white border-[#16181C]'
-                    : 'bg-[#F9F9F8] text-[#5B6169] border-[#E3E2DE] hover:text-[#16181C] hover:border-[#16181C]'
+                    ? 'btn-siampay-primary text-white border-transparent'
+                    : 'bg-white/80 text-[#635B80] border-[#DDD0FA] hover:text-[#7C3AED] hover:border-[#7C3AED]'
                 }`}
               >
                 {cat}
@@ -188,14 +188,14 @@ export function SavedPageClient() {
 
       {/* Grid of Saved Items */}
       {filteredItems.length === 0 ? (
-        <div className="min-h-[380px] bg-white border border-[#E3E2DE] rounded-2xl flex flex-col items-center justify-center text-center p-8 shadow-2xs">
-          <div className="w-14 h-14 rounded-2xl bg-[rgba(214,41,60,0.08)] border border-[#D6293C]/20 flex items-center justify-center text-[#D6293C] mb-4">
-            <Bookmark className="w-7 h-7 text-[#D6293C]" />
+        <div className="min-h-[380px] tool-card-3d flex flex-col items-center justify-center text-center p-8">
+          <div className="w-14 h-14 rounded-2xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 flex items-center justify-center text-[#7C3AED] mb-4">
+            <Bookmark className="w-7 h-7 text-[#7C3AED]" />
           </div>
-          <h3 className="text-[17px] font-bold text-[#16181C]">
+          <h3 className="text-[17px] font-bold text-[#181135]">
             {searchQuery ? 'No matching saved items found' : 'Your browser bookmark collection is empty'}
           </h3>
-          <p className="text-[13px] text-[#5B6169] max-w-md mt-1.5 leading-relaxed">
+          <p className="text-[13px] text-[#635B80] max-w-md mt-1.5 leading-relaxed">
             {searchQuery
               ? `No saved items match "${searchQuery}". Please check your spelling or clear the search filter.`
               : 'Every tool in YT MONETIZE includes a "Save to Browser" button on its result card. When you click Save, the item is instantly stored offline in your browser.'}
@@ -206,9 +206,9 @@ export function SavedPageClient() {
               <Link
                 key={tool.id}
                 href={tool.path}
-                className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#16181C] bg-[#F9F9F8] border border-[#E3E2DE] px-3 py-2 rounded-xl hover:border-[#16181C] hover:text-[#D6293C] transition-all"
+                className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#181135] bg-white/80 border border-[#DDD0FA] px-3 py-2 rounded-xl hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all shadow-2xs"
               >
-                <ToolIcon name={tool.icon} className="w-4 h-4 text-[#D6293C]" />
+                <ToolIcon name={tool.icon} className="w-4 h-4 text-[#7C3AED]" />
                 <span>{tool.name}</span>
               </Link>
             ))}
@@ -223,19 +223,19 @@ export function SavedPageClient() {
             return (
               <div
                 key={item.id}
-                className="bg-white border border-[#E3E2DE] rounded-2xl p-4 shadow-2xs hover:border-[#16181C]/40 transition-all flex flex-col justify-between space-y-3"
+                className="tool-card-3d p-4 flex flex-col justify-between space-y-3"
               >
                 <div className="space-y-3">
                   {/* Top Bar: Tool Tag & Time */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#5B6169] bg-[#F9F9F8] px-2.5 py-1 rounded-lg border border-[#E3E2DE]">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#7C3AED] bg-[#EDE8F9] px-2.5 py-1 rounded-lg border border-[#DDD0FA]">
                       {matchedTool ? (
-                        <ToolIcon name={matchedTool.icon} className="w-3.5 h-3.5 text-[#D6293C]" />
+                        <ToolIcon name={matchedTool.icon} className="w-3.5 h-3.5 text-[#7C3AED]" />
                       ) : null}
                       <span>{item.toolName}</span>
                     </span>
 
-                    <span className="text-[11px] font-mono-data text-[#8C929D] flex items-center gap-1">
+                    <span className="text-[11px] font-mono text-[#8C929D] flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {formatSavedDate(item.savedAt)}
                     </span>
@@ -244,7 +244,7 @@ export function SavedPageClient() {
                   {/* Subject Info */}
                   <div className="flex items-start gap-3">
                     {item.avatarUrl ? (
-                      <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-[#E3E2DE] shrink-0 bg-[#F0EFEB]">
+                      <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-[#EDE8F9] shrink-0 bg-white">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={item.avatarUrl}
@@ -253,17 +253,17 @@ export function SavedPageClient() {
                         />
                       </div>
                     ) : (
-                      <div className="w-12 h-12 rounded-xl bg-[#F0EFEB] border border-[#E3E2DE] shrink-0 flex items-center justify-center text-[#5B6169]">
+                      <div className="w-12 h-12 rounded-xl bg-white border border-[#EDE8F9] shrink-0 flex items-center justify-center text-[#7C3AED]">
                         <Bookmark className="w-5 h-5" />
                       </div>
                     )}
 
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-[14px] font-bold text-[#16181C] line-clamp-2 leading-snug">
+                      <h4 className="text-[14px] font-bold text-[#181135] line-clamp-2 leading-snug">
                         {item.title}
                       </h4>
                       {item.handle && (
-                        <p className="text-[12px] font-mono-data text-[#5B6169] truncate mt-0.5">
+                        <p className="text-[12px] font-mono text-[#635B80] truncate mt-0.5 font-bold">
                           {item.handle.startsWith('@') ? item.handle : `@${item.handle}`}
                         </p>
                       )}
@@ -272,19 +272,19 @@ export function SavedPageClient() {
 
                   {/* Summary Metric Badge */}
                   {item.metaText && (
-                    <div className="text-[12px] font-medium bg-[#F9F9F8] border border-[#E3E2DE] px-3 py-2 rounded-xl flex items-center justify-between">
-                      <span className="text-[#5B6169] text-[10px] font-bold uppercase tracking-wider">
+                    <div className="text-[12px] font-medium bg-white/70 border border-[#EDE8F9] px-3 py-2 rounded-xl flex items-center justify-between">
+                      <span className="text-[#635B80] text-[10px] font-bold uppercase tracking-wider">
                         Key Metric
                       </span>
                       <span
                         className={`font-bold ${
                           item.badgeType === 'success'
-                            ? 'text-[#1E9E6B]'
+                            ? 'text-emerald-600'
                             : item.badgeType === 'danger'
-                            ? 'text-[#D6293C]'
+                            ? 'text-rose-600'
                             : item.badgeType === 'warning'
-                            ? 'text-[#E07A14]'
-                            : 'text-[#16181C]'
+                            ? 'text-amber-600'
+                            : 'text-[#181135]'
                         }`}
                       >
                         {item.metaText}
@@ -294,18 +294,18 @@ export function SavedPageClient() {
                 </div>
 
                 {/* Bottom Actions */}
-                <div className="pt-2 border-t border-[#F0EFEB] flex items-center justify-between gap-2">
+                <div className="pt-2 border-t border-[#EDE8F9] flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
                     <button
                       type="button"
                       onClick={() => handleCopy(item.id, item.url)}
                       title="Copy YouTube URL"
-                      className="p-1.5 text-[11px] font-semibold text-[#5B6169] hover:text-[#16181C] hover:bg-[#F9F9F8] rounded-lg border border-[#E3E2DE] transition-all flex items-center gap-1 cursor-pointer"
+                      className="p-1.5 text-[11px] font-bold text-[#635B80] hover:text-[#7C3AED] hover:bg-white rounded-lg border border-[#DDD0FA] bg-white/80 transition-all flex items-center gap-1 cursor-pointer shadow-2xs"
                     >
                       {copiedId === item.id ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-[#1E9E6B]" />
-                          <span className="text-[#1E9E6B]">Copied</span>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span className="text-emerald-600">Copied</span>
                         </>
                       ) : (
                         <>
@@ -319,7 +319,7 @@ export function SavedPageClient() {
                       type="button"
                       onClick={() => remove(item.id)}
                       title="Remove from browser cache"
-                      className="p-1.5 text-[11px] text-[#5B6169] hover:text-red-600 hover:bg-red-50 rounded-lg border border-[#E3E2DE] hover:border-red-200 transition-all cursor-pointer"
+                      className="p-1.5 text-[11px] text-[#635B80] hover:text-rose-600 hover:bg-rose-50 rounded-lg border border-[#DDD0FA] bg-white/80 hover:border-rose-200 transition-all cursor-pointer shadow-2xs"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -327,7 +327,7 @@ export function SavedPageClient() {
 
                   <Link
                     href={toolTargetPath}
-                    className="inline-flex items-center gap-1 text-[12px] font-bold text-[#D6293C] hover:text-[#B51E30] bg-[rgba(214,41,60,0.06)] hover:bg-[rgba(214,41,60,0.12)] border border-[#D6293C]/20 px-3 py-1.5 rounded-xl transition-all"
+                    className="inline-flex items-center gap-1 text-[12px] font-bold text-[#7C3AED] hover:text-[#5B21B6] bg-[#7C3AED]/10 hover:bg-[#7C3AED]/15 border border-[#7C3AED]/20 px-3 py-1.5 rounded-xl transition-all shadow-2xs"
                   >
                     <span>Open Tool</span>
                     <ArrowRight className="w-3.5 h-3.5" />

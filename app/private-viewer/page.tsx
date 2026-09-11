@@ -77,14 +77,14 @@ export default function PrivateViewerPage() {
 
         {/* Header Intro */}
         <div className="space-y-3 max-w-[820px]">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#1E9E6B]/10 text-[#1E9E6B] text-[12px] font-bold tracking-wide rounded-full">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#DDD0FA] text-[#7C3AED] text-[12px] font-bold tracking-wide rounded-full shadow-2xs">
             <EyeOff className="w-3.5 h-3.5" />
             <span>Anonymous &amp; Distraction-Free Playback</span>
           </div>
-          <h1 className="text-[28px] md:text-[38px] font-semibold text-[#16181C] tracking-tight leading-[1.15]">
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
             Private YouTube Viewer – Watch Videos Anonymously
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Watch any YouTube video without tracking cookies, Google account history synchronization, or distracting algorithm recommendations. Perfect for studying, research, and private browsing.
           </p>
         </div>
@@ -93,43 +93,43 @@ export default function PrivateViewerPage() {
         <PrivateViewerClient />
 
         {/* Educational / Benefits Grid */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               Why Use an Anonymous YouTube Viewer?
             </h2>
-            <p className="text-[15px] text-[#5B6169] leading-relaxed">
+            <p className="text-[15px] text-[#635B80] leading-relaxed">
               Mainstream YouTube is designed to maximize watch time through aggressive behavioral tracking and algorithm rabbit holes.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <Lock className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <Lock className="w-4 h-4 text-emerald-600" />
                 <h3>Protect Your Algorithm</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Watching a one-off tutorial, controversial topic, or random clip will not ruin your YouTube homepage with days of unwanted recommendations.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <EyeOff className="w-4 h-4 text-[#2563EB]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <EyeOff className="w-4 h-4 text-blue-600" />
                 <h3>Zero Watch History Footprint</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Videos played through privacy-enhanced mode are completely isolated and never recorded into your personal Google activity log.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <Tv className="w-4 h-4 text-[#D6293C]" />
+            <div className="tool-card-3d p-6 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <Tv className="w-4 h-4 text-[#7C3AED]" />
                 <h3>Distraction-Free Focus</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Enjoy videos without autoplay traps, sensationalist comment sections, clickbait thumbnails, or endless notification pings.
               </p>
             </div>
@@ -138,43 +138,43 @@ export default function PrivateViewerPage() {
 
         {/* Feature Comparison Table */}
         <section className="space-y-4 pt-4">
-          <h2 className="text-[20px] md:text-[24px] font-semibold text-[#16181C]">
+          <h2 className="text-[20px] md:text-[24px] font-bold text-[#181135]">
             Standard YouTube vs. Private Anonymous Viewer
           </h2>
-          <div className="overflow-x-auto border border-[#E8E7E3] bg-white">
+          <div className="overflow-x-auto tool-card-3d overflow-hidden">
             <table className="w-full text-left text-[14px]">
-              <thead className="bg-[#F9F9F8] border-b border-[#E8E7E3] text-[#16181C] font-semibold">
+              <thead className="bg-white/80 border-b border-[#EDE8F9] text-[#181135] font-bold">
                 <tr>
-                  <th className="p-3.5">Privacy &amp; Experience Metric</th>
-                  <th className="p-3.5 text-[#D6293C]">Standard YouTube</th>
-                  <th className="p-3.5 text-[#1E9E6B]">YT MONETIZE Private Viewer</th>
+                  <th className="p-4">Privacy &amp; Experience Metric</th>
+                  <th className="p-4 text-red-600">Standard YouTube</th>
+                  <th className="p-4 text-emerald-600">YT MONETIZE Private Viewer</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E8E7E3] text-[#5B6169]">
+              <tbody className="divide-y divide-[#EDE8F9] text-[#635B80]">
                 <tr>
-                  <td className="p-3.5 font-medium text-[#16181C]">Watch History Logging</td>
-                  <td className="p-3.5 text-[#D6293C]">Logged to Google Profile</td>
-                  <td className="p-3.5 text-[#1E9E6B] font-semibold">Blocked &amp; Isolated</td>
+                  <td className="p-4 font-bold text-[#181135]">Watch History Logging</td>
+                  <td className="p-4 text-red-600">Logged to Google Profile</td>
+                  <td className="p-4 text-emerald-600 font-bold">Blocked &amp; Isolated</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 font-medium text-[#16181C]">Tracking Cookies</td>
-                  <td className="p-3.5 text-[#D6293C]">Active cross-site tracking</td>
-                  <td className="p-3.5 text-[#1E9E6B] font-semibold">youtube-nocookie.com mode</td>
+                  <td className="p-4 font-bold text-[#181135]">Tracking Cookies</td>
+                  <td className="p-4 text-red-600">Active cross-site tracking</td>
+                  <td className="p-4 text-emerald-600 font-bold">youtube-nocookie.com mode</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 font-medium text-[#16181C]">Algorithmic Recommendation Bias</td>
-                  <td className="p-3.5 text-[#D6293C]">Rewrites homepage feed</td>
-                  <td className="p-3.5 text-[#1E9E6B] font-semibold">Zero influence on feed</td>
+                  <td className="p-4 font-bold text-[#181135]">Algorithmic Recommendation Bias</td>
+                  <td className="p-4 text-red-600">Rewrites homepage feed</td>
+                  <td className="p-4 text-emerald-600 font-bold">Zero influence on feed</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 font-medium text-[#16181C]">Distraction Level</td>
-                  <td className="p-3.5 text-[#D6293C]">High (Sidebar, Shorts, Comments)</td>
-                  <td className="p-3.5 text-[#1E9E6B] font-semibold">Minimal (Focus &amp; Theater Mode)</td>
+                  <td className="p-4 font-bold text-[#181135]">Distraction Level</td>
+                  <td className="p-4 text-red-600">High (Sidebar, Shorts, Comments)</td>
+                  <td className="p-4 text-emerald-600 font-bold">Minimal (Focus &amp; Theater Mode)</td>
                 </tr>
                 <tr>
-                  <td className="p-3.5 font-medium text-[#16181C]">Account Requirement</td>
-                  <td className="p-3.5 text-[#5B6169]">Prompts sign-in constantly</td>
-                  <td className="p-3.5 text-[#1E9E6B] font-semibold">100% Free &amp; No Login</td>
+                  <td className="p-4 font-bold text-[#181135]">Account Requirement</td>
+                  <td className="p-4 text-[#635B80]">Prompts sign-in constantly</td>
+                  <td className="p-4 text-emerald-600 font-bold">100% Free &amp; No Login</td>
                 </tr>
               </tbody>
             </table>
@@ -182,24 +182,24 @@ export default function PrivateViewerPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               Frequently Asked Questions
             </h2>
-            <p className="text-[15px] text-[#5B6169]">
+            <p className="text-[15px] text-[#635B80]">
               Common questions about watching YouTube videos privately and securely.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-                <h3 className="text-[15px] font-semibold text-[#16181C] flex items-start gap-2">
-                  <span className="text-[#1E9E6B] font-bold">Q.</span>
+              <div key={index} className="tool-card-3d p-5 space-y-2">
+                <h3 className="text-[15px] font-bold text-[#181135] flex items-start gap-2">
+                  <span className="text-emerald-600 font-bold">Q.</span>
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed pl-5">{faq.a}</p>
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-5">{faq.a}</p>
               </div>
             ))}
           </div>

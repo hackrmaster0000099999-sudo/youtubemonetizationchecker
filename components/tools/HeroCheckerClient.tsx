@@ -8,7 +8,6 @@ import { MonetizationResultView } from '@/components/tools/MonetizationResultVie
 import { RecentlyCheckedSection } from '@/components/common/RecentlyCheckedSection';
 import { ChannelData, VideoData } from '@/lib/youtube/types';
 import { saveUserRecentCheck } from '@/lib/recent-checks/client';
-import { ShieldCheck, Zap, Lock } from 'lucide-react';
 
 export function HeroCheckerClient() {
   const [loading, setLoading] = useState(false);
@@ -109,22 +108,6 @@ export function HeroCheckerClient() {
           isLoading={loading}
           onSubmit={handleLookup}
         />
-      </div>
-
-      {/* Hero Trust Badges */}
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-1 text-[13px] text-[#5B6169]">
-        <div className="flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
-          <span>100% Free &amp; No Login</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <Zap className="w-4 h-4 text-[#C77C11]" />
-          <span>Public Signal Analysis</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <Lock className="w-4 h-4 text-[#5B6169]" />
-          <span>Private &amp; Anonymous</span>
-        </div>
       </div>
 
       {/* Live Hero Results */}

@@ -1,6 +1,6 @@
 {
   "name": "YT MONETIZE",
-  "description": "Free YouTube tools to check monetization signals, view hidden dislikes and ratios, pick random giveaway winners, view comments, find channel IDs, estimate earnings, and extract tags.",
+  "description": "Free YouTube creator tools to download videos with real-time MB file size calculation, check monetization signals, view dislikes, pick random winners, extract thumbnails, and inspect public metadata.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -16,7 +16,7 @@ export function HomeFaqClient({ faqs }: { faqs: FaqItem[] }) {
   };
 
   return (
-    <div className="divide-y divide-[#E8E7E3] border border-[#E8E7E3] bg-white">
+    <div className="tool-card-3d overflow-hidden divide-y divide-[#EDE8F9]">
       {faqs.map((faq, idx) => {
         const isOpen = openIdx === idx;
         return (
@@ -24,17 +24,17 @@ export function HomeFaqClient({ faqs }: { faqs: FaqItem[] }) {
             <button
               type="button"
               onClick={() => toggle(idx)}
-              className="w-full text-left flex items-center justify-between gap-4 text-[15px] md:text-[16px] font-semibold text-[#16181C] hover:text-[#D6293C] active:scale-[0.99] transition-all cursor-pointer select-none"
+              className="w-full text-left flex items-center justify-between gap-4 text-[15px] md:text-[16px] font-bold text-[#181135] hover:text-[#7C3AED] transition-colors cursor-pointer select-none"
             >
               <span>{faq.q}</span>
               <ChevronDown
-                className={`w-4 h-4 text-[#5B6169] shrink-0 transition-transform duration-200 ${
-                  isOpen ? 'rotate-180 text-[#D6293C]' : ''
+                className={`w-4 h-4 text-[#635B80] shrink-0 transition-transform duration-200 ${
+                  isOpen ? 'rotate-180 text-[#7C3AED]' : ''
                 }`}
               />
             </button>
             {isOpen && (
-              <div className="pt-3 text-[14px] text-[#5B6169] leading-relaxed animate-in fade-in-50 duration-150">
+              <div className="pt-3 text-[14px] text-[#635B80] leading-relaxed animate-in fade-in-50 duration-150">
                 {faq.a}
               </div>
             )}

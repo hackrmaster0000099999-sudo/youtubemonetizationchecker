@@ -42,21 +42,21 @@ export function CopyButton({ textToCopy, label = 'Copy', className = '', id }: C
       id={id}
       type="button"
       onClick={handleCopy}
-      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[13px] font-medium border active:scale-95 transition-all duration-150 cursor-pointer select-none ${
+      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[13px] font-semibold border rounded-xl transition-all duration-150 cursor-pointer select-none ${
         copied
-          ? 'bg-[#E8F8F0] border-[#1E9E6B] text-[#1E9E6B] shadow-xs'
-          : 'bg-white border-[#E8E7E3] text-[#16181C] hover:border-[#16181C] hover:bg-[#FCFCFB] active:bg-[#F2F1EE]'
+          ? 'bg-[#10B981]/15 border-[#10B981]/40 text-[#10B981] shadow-xs'
+          : 'bg-white/80 border-[#DDD0FA] text-[#181135] hover:border-[#7C3AED] hover:text-[#7C3AED] hover:bg-white'
       } ${className}`}
       aria-label={copied ? 'Copied to clipboard' : label}
     >
       {copied ? (
         <>
-          <Check className="w-3.5 h-3.5 text-[#1E9E6B] animate-in zoom-in-75 duration-150" />
-          <span className="font-semibold">Copied!</span>
+          <Check className="w-3.5 h-3.5 text-[#10B981] animate-in zoom-in-75 duration-150" />
+          <span className="font-semibold text-[#10B981]">Copied!</span>
         </>
       ) : (
         <>
-          <Copy className="w-3.5 h-3.5 text-[#5B6169]" />
+          <Copy className="w-3.5 h-3.5 text-[#7C3AED]" />
           <span>{label}</span>
         </>
       )}

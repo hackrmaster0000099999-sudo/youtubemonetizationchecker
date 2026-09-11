@@ -36,29 +36,29 @@ export function ResultCard({
 }: ResultCardProps) {
   const badgeClass =
     statusType === 'positive'
-      ? 'bg-[rgba(30,158,107,0.12)] text-[#1E9E6B]'
+      ? 'bg-[rgba(16,185,129,0.12)] text-[#10B981]'
       : statusType === 'caution'
-      ? 'bg-[rgba(199,124,17,0.12)] text-[#C77C11]'
-      : 'bg-[#F2F1EE] text-[#5B6169]';
+      ? 'bg-[rgba(245,158,11,0.12)] text-[#D97706]'
+      : 'bg-[#F2ECFE] text-[#635B80]';
 
   return (
-    <div id={id} className="p-5 sm:p-7 bg-white border border-[#E3E2DE] rounded-2xl shadow-xs space-y-6">
+    <div id={id} className="p-5 sm:p-7 bg-white border border-[#EDE8F9] rounded-2xl shadow-xs space-y-6">
       {/* Header section */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#F0EFEB]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#EDE8F9]">
         <div className="flex items-center gap-3.5 min-w-0">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={title}
-              className="w-14 h-14 rounded-full object-cover border border-[#E3E2DE] shrink-0"
+              className="w-14 h-14 rounded-full object-cover border border-[#EDE8F9] shrink-0"
               referrerPolicy="no-referrer"
             />
           )}
           <div className="space-y-0.5 min-w-0">
-            <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C] leading-snug break-words">
+            <h2 className="text-[18px] sm:text-[22px] font-bold text-[#181135] leading-snug break-words">
               {title}
             </h2>
-            {subtitle && <div className="text-[13px] text-[#5B6169] break-all">{subtitle}</div>}
+            {subtitle && <div className="text-[13px] text-[#635B80] break-all">{subtitle}</div>}
           </div>
         </div>
 
@@ -76,23 +76,23 @@ export function ResultCard({
 
       {/* Description / Summary */}
       {description && (
-        <div className="text-[13px] text-[#3D444D] leading-relaxed bg-[#F9F9F8] p-4 rounded-xl border border-[#E3E2DE] break-words">
+        <div className="text-[13px] text-[#181135] leading-relaxed bg-[#F8F5FE] p-4 rounded-xl border border-[#EDE8F9] break-words">
           {description}
         </div>
       )}
 
       {/* Data Rows */}
       {dataRows.length > 0 && (
-        <div className="divide-y divide-[#F0EFEB]">
+        <div className="divide-y divide-[#EDE8F9]">
           {dataRows.map((row, idx) => (
             <div
               key={idx}
               className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4"
             >
-              <span className="text-[13px] text-[#5B6169] shrink-0">{row.label}</span>
+              <span className="text-[13px] text-[#635B80] shrink-0">{row.label}</span>
               <div className="flex items-center gap-3 min-w-0">
                 <span
-                  className={`text-[14px] font-semibold text-[#16181C] break-all ${
+                  className={`text-[14px] font-semibold text-[#181135] break-all ${
                     row.isMono ? 'font-mono-data' : ''
                   }`}
                 >
@@ -116,7 +116,7 @@ export function ResultCard({
 
       {/* Action buttons */}
       {actions && (
-        <div className="pt-4 border-t border-[#F0EFEB] flex flex-wrap gap-2.5">
+        <div className="pt-4 border-t border-[#EDE8F9] flex flex-wrap gap-2.5">
           {actions}
         </div>
       )}

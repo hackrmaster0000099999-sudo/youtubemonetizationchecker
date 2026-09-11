@@ -230,7 +230,7 @@ export function RandomCommentPickerClient() {
   return (
     <div className="space-y-6">
       {/* Input Form Card */}
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
+      <div className="tool-card-3d p-6 md:p-8 space-y-4">
         <YouTubeInputForm
           id="random-comment-picker-form"
           initialValue={currentInput}
@@ -240,21 +240,9 @@ export function RandomCommentPickerClient() {
           isLoading={loading}
           onSubmit={handleSubmit}
         />
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 text-[13px] text-[#5B6169]">
-          <div className="flex items-center gap-2">
-            <Trophy className="w-4 h-4 text-[#D6293C]" />
-            <span>Fair, transparent, and unbiased winner selection for YouTube giveaways.</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-[12px]">
-            <span className="text-[#5B6169]">Try sample:</span>
-            <button
-              type="button"
-              onClick={() => handleSubmit('https://www.youtube.com/watch?v=dQw4w9WgXcQ')}
-              className="text-[#D6293C] font-semibold hover:underline"
-            >
-              Sample Video
-            </button>
-          </div>
+        <div className="flex items-center gap-2 text-[13px] text-[#635B80]">
+          <Trophy className="w-4 h-4 text-[#7C3AED]" />
+          <span>Fair, transparent, and unbiased winner selection for YouTube giveaways.</span>
         </div>
       </div>
 
@@ -271,8 +259,8 @@ export function RandomCommentPickerClient() {
       {data && (
         <div className="space-y-6 animate-in fade-in duration-200">
           {/* Target Video Info Bar */}
-          <div className="bg-white border border-[#E8E7E3] p-5 sm:p-6 shadow-xs flex flex-col md:flex-row gap-5 items-start">
-            <div className="relative w-full md:w-[220px] aspect-video bg-[#16181C] shrink-0 overflow-hidden border border-[#E8E7E3]">
+          <div className="tool-card-3d p-5 sm:p-6 flex flex-col md:flex-row gap-5 items-start">
+            <div className="relative w-full md:w-[220px] aspect-video bg-[#181135] shrink-0 overflow-hidden rounded-xl border border-[#EDE8F9]">
               {data.video.thumbnail ? (
                 <Image
                   src={data.video.thumbnail}
@@ -282,7 +270,7 @@ export function RandomCommentPickerClient() {
                   className="object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-[#5B6169]">
+                <div className="w-full h-full flex items-center justify-center text-[#635B80]">
                   <MessageSquare className="w-8 h-8" />
                 </div>
               )}
@@ -290,29 +278,29 @@ export function RandomCommentPickerClient() {
 
             <div className="space-y-2 flex-1 min-w-0">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
+                <span className="text-[11px] font-bold text-[#7C3AED] uppercase tracking-wider">
                   Contest Video
                 </span>
-                <h2 className="text-[18px] sm:text-[20px] font-bold text-[#16181C] leading-snug line-clamp-2">
+                <h2 className="text-[18px] sm:text-[20px] font-bold text-[#181135] leading-snug line-clamp-2">
                   {data.video.title}
                 </h2>
-                <div className="text-[14px] text-[#5B6169]">
-                  By: <span className="text-[#16181C] font-semibold">{data.video.channelTitle}</span>
+                <div className="text-[14px] text-[#635B80]">
+                  By: <span className="text-[#181135] font-semibold">{data.video.channelTitle}</span>
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F9F9F8] border border-[#E8E7E3] text-[12px] font-medium text-[#16181C]">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#D6293C]" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#EDE8F9] rounded-lg text-[12px] font-medium text-[#181135]">
+                  <MessageSquare className="w-3.5 h-3.5 text-[#7C3AED]" />
                   <span>{formatNumber(data.video.commentCount || commentsList.length)} Comments on Video</span>
                 </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F0FDF4] border border-[#A7F3D0] text-[12px] font-semibold text-[#065F46]">
-                  <Users className="w-3.5 h-3.5 text-[#1E9E6B]" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-lg text-[12px] font-bold text-emerald-700">
+                  <Users className="w-3.5 h-3.5 text-emerald-600" />
                   <span>{commentsList.length} Comments Loaded</span>
                 </div>
                 {eligiblePool.length !== commentsList.length && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#EFF6FF] border border-[#BFDBFE] text-[12px] font-semibold text-[#1D4ED8]">
-                    <UserCheck className="w-3.5 h-3.5 text-[#2563EB]" />
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-50 border border-purple-200 rounded-lg text-[12px] font-bold text-purple-700">
+                    <UserCheck className="w-3.5 h-3.5 text-[#7C3AED]" />
                     <span>{eligiblePool.length} Eligible Entries</span>
                   </div>
                 )}
@@ -338,11 +326,11 @@ export function RandomCommentPickerClient() {
 
           {/* Comments Disabled Warning */}
           {data.commentsDisabled && (
-            <div className="p-6 bg-[#FCFCFB] border border-[#E8E7E3] flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-[#D6293C] shrink-0 mt-0.5" />
+            <div className="p-6 tool-card-3d flex items-start gap-4">
+              <AlertCircle className="w-6 h-6 text-red-500 shrink-0 mt-0.5" />
               <div className="space-y-1">
-                <h3 className="text-[16px] font-semibold text-[#16181C]">Comments Are Disabled</h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed">
+                <h3 className="text-[16px] font-bold text-[#181135]">Comments Are Disabled</h3>
+                <p className="text-[14px] text-[#635B80] leading-relaxed">
                   Comments are disabled on this video by the creator or restricted by YouTube. A random winner cannot be picked.
                 </p>
               </div>
@@ -353,13 +341,13 @@ export function RandomCommentPickerClient() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               {/* Left Column: Giveaway Filter & Draw Controls */}
               <div className="lg:col-span-5 space-y-6">
-                <div className="bg-white border border-[#E8E7E3] p-5 sm:p-6 shadow-xs space-y-5">
-                  <div className="border-b border-[#E8E7E3] pb-3">
-                    <h3 className="text-[16px] font-bold text-[#16181C] flex items-center gap-2">
-                      <Filter className="w-4 h-4 text-[#D6293C]" />
+                <div className="tool-card-3d p-5 sm:p-6 space-y-5">
+                  <div className="border-b border-[#EDE8F9] pb-3">
+                    <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
+                      <Filter className="w-4 h-4 text-[#7C3AED]" />
                       <span>Giveaway Rules &amp; Filters</span>
                     </h3>
-                    <p className="text-[12px] text-[#5B6169] mt-0.5">
+                    <p className="text-[12px] text-[#635B80] mt-0.5">
                       Configure eligibility filters before picking winners.
                     </p>
                   </div>
@@ -368,9 +356,9 @@ export function RandomCommentPickerClient() {
                   <div className="space-y-4">
                     {/* Number of Winners */}
                     <div className="space-y-1.5">
-                      <label className="text-[13px] font-semibold text-[#16181C] flex items-center gap-2">
+                      <label className="text-[13px] font-bold text-[#181135] flex items-center gap-2">
                         <span>Number of Winners:</span>
-                        <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-[#D6293C] bg-[#D6293C]/10 border border-[#D6293C]/20 rounded-xs">
+                        <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-[#7C3AED] bg-purple-50 border border-purple-200 rounded-lg">
                           {settings.winnerCount}
                         </span>
                       </label>
@@ -379,7 +367,7 @@ export function RandomCommentPickerClient() {
                         onChange={(e) =>
                           setSettings((prev) => ({ ...prev, winnerCount: parseInt(e.target.value) || 1 }))
                         }
-                        className="w-full px-3 py-2 bg-[#F9F9F8] border border-[#E8E7E3] text-[13px] text-[#16181C] focus:outline-hidden focus:border-[#16181C]"
+                        className="w-full px-3 py-2 bg-white/80 border border-[#EDE8F9] rounded-xl text-[13px] text-[#181135] focus:outline-hidden focus:border-[#7C3AED]"
                       >
                         {[1, 2, 3, 4, 5, 10].map((num) => (
                           <option key={num} value={num}>
@@ -390,7 +378,7 @@ export function RandomCommentPickerClient() {
                     </div>
 
                     {/* Filter Duplicates */}
-                    <div className="flex items-start gap-3 p-3 bg-[#F9F9F8] border border-[#E8E7E3]">
+                    <div className="flex items-start gap-3 p-3.5 bg-white/80 border border-[#EDE8F9] rounded-xl">
                       <input
                         type="checkbox"
                         id="filterDuplicates"
@@ -398,11 +386,11 @@ export function RandomCommentPickerClient() {
                         onChange={(e) =>
                           setSettings((prev) => ({ ...prev, filterDuplicates: e.target.checked }))
                         }
-                        className="mt-0.5 h-4 w-4 text-[#D6293C] border-[#E8E7E3] focus:ring-0 cursor-pointer"
+                        className="mt-0.5 h-4 w-4 text-[#7C3AED] border-[#EDE8F9] focus:ring-0 cursor-pointer accent-[#7C3AED]"
                       />
-                      <label htmlFor="filterDuplicates" className="text-[13px] text-[#16181C] cursor-pointer">
-                        <span className="font-semibold block">Filter Duplicate Users</span>
-                        <span className="text-[12px] text-[#5B6169] block">
+                      <label htmlFor="filterDuplicates" className="text-[13px] text-[#181135] cursor-pointer">
+                        <span className="font-bold block">Filter Duplicate Users</span>
+                        <span className="text-[12px] text-[#635B80] block">
                           Only count one entry per person even if they commented multiple times.
                         </span>
                       </label>
@@ -410,8 +398,8 @@ export function RandomCommentPickerClient() {
 
                     {/* Required Keyword */}
                     <div className="space-y-1.5">
-                      <label className="text-[13px] font-semibold text-[#16181C] flex items-center gap-1.5">
-                        <Hash className="w-3.5 h-3.5 text-[#5B6169]" />
+                      <label className="text-[13px] font-bold text-[#181135] flex items-center gap-1.5">
+                        <Hash className="w-3.5 h-3.5 text-[#635B80]" />
                         <span>Filter by Keyword or Hashtag (Optional):</span>
                       </label>
                       <input
@@ -421,14 +409,14 @@ export function RandomCommentPickerClient() {
                           setSettings((prev) => ({ ...prev, requiredKeyword: e.target.value }))
                         }
                         placeholder="e.g. #giveaway or answer"
-                        className="w-full px-3 py-2 bg-[#F9F9F8] border border-[#E8E7E3] text-[13px] text-[#16181C] placeholder-[#5B6169] focus:outline-hidden focus:border-[#16181C]"
+                        className="w-full px-3.5 py-2.5 bg-white/80 border border-[#EDE8F9] rounded-xl text-[13px] text-[#181135] placeholder-[#635B80]/60 focus:outline-hidden focus:border-[#7C3AED]"
                       />
                     </div>
 
                     {/* Minimum Likes */}
                     <div className="space-y-1.5">
-                      <label className="text-[13px] font-semibold text-[#16181C] flex items-center gap-1.5">
-                        <ThumbsUp className="w-3.5 h-3.5 text-[#5B6169]" />
+                      <label className="text-[13px] font-bold text-[#181135] flex items-center gap-1.5">
+                        <ThumbsUp className="w-3.5 h-3.5 text-[#635B80]" />
                         <span>Minimum Comment Likes (Optional):</span>
                       </label>
                       <input
@@ -439,18 +427,18 @@ export function RandomCommentPickerClient() {
                           setSettings((prev) => ({ ...prev, minLikes: parseInt(e.target.value) || 0 }))
                         }
                         placeholder="0 (no minimum required)"
-                        className="w-full px-3 py-2 bg-[#F9F9F8] border border-[#E8E7E3] text-[13px] text-[#16181C] placeholder-[#5B6169] focus:outline-hidden focus:border-[#16181C]"
+                        className="w-full px-3.5 py-2.5 bg-white/80 border border-[#EDE8F9] rounded-xl text-[13px] text-[#181135] placeholder-[#635B80]/60 focus:outline-hidden focus:border-[#7C3AED]"
                       />
                     </div>
                   </div>
 
                   {/* Summary of Eligible Entries */}
-                  <div className="p-3.5 bg-[#FCFCFB] border border-[#E8E7E3] text-[13px] space-y-1">
-                    <div className="flex justify-between text-[#5B6169]">
+                  <div className="p-3.5 bg-white/80 border border-[#EDE8F9] rounded-xl text-[13px] space-y-1">
+                    <div className="flex justify-between text-[#635B80]">
                       <span>Total Comments Loaded:</span>
-                      <span className="font-semibold text-[#16181C]">{commentsList.length}</span>
+                      <span className="font-bold text-[#181135]">{commentsList.length}</span>
                     </div>
-                    <div className="flex justify-between text-[#1E9E6B] font-semibold">
+                    <div className="flex justify-between text-emerald-600 font-bold">
                       <span>Eligible Contestants:</span>
                       <span>{eligiblePool.length} entries</span>
                     </div>
@@ -461,7 +449,7 @@ export function RandomCommentPickerClient() {
                     type="button"
                     onClick={handleDrawWinners}
                     disabled={eligiblePool.length === 0 || isDrawing}
-                    className="w-full py-3 px-4 bg-[#D6293C] hover:bg-[#B81E2F] text-white font-bold text-[14px] flex items-center justify-center gap-2 transition-colors disabled:opacity-50 shadow-xs cursor-pointer"
+                    className="w-full py-3.5 px-4 btn-siampay-primary text-white font-bold text-[14px] rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                   >
                     <Trophy className={`w-4 h-4 ${isDrawing ? 'animate-spin' : ''}`} />
                     <span>{isDrawing ? 'Picking Random Winner...' : 'Pick Random Winner Now'}</span>
@@ -469,12 +457,12 @@ export function RandomCommentPickerClient() {
 
                   {/* Load more button if available */}
                   {nextPageToken && (
-                    <div className="pt-2 text-center border-t border-[#E8E7E3]">
+                    <div className="pt-2 text-center border-t border-[#EDE8F9]">
                       <button
                         type="button"
                         onClick={handleLoadMore}
                         disabled={loadingMore}
-                        className="text-[12px] font-semibold text-[#5B6169] hover:text-[#16181C] inline-flex items-center gap-1 transition-colors cursor-pointer"
+                        className="text-[12px] font-bold text-[#635B80] hover:text-[#7C3AED] inline-flex items-center gap-1 transition-colors cursor-pointer"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
                         <span>{loadingMore ? 'Loading next 50...' : 'Load 50 More Comments into Pool'}</span>
@@ -486,14 +474,14 @@ export function RandomCommentPickerClient() {
 
               {/* Right Column: Winners Display Board */}
               <div className="lg:col-span-7 space-y-6">
-                <div className="bg-white border border-[#E8E7E3] p-5 sm:p-6 shadow-xs min-h-[380px] flex flex-col">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E8E7E3] pb-3 mb-4">
+                <div className="tool-card-3d p-5 sm:p-6 min-h-[380px] flex flex-col">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EDE8F9] pb-3 mb-4">
                     <div className="flex items-center gap-2 min-w-0">
-                      <Trophy className="w-5 h-5 text-[#D6293C] shrink-0" />
-                      <h3 className="text-[17px] sm:text-[18px] font-bold text-[#16181C] whitespace-nowrap flex items-center gap-1.5">
+                      <Trophy className="w-5 h-5 text-[#7C3AED] shrink-0" />
+                      <h3 className="text-[17px] sm:text-[18px] font-bold text-[#181135] whitespace-nowrap flex items-center gap-1.5">
                         <span>Contest Winners</span>
                         {winners.length > 0 && (
-                          <span className="text-[#D6293C] font-extrabold">({winners.length})</span>
+                          <span className="text-[#7C3AED] font-extrabold">({winners.length})</span>
                         )}
                       </h3>
                     </div>
@@ -503,16 +491,16 @@ export function RandomCommentPickerClient() {
                         <button
                           type="button"
                           onClick={handleCopyWinners}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F9F9F8] border border-[#E8E7E3] text-[12px] font-semibold text-[#16181C] hover:bg-[#F0EFEB] transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/80 border border-[#DDD0FA] rounded-xl text-[12px] font-bold text-[#181135] hover:bg-white hover:text-[#7C3AED] transition-colors cursor-pointer whitespace-nowrap shrink-0 shadow-2xs"
                         >
                           {copiedWinners ? (
                             <>
-                              <Check className="w-3.5 h-3.5 text-[#1E9E6B] shrink-0" />
-                              <span className="text-[#1E9E6B]">Copied!</span>
+                              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                              <span className="text-emerald-600">Copied!</span>
                             </>
                           ) : (
                             <>
-                              <Copy className="w-3.5 h-3.5 text-[#5B6169] shrink-0" />
+                              <Copy className="w-3.5 h-3.5 text-[#7C3AED] shrink-0" />
                               <span>Copy Winners</span>
                             </>
                           )}
@@ -520,7 +508,7 @@ export function RandomCommentPickerClient() {
                         <button
                           type="button"
                           onClick={handleDrawWinners}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D6293C] text-white text-[12px] font-semibold hover:bg-[#B81E2F] transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 btn-siampay-primary text-white text-[12px] font-bold rounded-xl cursor-pointer whitespace-nowrap shrink-0"
                         >
                           <RotateCcw className="w-3.5 h-3.5 shrink-0" />
                           <span>Re-Draw</span>
@@ -531,8 +519,8 @@ export function RandomCommentPickerClient() {
 
                   {/* Celebratory Winner Announcement Banner */}
                   {winners.length > 0 && !isDrawing && (
-                    <div className="flex items-center gap-2 px-3.5 py-2.5 bg-[#F0FDF4] border border-[#A7F3D0] text-[#065F46] text-[13px] font-medium mb-4 rounded-xs animate-in fade-in duration-300">
-                      <Sparkles className="w-4 h-4 text-[#1E9E6B] shrink-0" />
+                    <div className="flex items-center gap-2 px-3.5 py-2.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[13px] font-bold mb-4 rounded-xl animate-in fade-in duration-300">
+                      <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>
                         Congratulations! Winner{winners.length > 1 ? 's' : ''} selected fairly and randomly from {eligiblePool.length} eligible entries.
                       </span>
@@ -542,14 +530,14 @@ export function RandomCommentPickerClient() {
                   {/* When no winners are picked yet */}
                   {winners.length === 0 && !isDrawing && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center p-8 space-y-3">
-                      <div className="w-14 h-14 rounded-full bg-[#F9F9F8] border border-[#E8E7E3] flex items-center justify-center text-[#5B6169]">
-                        <Trophy className="w-7 h-7 text-[#D6293C]" />
+                      <div className="w-14 h-14 rounded-2xl bg-white/80 border border-[#EDE8F9] flex items-center justify-center text-[#7C3AED] shadow-2xs">
+                        <Trophy className="w-7 h-7 text-[#7C3AED]" />
                       </div>
                       <div className="space-y-1 max-w-[340px]">
-                        <h4 className="text-[16px] font-semibold text-[#16181C]">
+                        <h4 className="text-[16px] font-bold text-[#181135]">
                           Ready to Draw Winners
                         </h4>
-                        <p className="text-[13px] text-[#5B6169] leading-relaxed">
+                        <p className="text-[13px] text-[#635B80] leading-relaxed">
                           We found {eligiblePool.length} eligible entries based on your rules. Click &ldquo;Pick Random Winner Now&rdquo; to begin.
                         </p>
                       </div>
@@ -562,17 +550,17 @@ export function RandomCommentPickerClient() {
                       {winners.map((winner, idx) => (
                         <div
                           key={winner.id || idx}
-                          className={`p-5 border transition-all ${
+                          className={`p-5 rounded-2xl border transition-all ${
                             isDrawing
-                              ? 'border-[#D6293C] bg-[#FCFCFB] animate-pulse'
-                              : 'border-[#1E9E6B] bg-[#F0FDF4]/30 shadow-2xs'
+                              ? 'border-[#7C3AED] bg-purple-50/50 animate-pulse'
+                              : 'border-emerald-200 bg-white/80 shadow-2xs'
                           }`}
                         >
                           {/* Winner Header */}
                           <div className="flex items-start justify-between gap-3 mb-3">
                             <div className="flex items-center gap-3 min-w-0">
                               <div className="relative">
-                                <div className="relative w-12 h-12 rounded-full bg-[#E8E7E3] overflow-hidden border border-[#1E9E6B]">
+                                <div className="relative w-12 h-12 rounded-full bg-[#EDE8F9] overflow-hidden border-2 border-emerald-500">
                                   {winner.authorAvatarUrl ? (
                                     <Image
                                       src={winner.authorAvatarUrl}
@@ -582,19 +570,19 @@ export function RandomCommentPickerClient() {
                                       className="object-cover"
                                     />
                                   ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-[#5B6169]">
+                                    <div className="w-full h-full flex items-center justify-center text-[#635B80]">
                                       <Users className="w-5 h-5" />
                                     </div>
                                   )}
                                 </div>
-                                <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#1E9E6B] text-white flex items-center justify-center text-[10px] font-bold">
+                                <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">
                                   #{idx + 1}
                                 </div>
                               </div>
 
                               <div className="min-w-0">
                                 <div className="flex items-center gap-2">
-                                  <span className="text-[12px] font-bold text-[#1E9E6B] uppercase tracking-wider">
+                                  <span className="text-[12px] font-bold text-emerald-600 uppercase tracking-wider">
                                     Winner #{idx + 1}
                                   </span>
                                 </div>
@@ -603,13 +591,13 @@ export function RandomCommentPickerClient() {
                                     href={winner.authorChannelUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-[16px] font-bold text-[#16181C] hover:text-[#D6293C] transition-colors flex items-center gap-1.5 truncate"
+                                    className="text-[16px] font-bold text-[#181135] hover:text-[#7C3AED] transition-colors flex items-center gap-1.5 truncate"
                                   >
                                     <span className="truncate">{winner.authorName}</span>
                                     <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                                   </a>
                                 ) : (
-                                  <div className="text-[16px] font-bold text-[#16181C] truncate">
+                                  <div className="text-[16px] font-bold text-[#181135] truncate">
                                     {winner.authorName}
                                   </div>
                                 )}
@@ -626,22 +614,22 @@ export function RandomCommentPickerClient() {
                           </div>
 
                           {/* Winner Comment Body */}
-                          <div className="p-3.5 bg-white border border-[#E8E7E3] text-[14px] text-[#16181C] leading-relaxed whitespace-pre-line rounded-xs">
+                          <div className="p-3.5 bg-white/70 border border-[#EDE8F9] text-[14px] text-[#181135] leading-relaxed whitespace-pre-line rounded-xl">
                             &ldquo;{winner.text}&rdquo;
                           </div>
 
                           {/* Interaction Meta */}
-                          <div className="flex items-center gap-4 mt-2.5 text-[12px] text-[#5B6169]">
+                          <div className="flex items-center gap-4 mt-2.5 text-[12px] text-[#635B80]">
                             <div className="flex items-center gap-1">
-                              <ThumbsUp className="w-3 h-3 text-[#5B6169]" />
+                              <ThumbsUp className="w-3 h-3 text-[#7C3AED]" />
                               <span>{winner.likeCount} Likes</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <MessageSquare className="w-3 h-3 text-[#5B6169]" />
+                              <MessageSquare className="w-3 h-3 text-[#7C3AED]" />
                               <span>{winner.replyCount} Replies</span>
                             </div>
                             {winner.publishedAt && (
-                              <div className="text-[#5B6169]">
+                              <div className="text-[#635B80]">
                                 Commented: {winner.publishedAt}
                               </div>
                             )}

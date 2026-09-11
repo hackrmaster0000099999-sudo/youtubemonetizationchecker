@@ -52,7 +52,7 @@ export function DataViewerClient() {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
+      <div className="tool-card-3d p-6 md:p-8 space-y-4">
         <YouTubeInputForm
           id="data-viewer-form"
           initialValue={inputValue}
@@ -62,8 +62,8 @@ export function DataViewerClient() {
           isLoading={loading}
           onSubmit={handleInspect}
         />
-        <div className="flex items-center gap-2 text-[13px] text-[#5B6169]">
-          <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
+        <div className="flex items-center gap-2 text-[13px] text-[#635B80]">
+          <ShieldCheck className="w-4 h-4 text-emerald-600" />
           <span>Inspects normalized technical schema fields, durations, dates, and raw JSON payloads.</span>
         </div>
       </div>
@@ -78,13 +78,13 @@ export function DataViewerClient() {
       )}
 
       {rawResult && (
-        <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#F0EFEB]">
+        <div className="tool-card-3d p-5 sm:p-7 space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#EDE8F9]">
             <div>
-              <span className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-[#7C3AED] uppercase tracking-wider">
                 {rawResult.type} Identified
               </span>
-              <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C]">
+              <h2 className="text-[18px] sm:text-[22px] font-bold text-[#181135]">
                 {rawResult.data.title}
               </h2>
             </div>
@@ -119,10 +119,10 @@ export function DataViewerClient() {
               <button
                 type="button"
                 onClick={() => setShowJson(!showJson)}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-2 border text-[13px] font-semibold rounded-xl cursor-pointer transition-colors ${
+                className={`inline-flex items-center gap-1.5 px-3.5 py-2 border text-[13px] font-bold rounded-xl cursor-pointer transition-colors ${
                   showJson
-                    ? 'border-[#16181C] bg-[#16181C] text-white'
-                    : 'border-[#E3E2DE] bg-[#F9F9F8] text-[#16181C] hover:bg-white'
+                    ? 'btn-siampay-primary text-white border-transparent'
+                    : 'border-[#DDD0FA] bg-white/80 text-[#181135] hover:bg-white hover:text-[#7C3AED] shadow-2xs'
                 }`}
               >
                 <Code className="w-3.5 h-3.5" />
@@ -134,7 +134,7 @@ export function DataViewerClient() {
           {showJson ? (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[12px] font-bold text-[#5B6169] uppercase tracking-wider">
+                <span className="text-[12px] font-bold text-[#635B80] uppercase tracking-wider">
                   Raw JSON Payload
                 </span>
                 <CopyButton
@@ -143,81 +143,81 @@ export function DataViewerClient() {
                   label="Copy JSON"
                 />
               </div>
-              <pre className="p-4 bg-[#16181C] text-[#34D399] rounded-xl font-mono-data text-[12px] overflow-x-auto max-h-[480px]">
+              <pre className="p-4 bg-[#181135] text-emerald-400 rounded-2xl font-mono text-[12px] overflow-x-auto max-h-[480px] border border-[#2D225A]">
                 {jsonString}
               </pre>
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="text-[12px] font-bold text-[#5B6169] uppercase tracking-wider">
+              <div className="text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider">
                 Normalized Technical Schema
               </div>
 
-              <div className="border border-[#E3E2DE] rounded-xl overflow-hidden text-[13px]">
-                <div className="divide-y divide-[#F0EFEB]">
-                  <div className="flex flex-col sm:flex-row p-3.5 bg-white">
-                    <span className="w-48 font-bold text-[#5B6169]">Resource Type</span>
-                    <span className="flex-1 font-mono-data text-[#16181C]">{rawResult.type}</span>
+              <div className="border border-[#EDE8F9] rounded-2xl overflow-hidden text-[13px] bg-white/80 backdrop-blur-md">
+                <div className="divide-y divide-[#EDE8F9]">
+                  <div className="flex flex-col sm:flex-row p-4 bg-white/60">
+                    <span className="w-48 font-bold text-[#635B80]">Resource Type</span>
+                    <span className="flex-1 font-mono text-[#181135] font-bold">{rawResult.type}</span>
                   </div>
-                  <div className="flex flex-col sm:flex-row p-3.5 bg-[#F9F9F8]">
-                    <span className="w-48 font-bold text-[#5B6169]">Resource ID</span>
-                    <span className="flex-1 font-mono-data text-[#16181C] font-semibold">{rawResult.data.id}</span>
+                  <div className="flex flex-col sm:flex-row p-4 bg-white/40">
+                    <span className="w-48 font-bold text-[#635B80]">Resource ID</span>
+                    <span className="flex-1 font-mono text-[#181135] font-bold">{rawResult.data.id}</span>
                   </div>
 
                   {isVideo && videoData ? (
                     <>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-white">
-                        <span className="w-48 font-bold text-[#5B6169]">Parent Channel ID</span>
-                        <span className="flex-1 font-mono-data text-[#16181C]">{videoData.channelId}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/60">
+                        <span className="w-48 font-bold text-[#635B80]">Parent Channel ID</span>
+                        <span className="flex-1 font-mono text-[#181135]">{videoData.channelId}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-[#F9F9F8]">
-                        <span className="w-48 font-bold text-[#5B6169]">Parent Channel Title</span>
-                        <span className="flex-1 text-[#16181C] font-medium">{videoData.channelTitle}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/40">
+                        <span className="w-48 font-bold text-[#635B80]">Parent Channel Title</span>
+                        <span className="flex-1 text-[#181135] font-bold">{videoData.channelTitle}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-white">
-                        <span className="w-48 font-bold text-[#5B6169]">Published At (ISO)</span>
-                        <span className="flex-1 font-mono-data text-[#16181C]">{videoData.publishedAt}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/60">
+                        <span className="w-48 font-bold text-[#635B80]">Published At (ISO)</span>
+                        <span className="flex-1 font-mono text-[#181135]">{videoData.publishedAt}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-[#F9F9F8]">
-                        <span className="w-48 font-bold text-[#5B6169]">Total Public Views</span>
-                        <span className="flex-1 font-mono-data text-[#16181C] font-semibold">
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/40">
+                        <span className="w-48 font-bold text-[#635B80]">Total Public Views</span>
+                        <span className="flex-1 font-mono text-[#181135] font-bold">
                           {videoData.viewCount != null ? videoData.viewCount.toLocaleString() : 'Not publicly available'}
                         </span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-white">
-                        <span className="w-48 font-bold text-[#5B6169]">Duration Format</span>
-                        <span className="flex-1 font-mono-data text-[#16181C]">{videoData.duration}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/60">
+                        <span className="w-48 font-bold text-[#635B80]">Duration Format</span>
+                        <span className="flex-1 font-mono text-[#181135]">{videoData.duration}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-[#F9F9F8]">
-                        <span className="w-48 font-bold text-[#5B6169]">Tags Count</span>
-                        <span className="flex-1 font-mono-data text-[#16181C]">{videoData.tags.length} detected</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/40">
+                        <span className="w-48 font-bold text-[#635B80]">Tags Count</span>
+                        <span className="flex-1 font-mono text-[#181135] font-bold">{videoData.tags.length} detected</span>
                       </div>
                     </>
                   ) : channelData ? (
                     <>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-white">
-                        <span className="w-48 font-bold text-[#5B6169]">Custom URL</span>
-                        <span className="flex-1 font-mono-data text-[#16181C]">{channelData.customUrl || 'None assigned'}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/60">
+                        <span className="w-48 font-bold text-[#635B80]">Custom URL</span>
+                        <span className="flex-1 font-mono text-[#181135]">{channelData.customUrl || 'None assigned'}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-[#F9F9F8]">
-                        <span className="w-48 font-bold text-[#5B6169]">Handle</span>
-                        <span className="flex-1 font-mono-data text-[#16181C] font-semibold">{channelData.handle}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/40">
+                        <span className="w-48 font-bold text-[#635B80]">Handle</span>
+                        <span className="flex-1 font-mono text-[#181135] font-bold">{channelData.handle}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-white">
-                        <span className="w-48 font-bold text-[#5B6169]">Subscriber Count</span>
-                        <span className="flex-1 font-mono-data text-[#16181C] font-semibold">{channelData.subscriberText}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/60">
+                        <span className="w-48 font-bold text-[#635B80]">Subscriber Count</span>
+                        <span className="flex-1 font-mono text-[#181135] font-bold">{channelData.subscriberText}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-[#F9F9F8]">
-                        <span className="w-48 font-bold text-[#5B6169]">Total Public Videos</span>
-                        <span className="flex-1 font-mono-data text-[#16181C] font-semibold">{channelData.videoCountText}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/40">
+                        <span className="w-48 font-bold text-[#635B80]">Total Public Videos</span>
+                        <span className="flex-1 font-mono text-[#181135] font-bold">{channelData.videoCountText}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-white">
-                        <span className="w-48 font-bold text-[#5B6169]">Lifetime Channel Views</span>
-                        <span className="flex-1 font-mono-data text-[#16181C] font-semibold">{channelData.viewCountText}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/60">
+                        <span className="w-48 font-bold text-[#635B80]">Lifetime Channel Views</span>
+                        <span className="flex-1 font-mono text-[#181135] font-bold">{channelData.viewCountText}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row p-3.5 bg-[#F9F9F8]">
-                        <span className="w-48 font-bold text-[#5B6169]">Creation Date</span>
-                        <span className="flex-1 font-mono-data text-[#16181C]">{formatDate(channelData.publishedAt)}</span>
+                      <div className="flex flex-col sm:flex-row p-4 bg-white/40">
+                        <span className="w-48 font-bold text-[#635B80]">Creation Date</span>
+                        <span className="flex-1 font-mono text-[#181135] font-bold">{formatDate(channelData.publishedAt)}</span>
                       </div>
                     </>
                   ) : null}

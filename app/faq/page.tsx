@@ -93,21 +93,21 @@ export default function FAQPage() {
         <Breadcrumbs items={[{ label: 'Frequently Asked Questions' }]} />
 
         <div className="space-y-3 max-w-[800px]">
-          <h1 className="text-[28px] md:text-[38px] font-semibold text-[#16181C] tracking-tight leading-[1.15]">
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
             Frequently Asked Questions
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Detailed guidance on YouTube Partner Program thresholds, monetization evaluation methodology, creator tools, and platform policies.
           </p>
         </div>
 
         <FaqAccordionClient data={FAQS_DATA} />
 
-        <div className="p-6 bg-[#FCFCFB] border border-[#E8E7E3] space-y-2">
-          <h2 className="text-[18px] font-semibold text-[#16181C]">Have a question that is not covered here?</h2>
-          <p className="text-[14px] text-[#5B6169]">
+        <div className="p-6 tool-card-3d space-y-2">
+          <h2 className="text-[18px] font-bold text-[#181135]">Have a question that is not covered here?</h2>
+          <p className="text-[14px] text-[#635B80]">
             Feel free to reach out to our team via our{' '}
-            <Link href="/contact" className="text-[#D6293C] font-semibold hover:underline">
+            <Link href="/contact" className="text-[#7C3AED] font-bold hover:underline">
               Contact Page
             </Link>
             . We typically respond within 24–48 hours.

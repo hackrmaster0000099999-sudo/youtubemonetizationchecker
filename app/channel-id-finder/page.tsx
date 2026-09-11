@@ -68,14 +68,14 @@ export default function ChannelIdFinderPage() {
 
         {/* Header & Tool Intro */}
         <div className="space-y-3 max-w-[800px]">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E3E2DE] text-[12px] font-bold text-[#5B6169] uppercase tracking-wider shadow-2xs">
-            <Search className="w-3.5 h-3.5 text-[#D6293C]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#EDE8F9] text-[12px] font-bold text-[#7C3AED] uppercase tracking-wider shadow-2xs backdrop-blur-md">
+            <Search className="w-3.5 h-3.5 text-[#7C3AED]" />
             <span>Channel ID Utility</span>
           </div>
-          <h1 className="text-[28px] md:text-[38px] font-bold text-[#16181C] tracking-tight leading-[1.15]">
+          <h1 className="text-[28px] md:text-[38px] font-bold text-[#181135] tracking-tight leading-[1.15]">
             YouTube Channel ID Finder
           </h1>
-          <p className="text-[16px] text-[#5B6169] leading-relaxed">
+          <p className="text-[16px] text-[#635B80] leading-relaxed">
             Find the canonical 24-character YouTube channel ID (UC...) for any channel, creator handle, or video URL. One-click copy with instant RSS feed links.
           </p>
         </div>
@@ -84,57 +84,57 @@ export default function ChannelIdFinderPage() {
         <ChannelIdFinderClient />
 
         {/* How The Tool Works */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
           <div className="space-y-2">
-            <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+            <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
               How to Find Any YouTube Channel ID
             </h2>
-            <p className="text-[15px] text-[#5B6169] leading-relaxed">
+            <p className="text-[15px] text-[#635B80] leading-relaxed">
               YouTube introduced modern @handles and custom URLs, but most developer tools, plugins, and RSS readers still require the raw 24-character Channel ID:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>1. Paste Any YouTube Link</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
-                Enter any format including <code className="font-mono-data text-[12px] bg-[#FCFCFB] px-1">youtube.com/@handle</code>, custom URLs, legacy usernames, or video URLs.
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
+                Enter any format including <code className="font-mono-data text-[12px] bg-white/60 px-1 py-0.5 rounded border border-[#EDE8F9]">youtube.com/@handle</code>, custom URLs, legacy usernames, or video URLs.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>2. Instant Canonical Extraction</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 The engine resolves redirects, parses verified channel metadata, and extracts the unique UC-prefixed identifier immediately.
               </p>
             </div>
 
-            <div className="p-5 bg-white border border-[#E8E7E3] space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-[#16181C]">
-                <CheckCircle2 className="w-4 h-4 text-[#1E9E6B]" />
+            <div className="p-6 tool-card-3d space-y-2.5">
+              <div className="flex items-center gap-2 font-bold text-[#181135]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <h3>3. One-Click Copy & RSS</h3>
               </div>
-              <p className="text-[14px] text-[#5B6169] leading-relaxed">
+              <p className="text-[14px] text-[#635B80] leading-relaxed">
                 Copy the channel ID with one tap, or grab the ready-to-use YouTube XML RSS feed link for feed readers and Discord bots.
               </p>
             </div>
           </div>
 
           {/* Contextual Links */}
-          <div className="p-4 bg-[#FCFCFB] border border-[#E8E7E3] text-[14px] text-[#5B6169] space-y-2">
+          <div className="p-4.5 bg-white/70 backdrop-blur-md border border-[#EDE8F9] rounded-2xl text-[14px] text-[#635B80] space-y-2 shadow-2xs">
             <p>
               Once you have the channel ID, you can check its monetization status with our{' '}
-              <Link href="/monetization-checker" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/monetization-checker" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Monetization Checker
               </Link>{' '}
               or inspect full metadata in the{' '}
-              <Link href="/data-viewer" className="text-[#D6293C] font-semibold hover:underline">
+              <Link href="/data-viewer" className="text-[#7C3AED] font-bold hover:underline">
                 YouTube Metadata Viewer
               </Link>
               .
@@ -143,43 +143,43 @@ export default function ChannelIdFinderPage() {
         </section>
 
         {/* When to Use This Tool */}
-        <section className="space-y-4 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-4 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             When You Need a YouTube Channel ID
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">API Integrations:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">API Integrations:</strong>
               When setting up YouTube Data API v3 scripts, channel endpoints strictly mandate the UC channel ID.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">RSS Feeds &amp; Webhooks:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">RSS Feeds &amp; Webhooks:</strong>
               Syndicating new video notifications to Discord, Telegram, or RSS readers requires the channel XML feed URL.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Website Widgets &amp; Embeds:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">Website Widgets &amp; Embeds:</strong>
               Third-party YouTube subscribe buttons and showcase sliders often require the permanent ID.
             </div>
-            <div className="p-4 bg-white border border-[#E8E7E3] text-[14px] text-[#5B6169]">
-              <strong className="text-[#16181C] block mb-1">Creator Collaboration:</strong>
+            <div className="p-5 tool-card-3d text-[14px] text-[#635B80] space-y-1.5">
+              <strong className="text-[#181135] block font-bold">Creator Collaboration:</strong>
               Cross-check official channel identifiers to prevent impersonation when signing influencer agreements.
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-6 pt-6 border-t border-[#E8E7E3]">
-          <h2 className="text-[22px] md:text-[26px] font-semibold text-[#16181C]">
+        <section className="space-y-6 pt-6 border-t border-[#EDE8F9]">
+          <h2 className="text-[22px] md:text-[26px] font-bold text-[#181135]">
             Frequently Asked Questions
           </h2>
-          <div className="divide-y divide-[#E8E7E3] border border-[#E8E7E3] bg-white">
+          <div className="divide-y divide-[#EDE8F9] border border-[#EDE8F9] bg-white/80 backdrop-blur-md rounded-2xl shadow-xs overflow-hidden">
             {faqs.map((faq, idx) => (
               <div key={idx} className="p-5 space-y-2">
-                <h3 className="text-[16px] font-semibold text-[#16181C] flex items-center gap-2">
-                  <Info className="w-4 h-4 text-[#5B6169]" />
+                <h3 className="text-[16px] font-bold text-[#181135] flex items-center gap-2">
+                  <Info className="w-4 h-4 text-[#7C3AED]" />
                   <span>{faq.q}</span>
                 </h3>
-                <p className="text-[14px] text-[#5B6169] leading-relaxed pl-6">
+                <p className="text-[14px] text-[#635B80] leading-relaxed pl-6">
                   {faq.a}
                 </p>
               </div>

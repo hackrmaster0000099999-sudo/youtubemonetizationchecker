@@ -23,33 +23,33 @@ export default function TermsOfUsePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="space-y-8 py-4 max-w-[840px]">
+      <div className="space-y-8 py-4 max-w-[880px] mx-auto">
         <Breadcrumbs items={[{ label: 'Terms of Use' }]} />
 
         <div className="space-y-3">
-          <h1 className="text-[28px] md:text-[36px] font-semibold text-[#16181C] tracking-tight">
+          <h1 className="text-[28px] md:text-[36px] font-bold text-[#181135] tracking-tight">
             Terms of Use
           </h1>
-          <div className="text-[14px] text-[#5B6169]">Last Updated: January 2026</div>
+          <div className="text-[14px] text-[#635B80]">Last Updated: January 2026</div>
         </div>
 
-        <div className="p-8 bg-white border border-[#E8E7E3] space-y-6 text-[15px] text-[#5B6169] leading-relaxed shadow-xs">
+        <div className="p-8 tool-card-3d space-y-6 text-[15px] text-[#635B80] leading-relaxed">
           <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#16181C]">1. Acceptance of Terms</h2>
+            <h2 className="text-[18px] font-bold text-[#181135]">1. Acceptance of Terms</h2>
             <p>
               By accessing or using the YT MONETIZE website (the &quot;Site&quot; or &quot;Service&quot;), you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#16181C]">2. Independent Service Disclaimer</h2>
+            <h2 className="text-[18px] font-bold text-[#181135]">2. Independent Service Disclaimer</h2>
             <p>
               YT MONETIZE is an independent third-party creator utility and is <strong>not affiliated with, endorsed by, sponsored by, or associated with YouTube, LLC or Google LLC</strong>. YouTube, YouTube Studio, and the YouTube logo are registered trademarks of Google LLC.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#16181C]">3. Nature of Estimates and Inferences</h2>
+            <h2 className="text-[18px] font-bold text-[#181135]">3. Nature of Estimates and Inferences</h2>
             <p>
               All evaluations regarding YouTube monetization, YouTube Partner Program (YPP) status, projected earnings, RPMs, and shadowban indicators are <strong>estimates based strictly on publicly observable information and heuristic models</strong>.
             </p>
@@ -59,7 +59,7 @@ export default function TermsOfUsePage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#16181C]">4. Permitted &amp; Prohibited Use</h2>
+            <h2 className="text-[18px] font-bold text-[#181135]">4. Permitted &amp; Prohibited Use</h2>
             <p>
               You agree to use the Service only for legitimate channel research, media asset acquisition, and content optimization. You agree not to:
             </p>
@@ -71,14 +71,14 @@ export default function TermsOfUsePage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#16181C]">5. Intellectual Property</h2>
+            <h2 className="text-[18px] font-bold text-[#181135]">5. Intellectual Property</h2>
             <p>
               The software, branding, layout design, and algorithms of YT MONETIZE are the intellectual property of YT MONETIZE. All YouTube video thumbnails, channel avatars, and channel banners remain the exclusive copyright and property of their respective creators and YouTube.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#16181C]">6. Limitation of Liability</h2>
+            <h2 className="text-[18px] font-bold text-[#181135]">6. Limitation of Liability</h2>
             <p>
               In no event shall YT MONETIZE or its operators be liable for any damages (including, without limitation, damages for loss of data, profit, or business interruption) arising out of the use or inability to use the tools or materials on YT MONETIZE.
             </p>

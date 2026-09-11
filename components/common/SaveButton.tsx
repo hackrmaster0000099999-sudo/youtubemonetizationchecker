@@ -75,12 +75,12 @@ export function SaveButton({ item, variant = 'default', className = '' }: SaveBu
         aria-label={saved ? 'Remove from saved items' : 'Save to browser cache'}
         className={`p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-center ${
           saved
-            ? 'border-[#D6293C]/30 bg-[#FDF2F3] text-[#D6293C]'
-            : 'border-[#E3E2DE] bg-white hover:bg-[#F9F9F8] text-[#5B6169] hover:text-[#16181C]'
+            ? 'border-[#DDD0FA] bg-[#F2ECFE] text-[#7C3AED]'
+            : 'border-[#EDE8F9] bg-white hover:bg-[#F8F5FE] text-[#635B80] hover:text-[#181135]'
         } ${className}`}
       >
         {saved ? (
-          <BookmarkCheck className="w-4 h-4 fill-[#D6293C] text-white" />
+          <BookmarkCheck className="w-4 h-4 fill-[#7C3AED] text-white" />
         ) : (
           <Bookmark className="w-4 h-4 text-inherit" />
         )}
@@ -96,18 +96,18 @@ export function SaveButton({ item, variant = 'default', className = '' }: SaveBu
         title={saved ? 'Saved in browser cache (localStorage)' : 'Save to browser cache'}
         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[12px] font-semibold transition-all cursor-pointer ${
           saved
-            ? 'border-[#D6293C]/30 bg-[#FDF2F3] text-[#D6293C]'
-            : 'border-[#E3E2DE] bg-white hover:bg-[#F9F9F8] text-[#5B6169] hover:text-[#16181C]'
+            ? 'border-[#DDD0FA] bg-[#F2ECFE] text-[#7C3AED]'
+            : 'border-[#EDE8F9] bg-white hover:bg-[#F8F5FE] text-[#635B80] hover:text-[#181135]'
         } ${className}`}
       >
         {saved ? (
           <>
-            <BookmarkCheck className="w-3.5 h-3.5 fill-[#D6293C] text-white" />
+            <BookmarkCheck className="w-3.5 h-3.5 fill-[#7C3AED] text-white" />
             <span>{justSaved ? 'Saved in Browser!' : 'Saved'}</span>
           </>
         ) : (
           <>
-            <Bookmark className="w-3.5 h-3.5 text-[#5B6169]" />
+            <Bookmark className="w-3.5 h-3.5 text-[#635B80]" />
             <span>Save</span>
           </>
         )}
@@ -126,22 +126,22 @@ export function SaveButton({ item, variant = 'default', className = '' }: SaveBu
       }
       className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border text-[13px] font-semibold transition-all cursor-pointer ${
         saved
-          ? 'border-[#D6293C]/40 bg-[#FDF2F3] text-[#D6293C] shadow-2xs'
-          : 'border-[#E3E2DE] bg-white hover:bg-[#F9F9F8] text-[#16181C] hover:border-[#16181C]'
+          ? 'border-[#DDD0FA] bg-[#F2ECFE] text-[#7C3AED] shadow-2xs'
+          : 'border-[#EDE8F9] bg-white hover:bg-[#F8F5FE] text-[#181135] hover:border-[#DDD0FA]'
       } ${className}`}
     >
       {saved ? (
         <>
           {justSaved ? (
-            <Check className="w-4 h-4 text-[#D6293C] animate-in zoom-in-50 duration-150" />
+            <Check className="w-4 h-4 text-[#7C3AED] animate-in zoom-in-50 duration-150" />
           ) : (
-            <BookmarkCheck className="w-4 h-4 fill-[#D6293C] text-white" />
+            <BookmarkCheck className="w-4 h-4 fill-[#7C3AED] text-white" />
           )}
           <span>{justSaved ? 'Saved in Browser Cache!' : 'Saved in Browser'}</span>
         </>
       ) : (
         <>
-          <Bookmark className="w-4 h-4 text-[#5B6169]" />
+          <Bookmark className="w-4 h-4 text-[#635B80]" />
           <span>Save to Browser</span>
         </>
       )}

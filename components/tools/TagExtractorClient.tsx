@@ -50,7 +50,7 @@ export function TagExtractorClient() {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 md:p-8 bg-white border border-[#E8E7E3] space-y-4 shadow-xs rounded-2xl">
+      <div className="tool-card-3d p-6 md:p-8 space-y-4">
         <YouTubeInputForm
           id="tag-extractor-form"
           initialValue={inputValue}
@@ -60,8 +60,8 @@ export function TagExtractorClient() {
           isLoading={loading}
           onSubmit={handleExtract}
         />
-        <div className="flex items-center gap-2 text-[13px] text-[#5B6169]">
-          <ShieldCheck className="w-4 h-4 text-[#1E9E6B]" />
+        <div className="flex items-center gap-2 text-[13px] text-[#635B80]">
+          <ShieldCheck className="w-4 h-4 text-emerald-600" />
           <span>Parses public search tags directly from video source metadata.</span>
         </div>
       </div>
@@ -76,17 +76,17 @@ export function TagExtractorClient() {
       )}
 
       {video && (
-        <div className="bg-white border border-[#E3E2DE] rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#F0EFEB]">
+        <div className="tool-card-3d p-6 sm:p-7 space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 pb-5 border-b border-[#EDE8F9]">
             <div className="space-y-1 min-w-0">
-              <span className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-[#635B80] uppercase tracking-wider">
                 Video Found
               </span>
-              <h2 className="text-[18px] sm:text-[22px] font-bold text-[#16181C] leading-snug">
+              <h2 className="text-[18px] sm:text-[22px] font-bold text-[#181135] leading-snug">
                 {video.title}
               </h2>
-              <div className="text-[13px] text-[#5B6169]">
-                Channel: <span className="text-[#16181C] font-semibold">{video.channelTitle}</span>
+              <div className="text-[13px] text-[#635B80]">
+                Channel: <span className="text-[#181135] font-semibold">{video.channelTitle}</span>
               </div>
             </div>
 
@@ -112,28 +112,28 @@ export function TagExtractorClient() {
                 href={`https://www.youtube.com/watch?v=${video.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#E3E2DE] bg-[#F9F9F8] hover:bg-white rounded-xl text-[13px] font-medium text-[#16181C] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#DDD0FA] bg-white/80 hover:border-[#7C3AED] rounded-xl text-[13px] font-semibold text-[#181135] transition-colors shadow-2xs"
               >
                 <span>Watch on YouTube</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-3.5 h-3.5 text-[#7C3AED]" />
               </a>
             </div>
           </div>
 
           {tags.length === 0 ? (
-            <div className="p-8 text-center bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl space-y-2">
-              <TagIcon className="w-8 h-8 text-[#5B6169] mx-auto opacity-50" />
-              <div className="font-bold text-[15px] text-[#16181C]">No Public Tags Found</div>
-              <p className="text-[13px] text-[#5B6169] max-w-md mx-auto">
+            <div className="p-8 text-center bg-white/40 border border-[#EDE8F9] rounded-2xl space-y-2">
+              <TagIcon className="w-8 h-8 text-[#635B80] mx-auto opacity-50" />
+              <div className="font-bold text-[15px] text-[#181135]">No Public Tags Found</div>
+              <p className="text-[13px] text-[#635B80] max-w-md mx-auto">
                 This creator did not specify custom search tags for this video, or they rely exclusively on title and description keywords.
               </p>
             </div>
           ) : (
             <div className="space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#F0EFEB]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#EDE8F9]">
                 <div className="flex items-center gap-2">
-                  <Hash className="w-4 h-4 text-[#D6293C]" />
-                  <span className="font-bold text-[15px] text-[#16181C]">
+                  <Hash className="w-4 h-4 text-[#7C3AED]" />
+                  <span className="font-bold text-[15px] text-[#181135]">
                     {tags.length} Tags Extracted
                   </span>
                 </div>
@@ -146,8 +146,8 @@ export function TagExtractorClient() {
 
               {/* Tag Badges */}
               <div className="space-y-2">
-                <div className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
-                  Individual Tags
+                <div className="text-[11px] font-bold text-[#635B80] uppercase tracking-wider">
+                  Individual Tags (Click to Copy)
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, idx) => (
@@ -158,9 +158,9 @@ export function TagExtractorClient() {
                         navigator.clipboard.writeText(tag);
                       }}
                       title="Click to copy tag"
-                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#F9F9F8] border border-[#E3E2DE] hover:border-[#16181C] hover:bg-white rounded-lg active:scale-95 transition-all text-[13px] text-[#16181C] font-mono-data cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/80 border border-[#EDE8F9] hover:border-[#7C3AED] hover:bg-white rounded-xl transition-colors text-[13px] text-[#181135] font-mono-data cursor-pointer shadow-2xs"
                     >
-                      <span className="text-[#9E9E9E]">#</span>
+                      <span className="text-[#7C3AED] font-bold">#</span>
                       <span className="font-medium">{tag}</span>
                     </button>
                   ))}
@@ -169,10 +169,10 @@ export function TagExtractorClient() {
 
               {/* Raw Box */}
               <div className="space-y-2 pt-1">
-                <div className="text-[11px] font-bold text-[#5B6169] uppercase tracking-wider">
+                <div className="text-[11px] font-bold text-[#635B80] uppercase tracking-wider">
                   Raw Comma-Separated String
                 </div>
-                <div className="p-3.5 bg-[#F9F9F8] border border-[#E3E2DE] rounded-xl font-mono-data text-[12px] text-[#16181C] break-all select-all leading-relaxed">
+                <div className="p-4 bg-white/60 border border-[#EDE8F9] rounded-2xl font-mono-data text-[12px] text-[#181135] break-all select-all leading-relaxed shadow-2xs">
                   {commaSeparatedTags}
                 </div>
               </div>
