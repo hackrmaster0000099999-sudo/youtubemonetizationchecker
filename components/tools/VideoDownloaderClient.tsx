@@ -10,14 +10,12 @@ import {
   Music,
   Sparkles,
   AlertCircle,
-  Eye,
   Play,
   SlidersHorizontal,
   Bookmark,
   BookmarkCheck,
   HardDrive,
-  CheckCircle2,
-  ExternalLink,
+  Eye,
 } from 'lucide-react';
 import { VideoDownloadOption, VideoDownloadResult } from '@/lib/youtube/types';
 import { useSavedItems } from '@/lib/saved-items/storage';
@@ -48,8 +46,6 @@ export function VideoDownloaderClient() {
   const [result, setResult] = useState<VideoDownloadResult | null>(null);
   const [activeTab, setActiveTab] = useState<'all' | 'mp4' | 'webm' | 'audio'>('all');
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [downloadingId, setDownloadingId] = useState<string | null>(null);
-  const [downloadSuccessId, setDownloadSuccessId] = useState<string | null>(null);
   const [showPlayer, setShowPlayer] = useState(false);
 
   const { isSaved, save, remove } = useSavedItems();
@@ -106,51 +102,6 @@ export function VideoDownloaderClient() {
       }
     } catch {
       // Clipboard permissions
-    }
-  };
-
-  // Direct 1-Click File Download
-  const handleDirectDownload = async (option: VideoDownloadOption) => {
-    if (!result) return;
-
-    setDownloadingId(option.id);
-
-    try {
-      const res = await fetch('/api/youtube/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          videoId: result.video.id,
-          quality: option.quality,
-          format: option.extension,
-          title: result.video.title,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (data.success && data.downloadUrl) {
-        // Direct download trigger
-        const link = document.createElement('a');
-        link.href = data.downloadUrl;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.setAttribute('download', `${result.video.title}.${option.extension}`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        setDownloadSuccessId(option.id);
-        setTimeout(() => setDownloadSuccessId(null), 3000);
-      } else {
-        // Direct stream fallback
-        window.open(`https://yewtu.be/watch?v=${result.video.id}`, '_blank');
-      }
-    } catch (err) {
-      console.error('Download trigger error:', err);
-      window.open(`https://www.youtube.com/watch?v=${result.video.id}`, '_blank');
-    } finally {
-      setDownloadingId(null);
     }
   };
 
@@ -429,7 +380,7 @@ export function VideoDownloaderClient() {
                   <span>Choose Resolution &amp; Download Instantly</span>
                 </h3>
                 <p className="text-[13px] text-[#635B80]">
-                  Click any button to directly download the video/audio file to your device with exact MB sizes.
+                  Click any button to directly download the video or audio file to your device with exact MB sizes.
                 </p>
               </div>
 
@@ -485,8 +436,7 @@ export function VideoDownloaderClient() {
             {/* Formats Grid Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredOptions && filteredOptions.map((opt) => {
-                const isCurrentDownloading = downloadingId === opt.id;
-                const isCurrentSuccess = downloadSuccessId === opt.id;
+                const downloadHref = `/api/youtube/download?id=${result.video.id}&quality=${opt.quality}&format=${opt.extension}&title=${encodeURIComponent(result.video.title)}`;
 
                 return (
                   <div
@@ -547,35 +497,16 @@ export function VideoDownloaderClient() {
                       </div>
                     </div>
 
-                    {/* Direct 1-Click Action Button */}
+                    {/* Direct 1-Click Native Anchor Action Button - 100% immune to Popup Blockers */}
                     <div className="pt-2 border-t border-[#EDE8F9] flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleDirectDownload(opt)}
-                        disabled={isCurrentDownloading}
-                        className={`flex-1 h-11 text-white text-[13px] font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs ${
-                          isCurrentSuccess
-                            ? 'bg-emerald-600 hover:bg-emerald-700'
-                            : 'bg-[#7C3AED] hover:bg-[#6D28D9] active:scale-[0.98]'
-                        }`}
+                      <a
+                        href={downloadHref}
+                        download={`${result.video.title}.${opt.extension}`}
+                        className="flex-1 h-11 bg-[#7C3AED] hover:bg-[#6D28D9] active:scale-[0.98] text-white text-[13px] font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs no-underline"
                       >
-                        {isCurrentDownloading ? (
-                          <>
-                            <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                            <span>Generating Stream...</span>
-                          </>
-                        ) : isCurrentSuccess ? (
-                          <>
-                            <CheckCircle2 className="w-4 h-4" />
-                            <span>Download Triggered!</span>
-                          </>
-                        ) : (
-                          <>
-                            <Download className="w-4 h-4" />
-                            <span>Download {opt.extension.toUpperCase()} ({opt.sizeFormatted})</span>
-                          </>
-                        )}
-                      </button>
+                        <Download className="w-4 h-4" />
+                        <span>Download {opt.extension.toUpperCase()} ({opt.sizeFormatted})</span>
+                      </a>
 
                       <button
                         type="button"
@@ -642,14 +573,14 @@ export function VideoDownloaderClient() {
                         {opt.sizeFormatted}
                       </td>
                       <td className="py-3 px-4 text-right">
-                        <button
-                          type="button"
-                          onClick={() => handleDirectDownload(opt)}
-                          className="px-3.5 py-1.5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold text-[12px] rounded-lg transition-colors cursor-pointer inline-flex items-center gap-1.5 shadow-2xs"
+                        <a
+                          href={`/api/youtube/download?id=${result.video.id}&quality=${opt.quality}&format=${opt.extension}&title=${encodeURIComponent(result.video.title)}`}
+                          download={`${result.video.title}.${opt.extension}`}
+                          className="px-3.5 py-1.5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold text-[12px] rounded-lg transition-colors cursor-pointer inline-flex items-center gap-1.5 shadow-2xs no-underline"
                         >
                           <Download className="w-3.5 h-3.5" />
                           <span>Save {opt.extension.toUpperCase()}</span>
-                        </button>
+                        </a>
                       </td>
                     </tr>
                   ))}
