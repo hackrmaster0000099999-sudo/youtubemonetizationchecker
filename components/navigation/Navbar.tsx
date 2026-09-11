@@ -234,7 +234,7 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div
           id="mobile-nav-menu"
-          className="md:hidden bg-white/95 backdrop-blur-2xl border-b border-[#EDE8F9] px-5 py-5 space-y-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150 max-h-[85vh] overflow-y-auto"
+          className="lg:hidden bg-white/95 backdrop-blur-2xl border-b border-[#EDE8F9] px-5 py-5 space-y-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150 max-h-[85vh] overflow-y-auto"
         >
           {/* Main Home Button */}
           <Link
