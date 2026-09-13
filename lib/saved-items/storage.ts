@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback, useSyncExternalStore } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 export interface SavedItem {
   id: string; // unique item id
   toolId: string;
   toolName: string;
   category: string;
-  targetType: 'CHANNEL' | 'VIDEO' | 'PLAYLIST';
+  targetType: 'CHANNEL' | 'VIDEO' | 'PLAYLIST' | 'CAPTION';
   title: string;
   handle?: string;
   avatarUrl?: string;
@@ -256,16 +256,14 @@ function getServerSnapshot(): SavedItem[] {
   return emptySnapshot;
 }
 
+const noopSubscribe = () => () => {};
+
 /**
  * React hook to listen to browser saved items changes in real time
  */
 export function useSavedItems() {
   const items = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isClient = useSyncExternalStore(noopSubscribe, () => true, () => false);
 
   const save = useCallback(
     (itemData: Omit<SavedItem, 'id' | 'savedAt'> & { id?: string }) => {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/navigation/Navbar';
@@ -57,7 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="min-h-screen flex flex-col bg-[#F6F4FD] text-[#181135]" suppressHydrationWarning>
-        <Navbar />
+        <Suspense fallback={<header className="sticky top-0 z-50 h-[72px] bg-white/75 border-b border-white/80 w-full" />}>
+          <Navbar />
+        </Suspense>
         <main className="flex-1 w-full max-w-[1140px] mx-auto px-4 sm:px-6 py-6">
           {children}
         </main>

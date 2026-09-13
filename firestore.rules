@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Captions collection: Accessible for public reading and admin write
+    match /captions/{captionId} {
+      allow read, write: if true;
+    }
+
+    // Fallback rule
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+

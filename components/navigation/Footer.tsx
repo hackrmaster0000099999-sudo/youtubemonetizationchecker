@@ -1,26 +1,35 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import {
   DollarSign,
   Search,
+  FolderSearch,
   Download,
   ShieldAlert,
   Calculator,
-  Image as ImageIcon,
+  ImageIcon,
   Tag,
   BarChart2,
-  HelpCircle,
-  ShieldCheck,
-  FileText,
-  Mail,
-  AlertCircle,
-  Layers,
-  Tv,
   MessageSquare,
   Trophy,
   ThumbsDown,
+  FileText,
   EyeOff,
-  FolderSearch,
+  ShieldCheck,
+  HelpCircle,
+  Mail,
+  AlertCircle,
+  Sparkles,
+  MessageSquareQuote,
+  Heart,
+  Flame,
+  CloudRain,
+  Zap,
+  Compass,
+  Users,
+  Moon,
 } from 'lucide-react';
 import { Logo } from '@/components/common/Logo';
 import { CategoryIcon } from '@/components/common/ToolIcon';
@@ -32,14 +41,14 @@ export function Footer() {
       className="w-full bg-[#FCFCFB] border-t border-[#EDE8F9] pt-16 pb-12 text-[#181135]"
     >
       <div className="max-w-[1120px] mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-12 border-b border-[#EDE8F9]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 pb-12 border-b border-[#EDE8F9]">
           {/* Brand Column */}
           <div className="sm:col-span-2 lg:col-span-1 space-y-4">
             <Link href="/" className="inline-block tap-press">
               <Logo size={32} showText={true} />
             </Link>
             <p className="text-[13px] text-[#635B80] leading-relaxed max-w-sm">
-              Fast, accurate, free YouTube creator utility platform. Research channel monetization, copy channel IDs, estimate revenue, and inspect public video metadata without login or software installs.
+              Fast, accurate, free YouTube creator utility &amp; content platform. Research channel monetization, estimate revenue, inspect video metadata, and grab viral Bangla &amp; English captions without login.
             </p>
           </div>
 
@@ -53,13 +62,13 @@ export function Footer() {
               <li>
                 <Link href="/monetization-checker" id="footer-link-monetization" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <DollarSign className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Monetization Checker</span>
+                  <span>Monetization Checker</span>
                 </Link>
               </li>
               <li>
                 <Link href="/channel-id-finder" id="footer-link-channel-id" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <Search className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Channel ID Finder</span>
+                  <span>Channel ID Finder</span>
                 </Link>
               </li>
               <li>
@@ -71,13 +80,13 @@ export function Footer() {
               <li>
                 <Link href="/image-downloader" id="footer-link-image-downloader" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <Download className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Image Downloader</span>
+                  <span>Image Downloader</span>
                 </Link>
               </li>
               <li>
                 <Link href="/shadowban-detector" id="footer-link-shadowban" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <ShieldAlert className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Shadowban Detector</span>
+                  <span>Shadowban Detector</span>
                 </Link>
               </li>
             </ul>
@@ -93,31 +102,31 @@ export function Footer() {
               <li>
                 <Link href="/earnings-calculator" id="footer-link-earnings" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <Calculator className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Earnings Calculator</span>
+                  <span>Earnings Calculator</span>
                 </Link>
               </li>
               <li>
                 <Link href="/thumbnail-downloader" id="footer-link-thumbnail" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <ImageIcon className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Thumbnail Downloader</span>
+                  <span>Thumbnail Downloader</span>
                 </Link>
               </li>
               <li>
                 <Link href="/tag-extractor" id="footer-link-tags" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <Tag className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Tag Extractor</span>
+                  <span>Tag Extractor</span>
                 </Link>
               </li>
               <li>
                 <Link href="/data-viewer" id="footer-link-data" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
                   <BarChart2 className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Metadata Viewer</span>
+                  <span>Metadata Viewer</span>
                 </Link>
               </li>
               <li>
-                <Link href="/comment-viewer" id="footer-link-comments" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Comment Viewer</span>
+                <Link href="/dislike-checker" id="footer-link-dislikes" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <ThumbsDown className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
+                  <span>Dislike Checker</span>
                 </Link>
               </li>
               <li>
@@ -126,22 +135,62 @@ export function Footer() {
                   <span>Random Comment Picker</span>
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* Social Captions Hub (NEW) */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wider text-[#7C3AED]">
+              <MessageSquareQuote className="w-3.5 h-3.5 text-[#7C3AED]" />
+              <span>Captions Hub</span>
+            </div>
+            <ul className="space-y-2.5 text-[13px] text-[#635B80]">
               <li>
-                <Link href="/dislike-checker" id="footer-link-dislikes" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
-                  <ThumbsDown className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Dislike Checker</span>
+                <Link href="/captions" id="footer-link-all-captions" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors font-medium">
+                  <Sparkles className="w-3.5 h-3.5 text-[#7C3AED] shrink-0" />
+                  <span>All Bangla &amp; English Captions</span>
                 </Link>
               </li>
               <li>
-                <Link href="/description-viewer" id="footer-link-description" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
-                  <FileText className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>YouTube Description Viewer</span>
+                <Link href="/captions?category=motivational" id="footer-link-captions-motivational" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <Flame className="w-3.5 h-3.5 text-[#635B80] group-hover:text-amber-500 shrink-0 transition-colors" />
+                  <span>Motivational (মোটিভেশনাল)</span>
                 </Link>
               </li>
               <li>
-                <Link href="/private-viewer" id="footer-link-private" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
-                  <EyeOff className="w-3.5 h-3.5 text-[#635B80] group-hover:text-[#7C3AED] shrink-0" />
-                  <span>Private YouTube Viewer</span>
+                <Link href="/captions?category=attitude" id="footer-link-captions-attitude" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <Zap className="w-3.5 h-3.5 text-[#635B80] group-hover:text-pink-500 shrink-0 transition-colors" />
+                  <span>Attitude &amp; Swag (অ্যাটিটিউড)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/captions?category=romantic" id="footer-link-captions-romantic" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <Heart className="w-3.5 h-3.5 text-[#635B80] group-hover:text-rose-500 shrink-0 transition-colors" />
+                  <span>Romantic &amp; Love (ভালোবাসা)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/captions?category=sad" id="footer-link-captions-sad" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <CloudRain className="w-3.5 h-3.5 text-[#635B80] group-hover:text-indigo-500 shrink-0 transition-colors" />
+                  <span>Sad &amp; Pain (কষ্টের স্ট্যাটাস)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/captions?category=life" id="footer-link-captions-life" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <Compass className="w-3.5 h-3.5 text-[#635B80] group-hover:text-emerald-500 shrink-0 transition-colors" />
+                  <span>Life &amp; Reality (বাস্তবতা)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/captions?category=friendship" id="footer-link-captions-friendship" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <Users className="w-3.5 h-3.5 text-[#635B80] group-hover:text-cyan-500 shrink-0 transition-colors" />
+                  <span>Friendship (বন্ধুত্ব ও আড্ডা)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/captions?category=islamic" id="footer-link-captions-islamic" className="group flex items-center gap-2 hover:text-[#7C3AED] active:text-[#7C3AED] transition-colors">
+                  <Moon className="w-3.5 h-3.5 text-[#635B80] group-hover:text-teal-600 shrink-0 transition-colors" />
+                  <span>Islamic &amp; Moral (ইসলামিক)</span>
                 </Link>
               </li>
             </ul>
@@ -193,6 +242,10 @@ export function Footer() {
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2.5 text-[12px] text-[#635B80]">
+            <Link href="/captions" className="text-[#7C3AED] font-semibold hover:underline transition-colors whitespace-nowrap">
+              Bangla &amp; English Captions (New)
+            </Link>
+            <span className="text-[#DDD0FA] hidden sm:inline">•</span>
             <Link href="/monetization-checker" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">YouTube Monetization Checker</Link>
             <span className="text-[#DDD0FA] hidden sm:inline">•</span>
             <Link href="/channel-id-finder" className="hover:text-[#7C3AED] transition-colors whitespace-nowrap">Channel ID Finder</Link>

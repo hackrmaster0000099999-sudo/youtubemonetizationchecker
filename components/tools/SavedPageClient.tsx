@@ -218,7 +218,9 @@ export function SavedPageClient() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredItems.map((item) => {
             const matchedTool = TOOLS.find((t) => t.id === item.toolId);
-            const toolTargetPath = matchedTool ? matchedTool.path : '/monetization-checker';
+            const isCaption = item.targetType === 'CAPTION';
+            const toolTargetPath = isCaption ? (item.url || '/captions') : (matchedTool ? matchedTool.path : '/monetization-checker');
+            const textToCopy = isCaption ? (item.metaText || item.title) : item.url;
 
             return (
               <div
@@ -274,10 +276,10 @@ export function SavedPageClient() {
                   {item.metaText && (
                     <div className="text-[12px] font-medium bg-white/70 border border-[#EDE8F9] px-3 py-2 rounded-xl flex items-center justify-between">
                       <span className="text-[#635B80] text-[10px] font-bold uppercase tracking-wider">
-                        Key Metric
+                        {isCaption ? 'Caption Text' : 'Key Metric'}
                       </span>
                       <span
-                        className={`font-bold ${
+                        className={`font-bold truncate max-w-[200px] ${
                           item.badgeType === 'success'
                             ? 'text-emerald-600'
                             : item.badgeType === 'danger'
@@ -298,8 +300,8 @@ export function SavedPageClient() {
                   <div className="flex items-center gap-1.5">
                     <button
                       type="button"
-                      onClick={() => handleCopy(item.id, item.url)}
-                      title="Copy YouTube URL"
+                      onClick={() => handleCopy(item.id, textToCopy)}
+                      title={isCaption ? 'Copy Caption' : 'Copy YouTube URL'}
                       className="p-1.5 text-[11px] font-bold text-[#635B80] hover:text-[#7C3AED] hover:bg-white rounded-lg border border-[#DDD0FA] bg-white/80 transition-all flex items-center gap-1 cursor-pointer shadow-2xs"
                     >
                       {copiedId === item.id ? (
@@ -310,7 +312,7 @@ export function SavedPageClient() {
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          <span>URL</span>
+                          <span>{isCaption ? 'Copy' : 'URL'}</span>
                         </>
                       )}
                     </button>
@@ -329,7 +331,7 @@ export function SavedPageClient() {
                     href={toolTargetPath}
                     className="inline-flex items-center gap-1 text-[12px] font-bold text-[#7C3AED] hover:text-[#5B21B6] bg-[#7C3AED]/10 hover:bg-[#7C3AED]/15 border border-[#7C3AED]/20 px-3 py-1.5 rounded-xl transition-all shadow-2xs"
                   >
-                    <span>Open Tool</span>
+                    <span>{isCaption ? 'View Captions' : 'Open Tool'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
