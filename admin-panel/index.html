@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YT Monetize - ক্যাপশন ও ফটো স্ট্যাটাস অ্যাডমিন প্যানেল</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Main Admin Interface -->
+  <div id="adminApp">
+    <!-- Header -->
+    <header class="admin-header">
+      <div class="header-container">
+        <div class="brand-area">
+          <div class="brand-logo">⚡</div>
+          <div>
+            <div class="brand-title">YT Monetize অ্যাডমিন</div>
+            <div class="brand-subtitle">ক্যাপশন ও ফটো স্ট্যাটাস ম্যানেজমেন্ট প্যানেল</div>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="btnSettings" class="btn btn-outline btn-sm" onclick="openSettingsModal()">
+            ⚙️ API সেটিংস
+          </button>
+
+          <button id="btnSeed" class="btn btn-outline btn-sm" onclick="seedDefaultCaptions()">
+            🔄 ডিফল্ট ডেটা সিঙ্ক
+          </button>
+
+          <button id="btnNewCaption" class="btn btn-primary" onclick="openCreateModal()">
+            ＋ নতুন ক্যাপশন / ফটো
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+      
+      <!-- Stats Row -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3 id="statTotal">0</h3>
+            <p>মোট ক্যাপশন</p>
+          </div>
+          <div class="stat-icon red">📝</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3 id="statBangla">0</h3>
+            <p>বাংলা ক্যাপশন</p>
+          </div>
+          <div class="stat-icon green">🇧🇩</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3 id="statEnglish">0</h3>
+            <p>ইংরেজি ক্যাপশন</p>
+          </div>
+          <div class="stat-icon blue">🌐</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3 id="statWithImage">0</h3>
+            <p>ফটো স্ট্যাটাস যুক্ত</p>
+          </div>
+          <div class="stat-icon purple">🖼️</div>
+        </div>
+      </section>
+
+      <!-- Search & Filter Bar -->
+      <section class="filter-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="ক্যাপশন টেক্সট বা ট্যাগ খুঁজুন..." oninput="handleSearch(this.value)">
+        </div>
+
+        <div class="filter-controls">
+          <select id="filterCategory" class="select-field" onchange="handleCategoryFilter(this.value)">
+            <option value="all">সকল ক্যাটাগরি</option>
+            <option value="islamic">ইসলামিক ও নীতিবাক্য</option>
+            <option value="motivational">মোটিভেশনাল ও সাফল্য</option>
+            <option value="attitude">অ্যাটিটিউড ও ব্যক্তিত্ব</option>
+            <option value="romantic">রোমান্টিক ও ভালোবাসা</option>
+            <option value="sad">দুঃখ ও কষ্টের ক্যাপশন</option>
+            <option value="life">বাস্তবতা ও জীবনবোধ</option>
+            <option value="friendship">বন্ধুত্ব ও আড্ডা</option>
+          </select>
+
+          <select id="filterLanguage" class="select-field" onchange="handleLanguageFilter(this.value)">
+            <option value="all">সকল ভাষা</option>
+            <option value="bangla">বাংলা (Bangla)</option>
+            <option value="english">ইংরেজি (English)</option>
+          </select>
+
+          <select id="filterType" class="select-field" onchange="handleTypeFilter(this.value)">
+            <option value="all">সব ধরন</option>
+            <option value="image_only">শুধু ফটো স্ট্যাটাস</option>
+            <option value="text_only">শুধু টেক্সট ক্যাপশন</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Captions Table Card -->
+      <section class="content-card">
+        <div class="content-header">
+          <div class="content-title">ক্যাপশন তালিকা (<span id="tableCount">0</span>)</div>
+          <div id="loadingSpinner" style="display: none; font-size: 13px; color: var(--text-muted);">
+            ⏳ লোড হচ্ছে...
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="captions-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">ছবি</th>
+                <th>ক্যাপশন ও শিরোনাম</th>
+                <th style="width: 140px;">ক্যাটাগরি</th>
+                <th style="width: 90px;">ভাষা</th>
+                <th style="width: 120px;">স্লাগ / লিংক</th>
+                <th style="width: 110px; text-align: right;">অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="captionsTableBody">
+              <!-- Captions will be injected by app.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <div id="emptyState" style="display: none; padding: 40px 20px; text-align: center; color: var(--text-muted);">
+          <div style="font-size: 40px; margin-bottom: 10px;">📭</div>
+          <h4 style="font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">কোনো ক্যাপশন পাওয়া যায়নি</h4>
+          <p style="font-size: 13px;">নতুন ক্যাপশন তৈরি করতে উপরের <strong>"＋ নতুন ক্যাপশন / ফটো"</strong> বাটনে ক্লিক করুন।</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Create / Edit Modal -->
+  <div id="captionModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle">নতুন ক্যাপশন / ফটো পোস্ট</h3>
+        <button class="close-btn" onclick="closeCaptionModal()">&times;</button>
+      </div>
+
+      <form id="captionForm" onsubmit="handleSaveCaption(event)">
+        <input type="hidden" id="formCaptionId">
+
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">ক্যাটাগরি নির্বাচন করুন *</label>
+              <select id="formCategory" class="input-field" required onchange="onCategorySelectChange(this.value)">
+                <option value="islamic">ইসলামিক ও নীতিবাক্য</option>
+                <option value="motivational">মোটিভেশনাল ও সাফল্য</option>
+                <option value="attitude">অ্যাটিটিউড ও ব্যক্তিত্ব</option>
+                <option value="romantic">রোমান্টিক ও ভালোবাসা</option>
+                <option value="sad">দুঃখ ও কষ্টের ক্যাপশন</option>
+                <option value="life">বাস্তবতা ও জীবনবোধ</option>
+                <option value="friendship">বন্ধুত্ব ও আড্ডা</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ভাষা *</label>
+              <select id="formLanguage" class="input-field" required>
+                <option value="bangla">বাংলা (Bangla)</option>
+                <option value="english">ইংরেজি (English)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">শিরোনাম (ঐচ্ছিক)</label>
+            <input type="text" id="formTitle" class="input-field" placeholder="যেমন: আত্মবিশ্বাস বাড়ানোর সেরা বার্তা">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ক্যাপশন / স্ট্যাটাস টেক্সট *</label>
+            <textarea id="formText" class="textarea-field" required placeholder="এখানে আপনার পূর্ণাঙ্গ ক্যাপশন বা উক্তিটি লিখুন..." oninput="handleTextChangeForSlug(this.value)"></textarea>
+          </div>
+
+          <!-- Image Upload / Link Area -->
+          <div class="form-group">
+            <label class="form-label">ফটো স্ট্যাটাস ইমেজ (ImgBB সরাসরি আপলোড)</label>
+            <div id="imageUploadBox" class="image-upload-zone" onclick="document.getElementById('formImageFile').click()">
+              <input type="file" id="formImageFile" accept="image/*" style="display: none;" onchange="handleImageFileUpload(event)">
+              <div id="imageUploadStatus">
+                <div style="font-size: 28px; margin-bottom: 6px;">📸</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--text-dark);">ছবি নির্বাচন করতে এখানে ক্লিক করুন</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">PNG, JPG, WebP (স্বয়ংক্রিয়ভাবে ImgBB-তে আপলোড হবে)</div>
+              </div>
+            </div>
+
+            <div id="uploadSuccessPreview" style="display: none; margin-top: 10px; align-items: center; gap: 12px;">
+              <div class="image-preview-box" style="width: 100px; height: 70px;">
+                <img id="formImagePreview" src="" alt="Preview">
+              </div>
+              <div style="flex: 1;">
+                <input type="url" id="formImageUrl" class="input-field" style="font-size: 12px;" placeholder="ইমেজ ডিরেক্ট লিঙ্ক" readonly>
+              </div>
+              <button type="button" id="removeImageBtn" class="btn btn-outline btn-sm" onclick="removeImage()">মুছুন</button>
+            </div>
+          </div>
+
+          <!-- Tags & Suggestions -->
+          <div class="form-group">
+            <label class="form-label">ট্যাগ / হ্যাশট্যাগ (কমা দিয়ে আলাদা করুন)</label>
+            <input type="text" id="formTags" class="input-field" placeholder="#Alhamdulillah, #Sabr, #LifeQuotes">
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">পরামর্শকৃত ট্যাগ (ক্লিক করে যুক্ত করুন):</div>
+            <div id="tagSuggestions" class="tag-chips"></div>
+          </div>
+
+          <!-- Slug / SEO URL -->
+          <div class="form-group">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <label class="form-label">URL Slug (এসইও ফ্রেন্ডলি লিঙ্ক) *</label>
+              <label style="font-size: 12px; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                <input type="checkbox" id="autoSlugToggle" checked onchange="toggleAutoSlug(this.checked)">
+                অটো স্লাগ
+              </label>
+            </div>
+            <input type="text" id="formSlug" class="input-field" required placeholder="dhairya-o-allahor-upor-bhorosa">
+            <div id="slugPreviewUrl" style="font-size: 11px; color: var(--text-muted); word-break: break-all;"></div>
+          </div>
+
+          <!-- SEO Meta Details (Collapsible) -->
+          <details style="background: #F8FAFC; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <summary style="font-size: 13px; font-weight: 600; cursor: pointer; color: var(--text-dark);">
+              🔍 উন্নত এসইও মেটা সেটিংস (ঐচ্ছিক)
+            </summary>
+            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 12px;">
+              <div class="form-group">
+                <label class="form-label">মেটা টাইটেল</label>
+                <input type="text" id="formMetaTitle" class="input-field" placeholder="SEO Title...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">মেটা ডেসক্রিপশন</label>
+                <textarea id="formMetaDesc" class="input-field" style="min-height: 60px;" placeholder="Google সার্চের জন্য সংক্ষিপ্ত বিবরণ..."></textarea>
+              </div>
+            </div>
+          </details>
+
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+            <input type="checkbox" id="formPublished" checked>
+            <label for="formPublished" style="font-size: 14px; font-weight: 600; cursor: pointer;">সরাসরি ওয়েবসাইটে প্রকাশ করুন (Published)</label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeCaptionModal()">বাতিল</button>
+          <button type="submit" id="saveCaptionBtn" class="btn btn-primary">সংরক্ষণ করুন</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 style="color: var(--danger);">ক্যাপশন মুছে ফেলা নিশ্চিত করুন</h3>
+        <button class="close-btn" onclick="closeDeleteModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="text-align: center; padding: 24px;">
+        <input type="hidden" id="deleteCaptionId">
+        <div style="font-size: 44px; margin-bottom: 12px;">⚠️</div>
+        <p style="font-size: 14px; color: var(--text-dark); margin-bottom: 8px;">
+          আপনি কি নিশ্চিত যে আপনি এই ক্যাপশনটি স্থায়ীভাবে মুছে ফেলতে চান?
+        </p>
+        <p id="deleteCaptionTitle" style="font-size: 13px; color: var(--text-muted); font-style: italic; background: #F8FAFC; padding: 8px; border-radius: 6px;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeDeleteModal()">বাতিল</button>
+        <button type="button" class="btn btn-danger" onclick="confirmDeleteCaption()">হ্যাঁ, মুছে ফেলুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3>অ্যাডমিন ও API সেটিংস</h3>
+        <button class="close-btn" onclick="closeSettingsModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">ImgBB API Key (ছবি আপলোডের জন্য)</label>
+          <input type="text" id="settingsImgbbKey" class="input-field" placeholder="ImgBB API Key দিন">
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+            ডিফল্টভাবে আপনার প্রদত্ত কী কনফিগার করা আছে।
+          </div>
+        </div>
+
+        <div class="form-group" style="background: #F8FAFC; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px;">ফায়ারবেস প্রজেক্ট তথ্য</div>
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.7;">
+            <strong>Project ID:</strong> yt-monetize-ae3d7<br>
+            <strong>Auth Domain:</strong> yt-monetize-ae3d7.firebaseapp.com<br>
+            <strong>Storage Bucket:</strong> yt-monetize-ae3d7.firebasestorage.app<br>
+            <strong>Status:</strong> <span style="color: var(--success); font-weight: 600;">● ক্লাউড ফায়ারস্টোর সক্রিয়</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeSettingsModal()">বন্ধ করুন</button>
+        <button type="button" class="btn btn-primary" onclick="saveSettings()">সেভ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-msg"></div>
+
+  <!-- Load Standalone Admin Logic -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
