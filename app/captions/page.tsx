@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from '@/lib/constants/site';
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Bangla & English Captions (বাংলা ও ইংরেজি ক্যাপশন) - Quotes, Status & Viral Bio | YT MONETIZE',
   description:

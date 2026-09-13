@@ -25,16 +25,12 @@ import {
   ArrowRight,
 } from 'lucide-react';
 
+export const runtime = 'edge';
+
 interface CategoryPageProps {
   params: Promise<{
     category: string;
   }>;
-}
-
-export async function generateStaticParams() {
-  return CAPTION_CATEGORIES.map((cat) => ({
-    category: cat.id,
-  }));
 }
 
 export async function generateMetadata({

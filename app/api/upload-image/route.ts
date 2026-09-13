@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 const IMGBB_API_KEY = process.env.IMGBB_API_KEY || '3cfbc6a944c10a70d848cebae4b8245b';
 
 export async function POST(req: NextRequest) {

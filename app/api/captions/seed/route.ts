@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
+export const runtime = 'edge';
+
 const STARTER_CAPTIONS = [
   {
     category: 'islamic',

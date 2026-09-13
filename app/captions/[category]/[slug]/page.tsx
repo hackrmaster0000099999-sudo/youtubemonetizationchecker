@@ -7,6 +7,8 @@ import { CAPTION_CATEGORIES } from '@/lib/constants/captions';
 import { getCaptionBySlug, getCaptions } from '@/lib/firebase';
 import { SingleCaptionView } from '@/components/captions/SingleCaptionView';
 
+export const runtime = 'edge';
+
 interface PageProps {
   params: Promise<{
     category: string;
