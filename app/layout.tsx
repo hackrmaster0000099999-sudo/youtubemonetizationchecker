@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/navigation/Navbar';
 import { Footer } from '@/components/navigation/Footer';
+import { VisitorTracker } from '@/components/analytics/VisitorTracker';
 import { SITE_NAME, SITE_URL } from '@/lib/constants/site';
 
 const geistSans = Geist({
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="min-h-screen flex flex-col bg-[#F6F4FD] text-[#181135]" suppressHydrationWarning>
+        <VisitorTracker />
         <Suspense fallback={<header className="sticky top-0 z-50 h-[72px] bg-white/75 border-b border-white/80 w-full" />}>
           <Navbar />
         </Suspense>
